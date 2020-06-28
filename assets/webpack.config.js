@@ -9,6 +9,9 @@ module.exports = (env, options) => {
   const devMode = options.mode !== 'production';
 
   return {
+    resolve: {
+       extensions: [".ts", ".tsx", ".js", ".jsx"]
+    },
     optimization: {
       minimizer: [
         new TerserPlugin({ cache: true, parallel: true, sourceMap: devMode }),
@@ -27,12 +30,18 @@ module.exports = (env, options) => {
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.(js|ts|tsx|jsx)$/,
           exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader'
-          }
+          use: [
+            {
+              loader: "babel-loader"
+            },
+            {
+              loader: "ts-loader"
+            }
+          ]
         },
+        
         {
           test: /\.[s]?css$/,
           use: [

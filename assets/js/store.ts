@@ -3,8 +3,8 @@ import { configureStore, createSlice } from '@reduxjs/toolkit'
 const settingsSlice = createSlice({
     name: 'settings',
     initialState: {
-        playingVideo: false,
-        playingAudio: false,
+        playingVideo: true,
+        playingAudio: true,
         camera: null,
         microphone: null,
     },
@@ -14,7 +14,12 @@ const settingsSlice = createSlice({
         },
         stopVideo(state, action) {
             state.playingVideo = false
-
+        },
+        playAudio(state, action) {
+            state.playingAudio = true
+        },
+        stopAudio(state, action) {
+            state.playingAudio = false
         }
     }
 })
@@ -22,7 +27,5 @@ const settingsSlice = createSlice({
 const store = configureStore({
     reducer: settingsSlice.reducer
 })
-
-export type AppDispatch = typeof store.dispatch
-
+export const {playVideo, stopVideo, playAudio, stopAudio} = settingsSlice.actions
 export default store

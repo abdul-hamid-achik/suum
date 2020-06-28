@@ -14,10 +14,13 @@ const _css = require("../css/app.scss")
 //
 import React from "react"
 import {render} from "react-dom"
-
 import Main from "./main.tsx"
 
+import {Provider} from 'react-redux'
+import store from './store'
 
-render(<Main />, document.getElementById('app'))
+render(<Provider store={store}>
+    <Main />
+</Provider>, document.getElementById('app'))
 
 import "phoenix_html"

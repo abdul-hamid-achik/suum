@@ -37,10 +37,8 @@
                   Documentation
                 </a>
                 <%= if assigns[:current_user] do %>
-                  <a class="navbar-item" href="<%= Routes.pow_session_path(@conn, :delete) %>">
-                    Log Out
-                  </a>
-                  <% else %>
+                  <%= link("Log Out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "navbar-item") %>
+                <% else %>
                   <a class="navbar-item" href="<%= Routes.pow_session_path(@conn, :new) %>">
                     Sign In
                   </a>

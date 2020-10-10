@@ -17,7 +17,7 @@ ENV MIX_ENV=prod
 COPY mix.exs mix.lock ./
 COPY config config
 RUN mix do deps.get, deps.compile
-
+RUN mix ecto.create
 # build assets
 COPY assets/package.json assets/package-lock.json ./assets/
 RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error

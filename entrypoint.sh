@@ -1,3 +1,3 @@
 #!/bin/bash
 mix ecto.migrate
-exec mix phx.server
+MIX_ENV=${MIX_ENV:-prod} exec mix phx.server

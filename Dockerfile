@@ -1,6 +1,6 @@
 FROM elixir:latest
 ENV HOME=/app
-ARGS MIX_ENV=prod
+ARG MIX_ENV=prod
 ENV MIX_ENV=$MIX_ENV
 RUN mkdir /app
 COPY . /app

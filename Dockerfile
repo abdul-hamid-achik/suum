@@ -1,4 +1,4 @@
-FROM elixir:1.11
+FROM elixir:latest
 RUN mkdir /app
 COPY . /app
 WORKDIR /app

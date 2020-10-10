@@ -46,5 +46,6 @@ USER nobody:nobody
 COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/suum ./
 
 ENV HOME=/app
+RUN echo $DATABASE_URL
 RUN bin/suum eval "Suum.Release.Tasks.create_and_migrate"
 CMD ["bin/suum", "start"]

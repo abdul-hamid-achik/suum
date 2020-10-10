@@ -1,4 +1,5 @@
 FROM elixir:latest
+ENV HOME /app
 RUN mkdir /app
 COPY . /app
 WORKDIR /app

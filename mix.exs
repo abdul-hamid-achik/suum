@@ -33,7 +33,6 @@ defmodule Suum.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:pow, "~> 1.0.0"},
       {:phoenix, "~> 1.5.5"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
@@ -47,7 +46,8 @@ defmodule Suum.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:pow, "~> 1.0.0"}
     ]
   end
 
@@ -62,6 +62,7 @@ defmodule Suum.MixProject do
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "test.js": ["cmd cd assets && npm test"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
     ]
   end

@@ -36,9 +36,18 @@
                 <a class="navbar-item">
                   Documentation
                 </a>
-                <a class="navbar-item">
-                  Login
-                </a>
+                <%= if assigns[:current_user] do %>
+                  <a class="navbar-item" href="<%= Routes.pow_session_path(@conn, :delete) %>">
+                    Log Out
+                  </a>
+                  <% else %>
+                  <a class="navbar-item" href="<%= Routes.pow_session_path(@conn, :new) %>">
+                    Sign In
+                  </a>
+                  <a class="navbar-item" href="<%= Routes.pow_registration_path(@conn, :new) %>">
+                    Sign Up
+                  </a>
+                <% end %>
               </div>
             </div>
           </div>

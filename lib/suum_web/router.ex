@@ -26,16 +26,6 @@ defmodule SuumWeb.Router do
     get "/", PageController, :index
   end
 
-  scope "/", Pow.Phoenix, as: "pow" do
-    pipe_through :browser
-
-    get "/sign_up", RegistrationController, :new
-    post "/sign_up", RegistrationController, :create
-
-    get "/login", SessionController, :new
-    post "/login", SessionController, :create
-  end
-
   # Other scopes may use custom stacks.
   # scope "/api", SuumWeb do
   #   pipe_through :api

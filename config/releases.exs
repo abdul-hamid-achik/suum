@@ -29,10 +29,12 @@ config :suum, SuumWeb.Endpoint,
     transport_options: [socket_opts: [:inet6]]
   ],
   secret_key_base: secret_key_base
-  check_origin: [
-    "https://suum.app",
-    "https://*.suum.app"
-  ]
+
+# check_origin: [
+#   "//suum.app",
+#   "localhost",
+#   "//*.suum.app"
+# ]
 
 # ## Using releases (Elixir v1.9+)
 #

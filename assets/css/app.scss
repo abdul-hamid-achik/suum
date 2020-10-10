@@ -1,5 +1,8 @@
-/* This file is for your main application css. */
-@import "../node_modules/nprogress/nprogress.css";
 @charset "utf-8";
+@import "../node_modules/nprogress/nprogress.css";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
 @import "~nord-bulma/sass/nord-bulma-dark.scss";
 @import "~bulma/bulma";

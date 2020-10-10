@@ -32,4 +32,6 @@ defmodule SuumWeb.UserSocket do
   # Returning `nil` makes this socket anonymous.
   @impl true
   def id(_socket), do: nil
+
+  channel "video:*", SuumWeb.VideoChannel
 end

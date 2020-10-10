@@ -9,7 +9,74 @@
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
-  <body>
-    <%= @inner_content %>
+  <body data-controller="suum">
+    <section class="hero is-fullheight">
+      <div class="hero-head">
+        <header class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item">
+                Suum
+                <%# <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo"> %>
+              </a>
+              <span class="navbar-burger burger" data-target="navbarMenuHeroC">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroC" class="navbar-menu">
+              <div class="navbar-end">
+                <a class="navbar-item is-active">
+                  Home
+                </a>
+                <a class="navbar-item">
+                  Rooms
+                </a>
+                <a class="navbar-item">
+                  Documentation
+                </a>
+                <a class="navbar-item">
+                  Login
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
+      <div class="hero-body">
+        <%= @inner_content %>
+      </div>
+
+      <div class="hero-foot">
+        <nav class="tabs is-boxed is-fullwidth">
+          <div class="container">
+            <ul>
+              <li>
+                <button id="connect" class="button is-fullwidth" data-target="suum.connect" data-action="click->suum#start">
+                  <span class="icon"> 
+                    <i class="fas fa-wifi"></i>
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button id="call" class="button is-fullwidth" data-target="suum.call" data-action="click->suum#call">
+                  <span class="icon">
+                    <i class="fas fa-phone"></i>
+                  </span>
+                </button>
+              </li>
+              <li>
+                <button id="disconnect" class="button is-fullwidth" data-target="suum.disconnect" data-action="click->suum#stop">
+                  <span class="icon"> 
+                    <i class="fas fa-phone-slash"></i>
+                  </span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+  </section>
   </body>
 </html>

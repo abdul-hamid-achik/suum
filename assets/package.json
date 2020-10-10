@@ -7,15 +7,19 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "bulma": "^0.9.1",
+    "core-js": "^2.6.11",
+    "file-loader": "^6.1.1",
     "nord": "^0.2.1",
     "nord-bulma": "git+https://github.com/sereneblue/nord-bulma.git",
     "nprogress": "^0.2.0",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
     "phoenix_live_view": "file:../deps/phoenix_live_view",
-    "stimulus": "^1.1.1"
+    "stimulus": "^1.1.1",
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

@@ -1,0 +1,4 @@
+<label for="local-stream">Local Video Stream</label>
+<video id="local-stream" data-target="suum.local" autoplay muted></video>
+<label for="remote-stream">Remote Video Stream</label>
+<video id="remote-stream" data-target="suum.remote" autoplay></video>

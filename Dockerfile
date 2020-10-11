@@ -17,7 +17,6 @@ ENV MIX_ENV=prod
 COPY mix.exs mix.lock ./
 COPY config config
 RUN mix do deps.get, deps.compile
-RUN mix ecto.create -r Suum.Repo
 # build assets
 COPY assets/package.json assets/package-lock.json ./assets/
 RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
@@ -26,7 +25,7 @@ COPY priv priv
 COPY assets assets
 RUN npm run --prefix ./assets deploy
 RUN mix phx.digest
-
+RUN mix ecto.create -r Suum.Repo
 # compile and build release
 COPY lib lib
 # uncomment COPY if rel/ exists

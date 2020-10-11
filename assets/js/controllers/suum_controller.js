@@ -119,6 +119,26 @@ export default class extends Controller {
 				{
 					urls: 'stun:stun.stunprotocol.org',
 				},
+				{
+					url: 'turn:numb.viagenie.ca',
+					credential: 'muazkh',
+					username: 'webrtc@live.com'
+				},
+				{
+					url: "stun.l.google.com"
+				},
+				{
+					url: "stun1.l.google.com"
+				},
+				{
+					url: "stun2.l.google.com"
+				},
+				{
+					url: "stun3.l.google.com"
+				},
+				{
+					url: "stun4.l.google.com"
+				},
 			],
 		})
 		pc.ontrack = this.handleOnTrack

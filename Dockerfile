@@ -44,6 +44,6 @@ RUN chown nobody:nobody /app
 USER nobody:nobody
 
 COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/suum ./
-RUN bin/suum eval "Suum.Release.Tasks.setup"
+RUN MIX_ENV=prod bin/suum eval "Suum.Release.Tasks.setup"
 ENV HOME=/app
 CMD ["bin/suum", "start"]

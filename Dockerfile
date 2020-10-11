@@ -12,7 +12,6 @@ RUN mix local.hex --force && \
 
 # set build ENV
 ENV MIX_ENV=prod
-ENV DATABASE_URL=${DATABASE_URL:-postgresql://suum-prod:h5o3ry2dat77qb6d@app-feb12278-0ff1-49bf-9dbc-6edd42f263fd-do-user-2332779-0.b.db.ondigitalocean.com:25060/suum-prod?sslmode=require}
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
@@ -31,19 +30,19 @@ COPY lib lib
 # uncomment COPY if rel/ exists
 # COPY rel rel
 RUN mix do compile, release
-RUN apk add --no-cache openssl ncurses-libs
-CMD ["/app/_build/prod/rel/suum/bin/suum", "start"]
+
 # prepare release image
-# FROM alpine:3.9 AS app
-# RUN apk add --no-cache openssl ncurses-libs
+FROM alpine:3.9 AS app
+RUN apk add --no-cache openssl ncurses-libs
+ENV DATABASE_URL=${DATABASE_URL:-postgresql://suum-prod:h5o3ry2dat77qb6d@app-feb12278-0ff1-49bf-9dbc-6edd42f263fd-do-user-2332779-0.b.db.ondigitalocean.com:25060/suum-prod?sslmode=require}
 
-# WORKDIR /app
+WORKDIR /app
 
-# RUN chown nobody:nobody /app
+RUN chown nobody:nobody /app
 
-# USER nobody:nobody
+USER nobody:nobody
 
-# COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/suum ./
-
-# ENV HOME=/app
-# CMD ["bin/suum", "start"]
+COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/suum ./
+RUN bin/suum eval "Suum.Release.Tasks.create_and_migrate"
+ENV HOME=/app
+CMD ["bin/suum", "start"]

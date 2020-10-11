@@ -10,6 +10,8 @@ defmodule Suum.Release.Tasks do
   end
 
   def createdb do
+    load_app()
+
     for repo <- repos() do
       :ok = ensure_repo_created(repo)
     end

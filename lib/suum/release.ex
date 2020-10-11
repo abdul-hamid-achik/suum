@@ -45,8 +45,6 @@ defmodule Suum.Release.Tasks do
 
   defp start_app do
     load_app()
-    Application.put_env(@app, :minimal, true)
-    Application.ensure_started(:ssl)
     Application.ensure_all_started(@app)
   end
 end

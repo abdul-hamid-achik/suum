@@ -45,4 +45,5 @@ USER nobody:nobody
 
 COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/suum ./
 ENV HOME=/app
+RUN ulimit -n 4096
 CMD ["bin/suum", "start"]

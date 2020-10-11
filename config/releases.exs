@@ -32,8 +32,9 @@ config :suum, SuumWeb.Endpoint,
   check_origin: [
     "//suum.app",
     "//*.suum.app"
-  ]
+  ],
   url: [host: "prod.suum.app", port: 80]
+
 # ## Using releases (Elixir v1.9+)
 #
 # If you are doing OTP releases, you need to instruct Phoenix

@@ -30,12 +30,13 @@ COPY lib lib
 # uncomment COPY if rel/ exists
 # COPY rel rel
 RUN mix do compile, release
+ENV DATABASE_URL=$DATABASE_URL
+ENV SECRET_KEY_BASE=$SECRET_KEY_BASE
 
+RUN mix ecto.create ecto.migrate
 # prepare release image
 FROM alpine:3.9 AS app
 RUN apk add --no-cache openssl ncurses-libs
-ENV DATABASE_URL=$DATABASE_URL
-ENV SECRET_KEY_BASE=$SECRET_KEY_BASE
 
 WORKDIR /app
 

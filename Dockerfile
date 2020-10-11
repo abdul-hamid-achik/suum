@@ -30,14 +30,12 @@ COPY lib lib
 # uncomment COPY if rel/ exists
 # COPY rel rel
 RUN mix do compile, release
-ENV DATABASE_URL=$DATABASE_URL
-ENV SECRET_KEY_BASE=$SECRET_KEY_BASE
 
-RUN mix ecto.create 
-RUN mix ecto.migrate
 # prepare release image
 FROM alpine:3.9 AS app
 RUN apk add --no-cache openssl ncurses-libs
+ENV DATABASE_URL=$DATABASE_URL
+ENV SECRET_KEY_BASE=$SECRET_KEY_BASE
 
 WORKDIR /app
 
@@ -46,6 +44,6 @@ RUN chown nobody:nobody /app
 USER nobody:nobody
 
 COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/suum ./
-RUN bin/suum eval "Suum.Release.Tasks.create_and_migrate"
+RUN bin/suum eval "Suum.Release.Tasks.setup"
 ENV HOME=/app
 CMD ["bin/suum", "start"]

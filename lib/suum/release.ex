@@ -55,7 +55,8 @@ defmodule Suum.Release.Tasks do
 
   defp get_repos(app) do
     Application.load(app)
-    Application.fetch_env!(app, :ecto_repos)
+    # Application.fetch_env!(app, :ecto_repos)
+    [Suum.Repo]
   end
 
   def rollback(repo, version) do

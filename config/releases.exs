@@ -11,8 +11,9 @@ database_url =
     For example: ecto://USER:PASS@HOST/DATABASE
     """
 
-config :suum, Suum.Repo,
-  # ssl: true,
+config :suum, Suum.Repo
+  ecto_repos: [Suum.Repo],
+  ssl: true,
   url: database_url,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 

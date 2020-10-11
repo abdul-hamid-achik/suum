@@ -25,13 +25,12 @@ COPY priv priv
 COPY assets assets
 RUN npm run --prefix ./assets deploy
 RUN mix phx.digest
-RUN mix ecto.create -r Suum.Repo
 # compile and build release
 COPY lib lib
 # uncomment COPY if rel/ exists
 # COPY rel rel
 RUN mix do compile, release
-
+RUN /app/_build/prod/rel/suum/bin/suum eval "Suum.Release.Tasks.create_and_migrate"
 # prepare release image
 FROM alpine:3.9 AS app
 RUN apk add --no-cache openssl ncurses-libs
@@ -45,6 +44,4 @@ USER nobody:nobody
 COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/suum ./
 
 ENV HOME=/app
-RUN echo $DATABASE_URL
-RUN bin/suum eval "Suum.Release.Tasks.create_and_migrate"
 CMD ["bin/suum", "start"]

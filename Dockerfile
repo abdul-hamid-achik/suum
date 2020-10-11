@@ -30,18 +30,19 @@ COPY lib lib
 # uncomment COPY if rel/ exists
 # COPY rel rel
 RUN mix do compile, release
-RUN /app/_build/prod/rel/suum/bin/suum eval "Suum.Release.Tasks.create_and_migrate"
-# prepare release image
-FROM alpine:3.9 AS app
 RUN apk add --no-cache openssl ncurses-libs
+CMD ["/app/_build/prod/rel/suum/bin/suum", "start"]
+# prepare release image
+# FROM alpine:3.9 AS app
+# RUN apk add --no-cache openssl ncurses-libs
 
-WORKDIR /app
+# WORKDIR /app
 
-RUN chown nobody:nobody /app
+# RUN chown nobody:nobody /app
 
-USER nobody:nobody
+# USER nobody:nobody
 
-COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/suum ./
+# COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/suum ./
 
-ENV HOME=/app
-CMD ["bin/suum", "start"]
+# ENV HOME=/app
+# CMD ["bin/suum", "start"]

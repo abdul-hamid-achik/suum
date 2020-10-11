@@ -31,9 +31,10 @@ config :suum, SuumWeb.Endpoint,
   secret_key_base: secret_key_base,
   check_origin: [
     "//suum.app",
-    "//*.suum.app"
+    "//*.suum.app",
+    "//suum-4ca9v.ondigitalocean.app"
   ],
-  url: [host: "prod.suum.app", port: 80]
+  url: [host: "prod.suum.app", port: 8080]
 
 # ## Using releases (Elixir v1.9+)
 #

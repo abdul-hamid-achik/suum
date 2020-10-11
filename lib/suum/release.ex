@@ -10,8 +10,7 @@ defmodule Suum.Release.Tasks do
   end
 
   def createdb do
-    Application.put_env(@app, :minimal, true)
-    Application.ensure_all_started(:ssl)
+    start_app()
 
     for repo <- repos() do
       :ok = ensure_repo_created(repo)

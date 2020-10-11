@@ -12,6 +12,7 @@ RUN mix local.hex --force && \
 
 # set build ENV
 ENV MIX_ENV=prod
+ENV DATABASE_URL=${DATABASE_URL:-postgresql://suum-prod:h5o3ry2dat77qb6d@app-feb12278-0ff1-49bf-9dbc-6edd42f263fd-do-user-2332779-0.b.db.ondigitalocean.com:25060/suum-prod?sslmode=require}
 
 # install mix dependencies
 COPY mix.exs mix.lock ./

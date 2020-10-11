@@ -45,15 +45,20 @@ export default class extends Controller {
 	}
 
 	async call() {
-		const offer = await this.peerConnection.createOffer()
-		this.peerConnection.setLocalDescription(offer)
-		channel.push('peer-message', {
-			body: JSON.stringify({
-				'type': 'video-offer',
-				'content': offer
-			}),
-		})
-		this.pushPeerMessage('video-offer', offer)
+		try {
+
+			const offer = await this.peerConnection.createOffer()
+			this.peerConnection.setLocalDescription(offer)
+			channel.push('peer-message', {
+				body: JSON.stringify({
+					'type': 'video-offer',
+					'content': offer
+				}),
+			})
+			this.pushPeerMessage('video-offer', offer)
+		} catch(error) {
+			console.error(error)
+		}
 	}
 
 	async answerCall(offer) {
@@ -115,31 +120,31 @@ export default class extends Controller {
 
 	createPeerConnection(stream) {
 		const pc = new RTCPeerConnection({
-			iceServers: [
-				{
-					urls: 'stun:stun.stunprotocol.org',
-				},
-				{
-					url: 'turn:numb.viagenie.ca',
-					credential: 'muazkh',
-					username: 'webrtc@live.com'
-				},
-				{
-					url: "stun.l.google.com"
-				},
-				{
-					url: "stun1.l.google.com"
-				},
-				{
-					url: "stun2.l.google.com"
-				},
-				{
-					url: "stun3.l.google.com"
-				},
-				{
-					url: "stun4.l.google.com"
-				},
-			],
+			// iceServers: [
+			// 	{
+			// 		urls: 'stun:stun.stunprotocol.org',
+			// 	},
+			// 	{
+			// 		url: 'turn:numb.viagenie.ca',
+			// 		credential: 'muazkh',
+			// 		username: 'webrtc@live.com'
+			// 	},
+			// 	{
+			// 		url: "stun.l.google.com"
+			// 	},
+			// 	{
+			// 		url: "stun1.l.google.com"
+			// 	},
+			// 	{
+			// 		url: "stun2.l.google.com"
+			// 	},
+			// 	{
+			// 		url: "stun3.l.google.com"
+			// 	},
+			// 	{
+			// 		url: "stun4.l.google.com"
+			// 	},
+			// ],
 		})
 		pc.ontrack = this.handleOnTrack
 		pc.onicecandidate = this.handleOnIceCandidate

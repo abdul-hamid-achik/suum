@@ -33,7 +33,8 @@ RUN mix do compile, release
 ENV DATABASE_URL=$DATABASE_URL
 ENV SECRET_KEY_BASE=$SECRET_KEY_BASE
 
-RUN mix do ecto.create ecto.migrate
+RUN mix ecto.create 
+RUN mix ecto.migrate
 # prepare release image
 FROM alpine:3.9 AS app
 RUN apk add --no-cache openssl ncurses-libs

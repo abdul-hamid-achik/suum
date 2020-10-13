@@ -15,10 +15,7 @@
         <header class="navbar">
           <div class="container">
             <div class="navbar-brand">
-              <a class="navbar-item">
-                Suum
-                <%# <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo"> %>
-              </a>
+                <%= link("Suum", to: Routes.page_path(@conn, :index), method: :get, class: "navbar-item") %>
               <span class="navbar-burger burger" data-target="navbarMenuHeroC">
                 <span></span>
                 <span></span>
@@ -27,15 +24,7 @@
             </div>
             <div id="navbarMenuHeroC" class="navbar-menu">
               <div class="navbar-end">
-                <a class="navbar-item is-active">
-                  Home
-                </a>
-                <a class="navbar-item">
-                  Rooms
-                </a>
-                <a class="navbar-item">
-                  Documentation
-                </a>
+                <%= link("Create a Room", to: Routes.room_new_path(@conn, :new), method: :get, class: "navbar-item") %>
                 <%= if assigns[:current_user] do %>
                   <%= link("Log Out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "navbar-item") %>
                 <% else %>
@@ -55,7 +44,7 @@
         <%= @inner_content %>
       </div>
 
-      <div class="hero-foot">
+      <%# <div class="hero-foot">
         <nav class="tabs is-boxed is-fullwidth">
           <div class="container">
             <ul>
@@ -83,7 +72,7 @@
             </ul>
           </div>
         </nav>
-      </div>
+      </div> %>
   </section>
   </body>
 </html>

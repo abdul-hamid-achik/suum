@@ -6,3 +6,7 @@
 @import '~@fortawesome/fontawesome-free/scss/brands';
 @import "~nord-bulma/sass/nord-bulma-dark.scss";
 @import "~bulma/bulma";
+
+#local-video {
+  transform: rotateY(180deg);
+}

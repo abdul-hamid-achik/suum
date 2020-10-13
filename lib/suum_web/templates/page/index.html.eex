@@ -1,4 +1,5 @@
-<label for="local-stream">Local Video Stream</label>
-<video id="local-stream" data-target="suum.local" autoplay muted></video>
-<label for="remote-stream">Remote Video Stream</label>
-<video id="remote-stream" data-target="suum.remote" autoplay></video>
+<div class="container">
+	<p class="title is-spaced">Welcome</p>
+	<p class="subtitle">This is a website that contains demos for video calls and live streaming</p>
+</div>
+

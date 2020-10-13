@@ -7,41 +7,40 @@ export default class extends Controller {
 	remoteStream = new MediaStream()
 
 	connect() {
-		console.log(this)
-		this.setVideoStream(this.remoteTarget, this.remoteStream)
+		// this.setVideoStream(this.remoteTarget, this.remoteStream)
 
-		this.disconnectTarget.disabled = true
-		this.callTarget.disabled = true
+		// this.disconnectTarget.disabled = true
+		// this.callTarget.disabled = true
 
-		channel.on('peer-message', payload => {
-			const message = JSON.parse(payload.body)
-			switch (message.type) {
-				case 'video-offer':
-					console.log('offered: ', message.content)
-					break
-				case 'video-answer':
-					console.log('answered: ', message.content)
-					this.receiveRemote(message.content)
-					break
-				case 'ice-candidate':
-					console.log('candidate: ', message.content)
-					break
-				case 'disconnect':
-					this.stop()
-					break
-				case 'video-offer':
-					console.log('offered: ', message.content)
-					this.answerCall(message.content)
-					break
-				case 'ice-candidate':
-					console.log('candidate: ', message.content)
-					const candidate = new RTCIceCandidate(message.content)
-					this.peerConnection.addIceCandidate(candidate).catch(reportError)
-					break
-				default:
-					this.reportError('unhandled message type')(message.type)
-			}
-		})
+		// channel.on('peer-message', payload => {
+		// 	const message = JSON.parse(payload.body)
+		// 	switch (message.type) {
+		// 		case 'video-offer':
+		// 			console.log('offered: ', message.content)
+		// 			break
+		// 		case 'video-answer':
+		// 			console.log('answered: ', message.content)
+		// 			this.receiveRemote(message.content)
+		// 			break
+		// 		case 'ice-candidate':
+		// 			console.log('candidate: ', message.content)
+		// 			break
+		// 		case 'disconnect':
+		// 			this.stop()
+		// 			break
+		// 		case 'video-offer':
+		// 			console.log('offered: ', message.content)
+		// 			this.answerCall(message.content)
+		// 			break
+		// 		case 'ice-candidate':
+		// 			console.log('candidate: ', message.content)
+		// 			const candidate = new RTCIceCandidate(message.content)
+		// 			this.peerConnection.addIceCandidate(candidate).catch(reportError)
+		// 			break
+		// 		default:
+		// 			this.reportError('unhandled message type')(message.type)
+		// 	}
+		// })
 	}
 
 	async call() {
@@ -56,7 +55,7 @@ export default class extends Controller {
 				}),
 			})
 			this.pushPeerMessage('video-offer', offer)
-		} catch(error) {
+		} catch (error) {
 			console.error(error)
 		}
 	}
@@ -101,7 +100,6 @@ export default class extends Controller {
 			video: true,
 		})
 
-		console.log(this.localTarget)
 		this.setVideoStream(this.localTarget, localStream)
 		this.peerConnection = this.createPeerConnection(localStream)
 	}
@@ -120,31 +118,31 @@ export default class extends Controller {
 
 	createPeerConnection(stream) {
 		const pc = new RTCPeerConnection({
-			// iceServers: [
-			// 	{
-			// 		urls: 'stun:stun.stunprotocol.org',
-			// 	},
-			// 	{
-			// 		url: 'turn:numb.viagenie.ca',
-			// 		credential: 'muazkh',
-			// 		username: 'webrtc@live.com'
-			// 	},
-			// 	{
-			// 		url: "stun.l.google.com"
-			// 	},
-			// 	{
-			// 		url: "stun1.l.google.com"
-			// 	},
-			// 	{
-			// 		url: "stun2.l.google.com"
-			// 	},
-			// 	{
-			// 		url: "stun3.l.google.com"
-			// 	},
-			// 	{
-			// 		url: "stun4.l.google.com"
-			// 	},
-			// ],
+			iceServers: [
+				{
+					urls: 'stun:stun.stunprotocol.org',
+				},
+				{
+					url: 'turn:numb.viagenie.ca',
+					credential: 'aa121292',
+					username: 'abdulachik@icloud.com'
+				},
+				{
+					url: "stun.l.google.com"
+				},
+				{
+					url: "stun1.l.google.com"
+				},
+				{
+					url: "stun2.l.google.com"
+				},
+				{
+					url: "stun3.l.google.com"
+				},
+				{
+					url: "stun4.l.google.com"
+				},
+			],
 		})
 		pc.ontrack = this.handleOnTrack
 		pc.onicecandidate = this.handleOnIceCandidate

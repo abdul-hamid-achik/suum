@@ -14,7 +14,9 @@ defmodule Suum.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Suum.PubSub},
       # Start the Endpoint (http/https)
-      SuumWeb.Endpoint
+      SuumWeb.Presence,
+      SuumWeb.Endpoint,
+      SuumWeb.Stun
       # Start a worker by calling: Suum.Worker.start_link(arg)
       # {Suum.Worker, arg}
     ]

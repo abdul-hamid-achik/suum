@@ -1,6 +1,7 @@
 defmodule SuumWeb.Router do
   use SuumWeb, :router
   use Pow.Phoenix.Router
+  alias Suum.Organizer.Room
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -19,6 +20,11 @@ defmodule SuumWeb.Router do
     pipe_through :browser
 
     pow_routes()
+
+    scope "/room", as: :room do
+      live "/new", Room.NewLive, :new
+      live "/:slug", Room.ShowLive, :show
+    end
   end
 
   scope "/", SuumWeb do

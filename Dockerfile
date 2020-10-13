@@ -33,7 +33,7 @@ RUN mix do compile, release
 
 # prepare release image
 FROM alpine:3.9 AS app
-RUN apk add --no-cache openssl ncurses-libs openssl-dev
+RUN apk add --no-cache openssl ncurses-libs
 ENV DATABASE_URL=$DATABASE_URL
 ENV SECRET_KEY_BASE=$SECRET_KEY_BASE
 

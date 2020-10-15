@@ -11,4 +11,17 @@
 			]
 		}
 	],
+	"settings": {
+		"tabs_size": 2,
+		"lsp_format_on_save": true,
+		"LSP": {
+			"lsp-elixir": {
+				"enabled": true,
+				"settings" : {
+					"elixirLS.fetchDeps": true,
+					"elixirLS.dialyzerFormat": "dialyxir_short"
+				},
+			},
+		},
+	}
 }

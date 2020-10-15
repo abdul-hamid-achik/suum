@@ -7,18 +7,31 @@
     </div>
   <% end %>
 
-  <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-  <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-  <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+  <div class="field">
+    <%= label f, Pow.Ecto.Schema.user_id_field(@changeset), class: "label" %>
+    <div class="control">
+      <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), class: "input" %>
+    </div>
+    <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+  </div>
 
-  <%= label f, :password %>
-  <%= password_input f, :password %>
-  <%= error_tag f, :password %>
+  <div class="field">
+    <%= label f, :password, class: "label" %>  
+    <div class="control">
+      <%= password_input f, :password, class: "input" %>
+    </div>
+    <%= error_tag f, :password %>
+  </div>
 
-  <div>
-    <%= submit "Sign in" %>
+  <div class="field is-grouped">
+    <div class="control">
+      <%= link "Cancel", to: Routes.page_path(@conn, :index), class: "button is-link is-light" %>
+    </div>
+    <div class="control">
+      <%= link "Register", to: Routes.pow_registration_path(@conn, :new), class: "button is-link" %>
+    </div>
+    <div class="control">
+      <%= submit "Sign In", class: "button is-link" %>
+    </div>
   </div>
 <% end %>
-
-
-<span><%= link "Register", to: Routes.pow_registration_path(@conn, :new) %></span>

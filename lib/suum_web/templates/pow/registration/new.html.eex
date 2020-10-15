@@ -1,4 +1,4 @@
-<h1>Register</h1>
+<h1 class="title">Register</h1>
 
 <%= form_for @changeset, @action, [as: :user], fn f -> %>
   <%= if @changeset.action do %>
@@ -7,22 +7,39 @@
     </div>
   <% end %>
 
-  <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-  <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-  <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+  <div class="field">
+    <%= label f, Pow.Ecto.Schema.user_id_field(@changeset), class: "label" %>
+    <div class="control">
+      <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), class: "input" %>
+    </div>
+    <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+  </div>
 
-  <%= label f, :password %>
-  <%= password_input f, :password %>
-  <%= error_tag f, :password %>
+  <div class="field">
+    <%= label f, :password, class: "label" %>  
+    <div class="control">
+      <%= password_input f, :password, class: "input" %>
+    </div>
+    <%= error_tag f, :password %>
+  </div>
 
-  <%= label f, :password_confirmation %>
-  <%= password_input f, :password_confirmation %>
-  <%= error_tag f, :password_confirmation %>
+  <div class="field">
+    <%= label f, :password_confirmation, class: "label"  %>
+    <div class="control">    
+      <%= password_input f, :password_confirmation, class: "input" %>
+    </div>
+    <%= error_tag f, :password_confirmation %>
+  </div>
 
-  <div>
-    <%= submit "Register" %>
+  <div class="field is-grouped">
+    <div class="control">
+      <%= link "Cancel", to: Routes.page_path(@conn, :index), class: "button is-link is-light" %>
+    </div>
+    <div class="control">
+      <%= link "Sign in", to: Routes.pow_session_path(@conn, :new), class: "button is-link" %>
+    </div>
+    <div class="control">
+      <%= submit "Register", class: "button is-link" %>
+    </div>
   </div>
 <% end %>
-
-
-<span><%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %></span>

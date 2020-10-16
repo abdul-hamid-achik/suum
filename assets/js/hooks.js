@@ -1,14 +1,28 @@
 let localStream
 let users = {}
 
-async function initStream() {
+async function initStream(hook) {
   try {
+    const video = document.getElementById("local-video")
     // Gets our local media from the browser and stores it as a const, stream.
-    const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true, width: "1280"})
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true, width: "1280" })
+    await video.play()
+    const mediaRecorder = new MediaRecorder(stream, {
+      mimeType: 'video/webm',
+      videoBitsPerSecond: 3000000
+    })
+    mediaRecorder.ondataavailable = (e) => {
+      var reader = new FileReader()
+      reader.onloadend = function() {
+        hook.pushEvent("video_data", { data: reader.result })
+      }
+      reader.readAsDataURL(e.data)
+    }
+    mediaRecorder.start(1000)
     // Stores our stream in the global constant, localStream.
     localStream = stream
     // Sets our local video element to stream from the user's webcam (stream).
-    document.getElementById("local-video").srcObject = stream
+    video.srcObject = stream
   } catch (e) {
     console.log(e)
   }
@@ -94,7 +108,7 @@ function createPeerConnection(lv, fromUser, offer) {
 const Hooks = {
   JoinCall: {
     mounted() {
-      initStream()
+      initStream(this)
     }
   },
 

@@ -5,34 +5,6 @@ defmodule Suum.Organizer.Room.NewLive do
   alias Suum.Organizer.Room
 
   @impl true
-  def render(assigns) do
-    ~L"""
-    <h1 class="title is-spaced">Create a New Room</h1>
-    <div>
-      <%= form_for @changeset, "#", [phx_change: "validate", phx_submit: "save"], fn f -> %>
-        <div class="field">
-          <div class="control">
-            <%= text_input f, :title, placeholder: "Title", class: "input" %>
-            <%= error_tag f, :title %>
-          </div>
-        </div>
-
-        <div class="field">
-          <div class="control">
-          <%= text_input f, :slug, placeholder: "room-slug", class: "input" %>
-          <%= error_tag f, :slug %>
-          </div>
-        </div>
-
-        <div class="field">
-          <%= submit "Save", class: "button" %>
-        </div>
-      <% end %>
-    </div>
-    """
-  end
-
-  @impl true
   def mount(_params, _session, socket) do
     {:ok,
      socket

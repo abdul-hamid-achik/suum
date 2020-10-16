@@ -10,59 +10,6 @@ defmodule Suum.Organizer.Room.ShowLive do
   alias Phoenix.Socket.Broadcast
 
   @impl true
-  def render(assigns) do
-    ~L"""
-    <h1 class="title"><%= @room.title %></h1>
-    <h3 class="subtitle">Connected Users:</h3>
-    <ul>
-      <%= for uuid <- @connected_users do %>
-        <li><%= uuid %></li>
-      <% end %>
-    </ul>
-    <div class="streams tile is-ancestor">
-      <div class="tile is-8 is-parent">
-
-        <video id="local-video" class="tile is-" playsinline autoplay muted></video>
-      </div>
-
-      <div class="tile is-parent">
-        <%= for uuid <- @connected_users do %>
-          <div class="tile is-child">
-            <video id="video-remote-<%= uuid %>" data-user-uuid="<%= uuid %>" playsinline autoplay phx-hook="InitUser"></video>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
-    <button class="button" phx-hook="JoinCall" phx-click="join_call" id="join-call">Join Call</button>
-
-    <div id="offer-requests" class="tile is-parent">
-      <%= for request <- @offer_requests do %>
-      <span phx-hook="HandleOfferRequest" class="tile is-child" data-from-user-uuid="<%= request.from_user.uuid %>"></span>
-      <% end %>
-    </div>
-
-    <div id="sdp-offers" class="tile is-parent">
-      <%= for sdp_offer <- @sdp_offers do %>
-      <span phx-hook="HandleSdpOffer" class="tile is-child" data-from-user-uuid="<%= sdp_offer["from_user"] %>" data-sdp="<%= sdp_offer["description"]["sdp"] %>"></span>
-      <% end %>
-    </div>
-
-    <div id="sdp-answers" class="tile is-parent">
-      <%= for answer <- @answers do %>
-      <span phx-hook="HandleAnswer" class="tile is-child" data-from-user-uuid="<%= answer["from_user"] %>" data-sdp="<%= answer["description"]["sdp"] %>"></span>
-      <% end %>
-    </div>
-
-    <div id="ice-candidates" class="tile is-parent">
-      <%= for ice_candidate_offer <- @ice_candidate_offers do %>
-      <span phx-hook="HandleIceCandidateOffer" class="tile is-child" data-from-user-uuid="<%= ice_candidate_offer["from_user"] %>" data-ice-candidate="<%= Jason.encode!(ice_candidate_offer["candidate"]) %>"></span>
-      <% end %>
-    </div>
-    """
-  end
-
-  @impl true
   def mount(%{"slug" => slug}, _session, socket) do
     user = create_connected_user()
     Phoenix.PubSub.subscribe(Suum.PubSub, "room:" <> slug)
@@ -159,6 +106,18 @@ defmodule Suum.Organizer.Room.ShowLive do
     {:noreply,
      socket
      |> assign(:offer_requests, socket.assigns.offer_requests ++ [request])}
+  end
+
+  @impl true
+  def handle_event(
+        "video_data",
+        # %{"data" => "data:video/x-matroska;codecs=avc1,opus;base64," <> data},
+        data,
+        socket
+      ) do
+    IO.inspect(data)
+    # Porcelain.Process.send_input(socket.assigns.porcelain_process, Base.decode64!(data))
+    {:noreply, socket}
   end
 
   @impl true

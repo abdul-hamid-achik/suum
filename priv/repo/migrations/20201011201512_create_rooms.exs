@@ -8,6 +8,5 @@ defmodule Suum.Repo.Migrations.CreateRooms do
 
       timestamps()
     end
-
   end
 end

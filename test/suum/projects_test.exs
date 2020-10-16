@@ -39,12 +39,17 @@ defmodule Suum.ProjectsTest do
 
     test "update_two_cameras/2 with valid data updates the two_cameras" do
       two_cameras = two_cameras_fixture()
-      assert {:ok, %TwoCameras{} = two_cameras} = Projects.update_two_cameras(two_cameras, @update_attrs)
+
+      assert {:ok, %TwoCameras{} = two_cameras} =
+               Projects.update_two_cameras(two_cameras, @update_attrs)
     end
 
     test "update_two_cameras/2 with invalid data returns error changeset" do
       two_cameras = two_cameras_fixture()
-      assert {:error, %Ecto.Changeset{}} = Projects.update_two_cameras(two_cameras, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Projects.update_two_cameras(two_cameras, @invalid_attrs)
+
       assert two_cameras == Projects.get_two_cameras!(two_cameras.id)
     end
 

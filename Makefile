@@ -1,0 +1,1 @@
+start: @mix phx.server

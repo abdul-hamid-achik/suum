@@ -6,8 +6,7 @@ async function initStream(hook) {
     const video = document.getElementById("local-video")
     // Gets our local media from the browser and stores it as a const, stream.
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true, width: "1280" })
-    await video.play()
-    const mediaRecorder = new MediaRecorder(stream, {
+    const mediaRecorder = new window.MediaRecorder(stream, {
       mimeType: 'video/webm',
       videoBitsPerSecond: 3000000
     })

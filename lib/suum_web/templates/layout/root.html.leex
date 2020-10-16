@@ -7,6 +7,13 @@
     <%= csrf_meta_tag() %>
     <%= live_title_tag assigns[:page_title] || "Suum", suffix: " · Video Calls" %>
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script>
+      if (!window.MediaRecorder) {
+        document.write(
+          decodeURI('%3Cscript defer src="<%= Routes.static_path(@conn, "/js/polyfill.js") %>">%3C/script>')
+        )
+      }
+    </script>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body data-controller="suum">
@@ -15,7 +22,7 @@
         <header class="navbar">
           <div class="container">
             <div class="navbar-brand">
-                <%= link("Suum", to: Routes.page_path(@conn, :index), method: :get, class: "navbar-item") %>
+              <%= link("Suum", to: Routes.page_path(@conn, :index), method: :get, class: "navbar-item") %>
               <span class="navbar-burger burger" data-target="navbarMenuHeroC">
                 <span></span>
                 <span></span>
@@ -26,14 +33,14 @@
               <div class="navbar-end">
                 <%= link("Create a Room", to: Routes.room_new_path(@conn, :new), method: :get, class: "navbar-item") %>
                 <%= if assigns[:current_user] do %>
-                  <%= link("Log Out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "navbar-item") %>
+                <%= link("Log Out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "navbar-item") %>
                 <% else %>
-                  <a class="navbar-item" href="<%= Routes.pow_session_path(@conn, :new) %>">
-                    Sign In
-                  </a>
-                  <a class="navbar-item" href="<%= Routes.pow_registration_path(@conn, :new) %>">
-                    Sign Up
-                  </a>
+                <a class="navbar-item" href="<%= Routes.pow_session_path(@conn, :new) %>">
+                  Sign In
+                </a>
+                <a class="navbar-item" href="<%= Routes.pow_registration_path(@conn, :new) %>">
+                  Sign Up
+                </a>
                 <% end %>
               </div>
             </div>
@@ -43,36 +50,35 @@
       <div class="hero-body">
         <%= @inner_content %>
       </div>
-
       <%# <div class="hero-foot">
         <nav class="tabs is-boxed is-fullwidth">
           <div class="container">
             <ul>
               <li>
                 <button id="connect" class="button is-fullwidth" data-target="suum.connect" data-action="click->suum#start">
-                  <span class="icon"> 
-                    <i class="fas fa-wifi"></i>
-                  </span>
+                <span class="icon">
+                  <i class="fas fa-wifi"></i>
+                </span>
                 </button>
               </li>
               <li>
                 <button id="call" class="button is-fullwidth" data-target="suum.call" data-action="click->suum#call">
-                  <span class="icon">
-                    <i class="fas fa-phone"></i>
-                  </span>
+                <span class="icon">
+                  <i class="fas fa-phone"></i>
+                </span>
                 </button>
               </li>
               <li>
                 <button id="disconnect" class="button is-fullwidth" data-target="suum.disconnect" data-action="click->suum#stop">
-                  <span class="icon"> 
-                    <i class="fas fa-phone-slash"></i>
-                  </span>
+                <span class="icon">
+                  <i class="fas fa-phone-slash"></i>
+                </span>
                 </button>
               </li>
             </ul>
           </div>
         </nav>
       </div> %>
-  </section>
+    </section>
   </body>
 </html>

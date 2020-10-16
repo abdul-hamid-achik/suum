@@ -1,5 +1,13 @@
 <div class="container">
 	<p class="title is-spaced">Welcome</p>
 	<p class="subtitle">This is a website that contains demos for video calls and live streaming</p>
+
+	<ul>
+		<%= for room <- @rooms do %>
+			<li>
+				<%= link(room.title, to: Routes.room_show_path(@conn, :show, room.slug)) %>
+			</li>
+		<% end %>
+	</ul>
 </div>
 

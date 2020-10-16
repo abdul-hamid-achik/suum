@@ -50,6 +50,11 @@ defmodule Suum.MixProject do
       {:pow, "~> 1.0.0"},
       {:uuid, "~> 1.1"},
       {:membrane_core, "~> 0.5.0"},
+      {:membrane_element_file, "~> 0.3.0"},
+      {:membrane_element_portaudio, "~> 0.3.1"},
+      {:membrane_element_ffmpeg_swresample, "~> 0.3.0"},
+      {:membrane_element_mad, "~> 0.3.0"},
+      {:membrane_webrtc_server, "~> 0.1.0"}
       # {:stun, "~> 1.0"}
     ]
   end

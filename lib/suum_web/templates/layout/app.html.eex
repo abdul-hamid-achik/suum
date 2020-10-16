@@ -1,5 +1,19 @@
-<main role="main" class="container">
-  <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-  <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+<div role="main" class="container">
+  <%= if get_flash(@conn, :info) do  %>
+  <div class="notification is-primary" role="alert">
+      <button class="delete" phx-click="lv:clear-flash"
+    phx-value-key="info" /></button>
+      <%= get_flash(@conn, :info) %>  
+  </div>
+  <% end %>
+
+  <%= if get_flash(@conn, :error) do  %>
+    <div class="notification is-dangerr" role="alert">
+      <button class="delete" phx-click="lv:clear-flash"
+      phx-value-key="error"></button>
+      <%= get_flash(@conn, :error) %>
+    </div>
+  </div>
+  <% end %>
   <%= @inner_content %>
-</main>
+</div>

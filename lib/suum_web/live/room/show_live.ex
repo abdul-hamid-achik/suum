@@ -19,13 +19,21 @@ defmodule Suum.Organizer.Room.ShowLive do
         <li><%= uuid %></li>
       <% end %>
     </ul>
-    <div class="streams tile">
-      <video id="local-video" playsinline autoplay muted width="600"></video>
+    <div class="streams tile is-ancestor">
+      <div class="tile is-8 is-parent">
 
-      <%= for uuid <- @connected_users do %>
-        <video id="video-remote-<%= uuid %>" data-user-uuid="<%= uuid %>" playsinline autoplay phx-hook="InitUser"></video>
-      <% end %>
+        <video id="local-video" class="tile is-" playsinline autoplay muted></video>
+      </div>
+
+      <div class="tile is-parent">
+        <%= for uuid <- @connected_users do %>
+          <div class="tile is-child">
+            <video id="video-remote-<%= uuid %>" data-user-uuid="<%= uuid %>" playsinline autoplay phx-hook="InitUser"></video>
+          </div>
+        <% end %>
+      </div>
     </div>
+
     <button class="button" phx-hook="JoinCall" phx-click="join_call" id="join-call">Join Call</button>
 
     <div id="offer-requests" class="tile is-parent">

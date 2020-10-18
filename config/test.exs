@@ -20,3 +20,9 @@ config :suum, SuumWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+if System.get_env("GITHUB_ACTIONS") do
+  config :suum, Suum.Repo,
+    username: "postgres",
+    password: "postgres"
+end

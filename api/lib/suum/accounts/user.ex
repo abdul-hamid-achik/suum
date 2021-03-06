@@ -9,7 +9,7 @@ defmodule Suum.Accounts.User do
     field :password, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
-    field :avatar, Suum.AvatarUploader.Type
+    field :avatar, Suum.Uploaders.Avatar.Type
 
     timestamps()
   end

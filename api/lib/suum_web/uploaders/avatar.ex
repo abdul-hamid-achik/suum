@@ -1,4 +1,4 @@
-defmodule Suum.AvatarUploader do
+defmodule Suum.Uploaders.Avatar do
   use Waffle.Definition
   use Waffle.Ecto.Definition
 

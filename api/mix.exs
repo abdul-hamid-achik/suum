@@ -28,13 +28,15 @@ defmodule Suum.MixProject do
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
   # Specifies your project dependencies.
-  #
+  # c
   # Type `mix help deps` for examples and options.
   defp deps do
     [
       {:porcelain, "~> 2.0.3"},
       {:task_bunny, "~> 0.3.2"},
       {:tesla, "~> 1.4.0"},
+      {:crudry, "~> 2.3.1"},
+      {:ecto_enum, "~> 1.4"},
 
       # Absinthe for GraphQL
       {:absinthe, "~> 1.5.0"},

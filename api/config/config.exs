@@ -11,6 +11,8 @@ config :suum,
   ecto_repos: [Suum.Repo],
   bucket_name: System.get_env("AWS_BUCKET_NAME", "uploads")
 
+config :suum, Suum.Repo, migration_primary_key: [type: :uuid]
+
 # Configures the endpoint
 config :suum, SuumWeb.Endpoint,
   url: [host: "localhost"],
@@ -40,7 +42,11 @@ config :phoenix, :json_library, Jason
 
 config :suum, Suum.Guardian,
   issuer: "suum",
-  secret_key: "2m9Vl9d1P/XiaRc8mSvhwB3GzYXmRkxLWyt+bUIoafypZTG+JDTJmkM2F1zG9OHX9Rs=",
+  secret_key:
+    System.get_env(
+      "SECRET_KEY",
+      "2m9Vl9d1P/XiaRc8mSvhwB3GzYXmRkxLWyt+bUIoafypZTG+JDTJmkM2F1zG9OHX9Rs="
+    ),
   ttl: {3, :days}
 
 config :suum, SuumWeb.AuthAccessPipeline,
@@ -71,7 +77,12 @@ config :kaffy,
 
 config :task_bunny,
   hosts: [
-    default: [connect_options: "amqp://localhost?heartbeat=30"]
+    default: [
+      connect_options: [
+        username: System.get_env("RABBITMQ_DEFAULT_USER", "local_access"),
+        password: System.get_env("RABBITMQ_DEFAULT_PASSWORD", "local_access")
+      ]
+    ]
   ]
 
 config :task_bunny,

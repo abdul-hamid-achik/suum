@@ -1,0 +1,63 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: suum-db
+    image: postgres:latest
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - database:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+  db-admin:
+    container_name: suum-db-admin
+    image: dpage/pgadmin4:latest
+    depends_on:
+      - db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@suum.app
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - "8080:80"
+    volumes:
+      - db-admin:/var/lib/pgadmin
+    links:
+      - "db:pgsql-server"
+
+  minio:
+    container_name: suum-minio
+    image: minio/minio
+    volumes:
+      - minio_data:/data
+    ports:
+      - 9000:9000
+    environment:
+      MINIO_ACCESS_KEY: ${AWS_ACCESS_KEY_ID:-local_access}
+      MINIO_SECRET_KEY: ${AWS_SECRET_ACCESS_KEY:-local_access}
+      MINIO_ROOT_USER: ${AWS_ACCESS_KEY_ID:-local_access}
+      MINIO_ROOT_PASSWORD: ${AWS_SECRET_ACCESS_KEY:-local_access}
+    command: server /data
+
+  mc:
+    image: minio/mc:latest
+    container_name: suum-mc
+    environment:
+      MINIO_ACCESS_KEY: ${AWS_ACCESS_KEY_ID:-local_access}
+      MINIO_SECRET_KEY: ${AWS_SECRET_ACCESS_KEY:-local_access}
+    depends_on:
+      - minio
+    entrypoint: /usr/bin/mc-entrypoint.sh
+    volumes:
+      - ./scripts/mc-entrypoint.sh:/usr/bin/mc-entrypoint.sh
+
+volumes:
+  minio_data:
+  database:
+    name: suum-database
+  db-admin:
+    name: pgadmin-database

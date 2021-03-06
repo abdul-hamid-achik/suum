@@ -1,0 +1,110 @@
+version: '3'
+
+tasks:
+  clean:
+    desc: Restarts development environment
+    deps: [compose.up]
+    cmds:
+      - mix clean
+      - mix ecto.drop
+      - rm -rf ./assets/node_modules ./_build ./deps
+      - rm .env
+      - task: compose.down
+
+  compose.logs:
+    desc: Shows logs from the containers
+    cmds:
+      - docker-compose logs --tail=5 -f
+
+  compose.up:
+    desc: Starts docker images
+    cmds:
+      - docker-compose up -d
+      - docker-compose ps
+
+  compose.down:
+    desc: Stops docker images
+    cmds:
+      - docker-compose down -v
+  
+  deps.get:
+    cmd: mix deps.get
+
+  compile:
+    cmd: mix compile
+
+  reset:
+    desc: Restarts development environment
+    cmds:
+      - task: clean
+      - task: setup
+
+  iex:
+    desc: Starts interactive elixir session
+    deps: [migrate]
+    cmds:
+      - iex -S mix
+
+  iex.server:
+    deps: [deps.get]
+    cmd: iex -S mix phx.server
+
+  server:
+    deps: [deps.get]
+    cmd: mix phx.server
+
+  setup:    
+    desc: |
+      Setups the project by installing node_modules, elixir deps, running the database and
+      seeding some test data
+    deps: [compose.up]
+    cmds:
+      - cp .env.template .env
+      - task: deps.get
+      - task: compile
+      - mix ecto.setup
+      - npm install --prefix assets
+    status:
+      - test -d ./assets/node_modules
+      - test -d ./_build
+      - test -d ./deps
+      - test -f .env
+
+  format:
+    desc: Formats elixir code
+    cmds:
+      - mix format
+
+  format.check:
+    desc: Runs formatting checking for elixir
+    cmds:
+      - mix format --check-formatted
+
+  dialyzer.check:
+    desc: Runs Dialyzer for elixir
+    cmds:
+      - mkdir -p priv/plts
+      - mix dialyzer --quiet
+
+  migrate:
+    desc: Runs database migrations
+    deps: [compose.up]
+    cmds:
+      - mix ecto.migrate
+
+  seed:
+    desc: Seeds database with testing data
+    cmds:
+      - mix run priv/repo/seeds.exs
+
+  test:
+    desc: Run tests
+    deps: [compose.up]
+    cmds:
+      - mix test
+
+  test.wip:
+    desc: Run work in progress tagged tests
+    deps: [compose.up]
+    cmds:
+      - mix test --only wip

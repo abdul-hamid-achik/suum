@@ -1,0 +1,9 @@
+version: '3'
+
+tasks:
+  server:
+    cmd: npm start
+
+  clean:
+    cmd: rm -rf ./node_modules
+    

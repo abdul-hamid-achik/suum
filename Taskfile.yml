@@ -8,4 +8,4 @@ includes:
     taskfile: ./web/Taskfile.yml
     dir: ./web
 
-tasks:
+dotenv: ['api/.env', 'web/.env']

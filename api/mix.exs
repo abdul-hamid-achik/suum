@@ -32,6 +32,7 @@ defmodule Suum.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:porcelain, "~> 2.0.3"},
       # Absinthe for GraphQL
       {:absinthe, "~> 1.5.0"},
       {:absinthe_plug, "~> 1.5.0"},

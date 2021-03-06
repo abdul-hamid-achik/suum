@@ -1,4 +1,4 @@
 {
   "elixirLS.projectDir": "./api",
-  "elixirLS.fetchDeps": true
+  "elixirLS.fetchDeps": false
 }

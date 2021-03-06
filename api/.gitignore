@@ -36,3 +36,5 @@ npm-debug.log
 /.elixir-ls/
 .DS_Store
 .env
+
+/mnt

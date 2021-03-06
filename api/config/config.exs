@@ -8,7 +8,8 @@
 use Mix.Config
 
 config :suum,
-  ecto_repos: [Suum.Repo]
+  ecto_repos: [Suum.Repo],
+  bucket_name: System.get_env("AWS_BUCKET_NAME", "uploads")
 
 # Configures the endpoint
 config :suum, SuumWeb.Endpoint,
@@ -17,6 +18,17 @@ config :suum, SuumWeb.Endpoint,
   render_errors: [view: SuumWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Suum.PubSub,
   live_view: [signing_salt: "OHdMvegK"]
+
+config :ex_aws,
+  access_key_id: System.get_env("AWS_ACCESS_KEY_ID", "local_access"),
+  secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY", "local_access"),
+  region: System.get_env("AWS_REGION", "local")
+
+config :ex_aws, :s3,
+  host: System.get_env("AWS_HOST", "127.0.0.1"),
+  port: System.get_env("AWS_PORT", "9000"),
+  region: System.get_env("AWS_REGION", "local"),
+  scheme: System.get_env("AWS_SCHEME", "http://")
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -36,8 +48,10 @@ config :suum, SuumWeb.AuthAccessPipeline,
   error_handler: SuumWeb.AuthErrorHandler
 
 config :waffle,
-  storage: Waffle.Storage.S3, # or Waffle.Storage.Local
-  bucket: System.get_env("AWS_BUCKET_NAME") # if using S3
+  # or Waffle.Storage.Local
+  storage: Waffle.Storage.S3,
+  # if using S3
+  bucket: System.get_env("AWS_BUCKET_NAME")
 
 # If using S3:
 config :ex_aws,
@@ -51,9 +65,9 @@ config :suum, Suum.Mailer,
   api_key: "my_api_key"
 
 config :kaffy,
-   otp_app: :suum,
-   ecto_repo: Suum.Repo,
-   router: SuumWeb.Router
+  otp_app: :suum,
+  ecto_repo: Suum.Repo,
+  router: SuumWeb.Router
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

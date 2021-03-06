@@ -2,7 +2,7 @@ defmodule SuumWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", SuumWeb.RoomChannel
+  channel("transmit:*", SuumWeb.TransmitChannel)
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

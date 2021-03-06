@@ -3,9 +3,8 @@ version: "3.8"
 services:
   rtmp:
     container_name: suum-rtmp
-    build:
-      context: .
-      dockerfile: rtmp.Dockerfile
+
+    image: tiangolo/nginx-rtmp:latest
     ports:
       - 1935:1935
       - 8080:8080

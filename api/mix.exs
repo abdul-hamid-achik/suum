@@ -20,7 +20,7 @@ defmodule Suum.MixProject do
   def application do
     [
       mod: {Suum.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :task_bunny]
     ]
   end
 
@@ -33,6 +33,9 @@ defmodule Suum.MixProject do
   defp deps do
     [
       {:porcelain, "~> 2.0.3"},
+      {:task_bunny, "~> 0.3.2"},
+      {:tesla, "~> 1.4.0"},
+
       # Absinthe for GraphQL
       {:absinthe, "~> 1.5.0"},
       {:absinthe_plug, "~> 1.5.0"},

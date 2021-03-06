@@ -3,7 +3,6 @@ version: "3.8"
 services:
   rtmp:
     container_name: suum-rtmp
-
     image: tiangolo/nginx-rtmp:latest
     ports:
       - 1935:1935
@@ -12,6 +11,18 @@ services:
       - ./mnt/hls:/mnt/hls
       - ./scripts/thumbnail.sh:/usr/local/bin/thumbnail.sh
       - ./nginx.conf:/etc/nginx/nginx.conf
+
+  rabbitmq:
+    image: rabbitmq:3.8.14-alpine
+    container_name: suum-rabbitmq
+    environment:
+        RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:-local_access}
+        RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-local_access}
+        RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-local_access}
+    ports:
+        - 5672:5672
+        - 15672:15672
+
   db:
     container_name: suum-db
     image: postgres:latest

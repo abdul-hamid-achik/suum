@@ -9,3 +9,10 @@ includes:
     dir: ./web
 
 dotenv: ['api/.env', 'web/.env']
+
+tasks:
+  test:
+    desc: Runs all tests both api and web
+    cmds:
+      - task: api:test
+      - task: web:test

@@ -6,4 +6,13 @@ tasks:
 
   clean:
     cmd: rm -rf ./node_modules
-    
+
+  test:
+    desc: Runs tests
+    cmds:
+      - npm test --inspect-brk --runInBand --coverage false
+
+  test.watch:
+    desc: Runs tests in watch mode
+    cmds:
+      - npm run test.watch --inspect-brk --runInBand --coverage false

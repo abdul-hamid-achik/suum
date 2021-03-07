@@ -1,6 +1,5 @@
 defmodule Suum.Accounts.User do
-  use Ecto.Schema
-  import Ecto.Changeset
+  use Suum.Schema
   use Waffle.Ecto.Schema
 
   @derive {Inspect, except: [:password]}

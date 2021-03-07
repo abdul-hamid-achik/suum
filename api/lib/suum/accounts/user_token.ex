@@ -1,6 +1,5 @@
 defmodule Suum.Accounts.UserToken do
-  use Ecto.Schema
-  import Ecto.Query
+  use Suum.Schema
 
   @hash_algorithm :sha256
   @rand_size 32
@@ -16,7 +15,11 @@ defmodule Suum.Accounts.UserToken do
     field :token, :binary
     field :context, :string
     field :sent_to, :string
-    belongs_to :user, Suum.Accounts.User
+
+    belongs_to :user, Suum.Accounts.User,
+      foreign_key: :user_uuid,
+      references: :uuid,
+      primary_key: true
 
     timestamps(updated_at: false)
   end
@@ -28,7 +31,7 @@ defmodule Suum.Accounts.UserToken do
   """
   def build_session_token(user) do
     token = :crypto.strong_rand_bytes(@rand_size)
-    {token, %Suum.Accounts.UserToken{token: token, context: "session", user_id: user.id}}
+    {token, %Suum.Accounts.UserToken{token: token, context: "session", user_uuid: user.uuid}}
   end
 
   @doc """
@@ -67,7 +70,7 @@ defmodule Suum.Accounts.UserToken do
        token: hashed_token,
        context: context,
        sent_to: sent_to,
-       user_id: user.id
+       user_uuid: user.uuid
      }}
   end
 
@@ -130,10 +133,10 @@ defmodule Suum.Accounts.UserToken do
   Gets all tokens for the given user for the given contexts.
   """
   def user_and_contexts_query(user, :all) do
-    from t in Suum.Accounts.UserToken, where: t.user_id == ^user.id
+    from t in Suum.Accounts.UserToken, where: t.user_uuid == ^user.uuid
   end
 
   def user_and_contexts_query(user, [_ | _] = contexts) do
-    from t in Suum.Accounts.UserToken, where: t.user_id == ^user.id and t.context in ^contexts
+    from t in Suum.Accounts.UserToken, where: t.user_uuid == ^user.uuid and t.context in ^contexts
   end
 end

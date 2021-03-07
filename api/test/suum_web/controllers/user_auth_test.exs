@@ -89,7 +89,7 @@ defmodule SuumWeb.UserAuthTest do
     test "authenticates user from session", %{conn: conn, user: user} do
       user_token = Accounts.generate_user_session_token(user)
       conn = conn |> put_session(:user_token, user_token) |> UserAuth.fetch_current_user([])
-      assert conn.assigns.current_user.id == user.id
+      assert conn.assigns.current_user.uuid == user.uuid
     end
 
     test "authenticates user from cookies", %{conn: conn, user: user} do
@@ -105,7 +105,7 @@ defmodule SuumWeb.UserAuthTest do
         |> UserAuth.fetch_current_user([])
 
       assert get_session(conn, :user_token) == user_token
-      assert conn.assigns.current_user.id == user.id
+      assert conn.assigns.current_user.uuid == user.uuid
     end
 
     test "does not authenticate if data is missing", %{conn: conn, user: user} do

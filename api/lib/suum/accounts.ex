@@ -57,7 +57,7 @@ defmodule Suum.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user!(uuid), do: Repo.get!(User, uuid)
 
   ## User registration
 

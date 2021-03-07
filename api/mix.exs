@@ -37,6 +37,8 @@ defmodule Suum.MixProject do
       {:tesla, "~> 1.4.0"},
       {:crudry, "~> 2.3.1"},
       {:ecto_enum, "~> 1.4"},
+      {:faker, "~> 0.16"},
+      {:ex_machina, "~> 2.7.0"},
 
       # Absinthe for GraphQL
       {:absinthe, "~> 1.5.0"},

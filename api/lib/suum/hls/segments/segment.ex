@@ -1,10 +1,18 @@
 defmodule Suum.Hls.Segment do
-  alias Suum.Hls.Transmision
+  alias Suum.Hls.Transmission
 
   use Suum.Schema
   use Waffle.Ecto.Schema
 
-  @derive {Inspect, except: []}
+  @required [
+    :file,
+    :time_start,
+    :time_end,
+    :duration,
+    :transmission
+  ]
+
+  @optional []
 
   schema "segments" do
     field(:file, Suum.Uploaders.Segment.Type)
@@ -12,7 +20,14 @@ defmodule Suum.Hls.Segment do
     field(:time_start, :utc_datetime)
     field(:duration, :integer)
 
-    belongs_to(:transmision, Transmision)
+    belongs_to(:transmission, Transmission)
     timestamps()
+  end
+
+  def changeset(segment, attrs) do
+    segment
+    |> cast(attrs, @required ++ @optional)
+    |> validate_required(@required)
+    |> put_assoc(:tranmission, attrs.transmission)
   end
 end

@@ -66,6 +66,12 @@ config :ex_aws,
   secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY"),
   region: System.get_env("AWS_REGION")
 
+config :ex_aws, :s3,
+  host: System.get_env("AWS_HOST", "127.0.0.1"),
+  port: System.get_env("AWS_PORT", "9000"),
+  region: System.get_env("AWS_REGION", "local"),
+  scheme: System.get_env("AWS_SCHEME", "http://")
+
 config :suum, Suum.Mailer,
   adapter: Bamboo.MandrillAdapter,
   api_key: "my_api_key"

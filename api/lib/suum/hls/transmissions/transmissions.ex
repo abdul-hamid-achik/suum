@@ -1,6 +1,6 @@
-defmodule Suum.Hls.Transmisions do
-  alias Suum.Hls.Transmision
+defmodule Suum.Hls.Transmissions do
+  alias Suum.Hls.Transmission
   require Crudry.Context
 
-  Crudry.Context.generate_functions(Transmision)
+  Crudry.Context.generate_functions(Transmission)
 end

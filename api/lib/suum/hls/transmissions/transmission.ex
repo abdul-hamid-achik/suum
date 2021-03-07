@@ -1,12 +1,19 @@
-defmodule Suum.Hls.Transmision do
+defmodule Suum.Hls.Transmission do
   use Suum.Schema
   use Waffle.Ecto.Schema
 
   alias Suum.{Accounts.User, Hls.Segment}
 
+  @required [
+    :name,
+    :type,
+    :user
+  ]
+
+  @optional []
+
   defenum(Type, ["live", "vod"])
 
-  @derive {Inspect, except: []}
   schema "tranmissions" do
     field(:name, :string)
     field :type, Type
@@ -14,5 +21,12 @@ defmodule Suum.Hls.Transmision do
 
     has_many(:segment, Segment)
     timestamps()
+  end
+
+  def changeset(transmission, attrs) do
+    transmission
+    |> cast(attrs, @required ++ @optional)
+    |> validate_required(@required)
+    |> put_assoc(:user, attrs.user)
   end
 end

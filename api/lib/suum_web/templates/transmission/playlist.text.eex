@@ -1,7 +1,8 @@
 #EXTM3U
-#EXT-X-VERSION:3
-#EXT-X-TARGETDURATION:8
 #EXT-X-PLAYLIST-TYPE:VOD
-<%= for segment <- @transmission.segments do %>#EXTINF:<%= segment.duration_sec %>
+#EXT-X-TARGETDURATION:8
+#EXT-X-VERSION:4
+<%= for segment <- @transmission.segments do %>#EXTINF:<%= segment.duration_sec %>,
 <%= segment.file_url %>
 <% end %>
+#EXT-X-ENDLIST

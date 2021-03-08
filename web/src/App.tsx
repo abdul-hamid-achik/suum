@@ -121,18 +121,24 @@ export const App = () => {
   }, [socket])
 
   React.useEffect(() => {
-    const player = videojs(videoRef.current)
+    const player = videojs(videoRef.current, {
+      liveui: false,
+      liveTracker: {
+        trackingThreshold: 0,
+      }
+    })
     if (transmission) {
       player.ready(() => {
         player.src({
           src: `${env.HTTP_API_HOST}/transmissions/${transmission.uuid}/index.m3u8`,
           type: "application/x-mpegURL"
         })
-
+        // @ts-ignore
         player.vttThumbnails({
           src: `${env.HTTP_API_HOST}/transmissions/${transmission.uuid}/thumbnails.vtt`,
           showTimestamp: true
         })
+
         player.play()
       })
     } else {

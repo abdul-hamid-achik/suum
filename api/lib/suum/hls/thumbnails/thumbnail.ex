@@ -55,7 +55,7 @@ defmodule Suum.Hls.Thumbnail do
   def set_time(segment, index) do
     start_seconds = index * 8
     from = Time.add(~T[00:00:00.0], start_seconds, :second)
-    elapsed_seconds = 8 * (index + 1)
+    elapsed_seconds = 8 + start_seconds
     to = Time.add(from, elapsed_seconds, :second)
 
     Map.merge(segment, %{

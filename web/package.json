@@ -32,6 +32,9 @@
     "react-router": "^5.2.0",
     "react-scripts": "4.0.3",
     "typescript": "^3.9.9",
+    "video.js": "^7.11.4",
+    "videojs-contrib-hls": "^5.15.0",
+    "videojs-vtt-thumbnails": "0.0.13",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

@@ -3,15 +3,16 @@ version: "3.8"
 services:
   rtmp:
     container_name: suum-rtmp
-    image: tiangolo/nginx-rtmp:latest
-    command: ["nginx-rtmp-entrypoint.sh"]
+    build:
+      dockerfile: .docker/rtmp.dockerfile
+      context: .
+    # network_mode: host
     ports:
       - 1935:1935
       - 8080:8080
     volumes:
       - ./mnt/hls:/mnt/hls
       - ./scripts/thumbnail.sh:/usr/local/bin/thumbnail.sh
-      - ./scripts/nginx-rtmp-entrypoint.sh:/usr/local/bin/nginx-rtmp-entrypoint.sh
       - ./nginx.conf:/etc/nginx/nginx.conf
 
   rabbitmq:
@@ -37,6 +38,7 @@ services:
       - database:/var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
+
   db-admin:
     container_name: suum-db-admin
     image: dpage/pgadmin4:latest
@@ -49,7 +51,7 @@ services:
     ports:
       - "5433:80"
     volumes:
-      - db-admin:/var/lib/pgadmin
+      - pg-admin:/var/lib/pgadmin
     links:
       - "db:pgsql-server"
 
@@ -57,7 +59,7 @@ services:
     container_name: suum-minio
     image: minio/minio
     volumes:
-      - minio_data:/data
+      - minio-data:/data
     ports:
       - 9000:9000
     environment:
@@ -65,6 +67,7 @@ services:
       MINIO_SECRET_KEY: ${AWS_SECRET_ACCESS_KEY:-local_access}
       MINIO_ROOT_USER: ${AWS_ACCESS_KEY_ID:-local_access}
       MINIO_ROOT_PASSWORD: ${AWS_SECRET_ACCESS_KEY:-local_access}
+      AWS_BUCKET_NAME: ${AWS_BUCKET_NAME:-suum}
     command: server /data
 
   mc:
@@ -80,8 +83,9 @@ services:
       - ./scripts/mc-entrypoint.sh:/usr/bin/mc-entrypoint.sh
 
 volumes:
-  minio_data:
+  minio-data:
+    name: suum-bucket
   database:
     name: suum-database
-  db-admin:
-    name: pgadmin-database
+  pg-admin:
+    name: suum-database-admin

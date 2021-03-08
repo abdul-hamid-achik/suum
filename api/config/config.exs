@@ -9,7 +9,7 @@ use Mix.Config
 
 config :suum,
   ecto_repos: [Suum.Repo],
-  bucket_name: System.get_env("AWS_BUCKET_NAME", "uploads")
+  bucket_name: System.get_env("AWS_BUCKET_NAME", "suum")
 
 config :suum, Suum.Repo, migration_primary_key: [type: :uuid]
 
@@ -54,10 +54,9 @@ config :suum, SuumWeb.AuthAccessPipeline,
   error_handler: SuumWeb.AuthErrorHandler
 
 config :waffle,
-  # or Waffle.Storage.Local
   storage: Waffle.Storage.S3,
-  # if using S3
-  bucket: System.get_env("AWS_BUCKET_NAME")
+  bucket: System.get_env("AWS_BUCKET_NAME", "suum"),
+  asset_host: System.get_env("MINIO_HOST", "http://localhost:9000/suum")
 
 # If using S3:
 config :ex_aws,

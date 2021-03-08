@@ -4,6 +4,17 @@ tasks:
   server:
     cmd: npm start
 
+  setup:
+    cmd: npm install
+
+  build:
+    cmd: npm run build
+
+  reset:
+    cmds: 
+      - task: clean
+      - task: setup
+
   clean:
     cmd: rm -rf ./node_modules
 

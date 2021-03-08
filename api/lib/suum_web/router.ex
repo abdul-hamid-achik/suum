@@ -1,6 +1,7 @@
 defmodule SuumWeb.Router do
   use SuumWeb, :router
-  use Kaffy.Routes #, scope: "/admin", pipe_through: [:some_plug, :authenticate]
+  # , scope: "/admin", pipe_through: [:some_plug, :authenticate]
+  use Kaffy.Routes
 
   import SuumWeb.UserAuth
 
@@ -89,13 +90,19 @@ defmodule SuumWeb.Router do
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm
+
+    get "/transmissions/:uuid/index.m3u8", TransmissionController, :playlist
+    get "/transmissions/:uuid/thumbnails.vtt", TransmissionController, :thumbnails
+    post "/on_play", RtmpHooksController, :on_play
+    post "/on_publish", RtmpHooksController, :on_publish
+    post "/on_done", RtmpHooksController, :on_done
   end
 
-  if Mix.env == :dev do
+  if Mix.env() == :dev do
     forward "/sent_emails", Bamboo.SentEmailViewerPlug
   end
 
-  if Mix.env == :dev do
+  if Mix.env() == :dev do
     forward "/graphiql", Absinthe.Plug.GraphiQL, schema: SuumWeb.Schema
   end
 end

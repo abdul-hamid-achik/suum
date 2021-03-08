@@ -1,8 +1,8 @@
 defmodule SuumWeb.Schema do
   use Absinthe.Schema
 
-  alias SuumWeb.Schema
-  alias SuumWeb.Api.Types
+  alias SuumWeb.{Api.Types, Api.Queries}
+  import_types(Queries.Hls)
 
   import_types(Absinthe.Type.Custom)
   import_types(Types.Segment)
@@ -10,13 +10,11 @@ defmodule SuumWeb.Schema do
   import_types(Types.User)
 
   query do
-    # import_fields(:get_segments)
-    # import_fields(:get_transmissions)
-    # import_fields(:user_queries)
+    import_fields(:hls_queries)
   end
 
-  mutation do
-    # Add mutations here. Example
-    # import_fields(:create_product)
-  end
+  # mutation do
+  # Add mutations here. Example
+  # import_fields(:create_transmission)
+  # end
 end

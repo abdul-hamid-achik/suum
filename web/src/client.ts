@@ -5,9 +5,10 @@ import * as AbsintheSocket from '@absinthe/socket'
 import { createAbsintheSocketLink } from '@absinthe/socket-apollo-link'
 import { createLink } from 'apollo-absinthe-upload-link'
 import { Socket as PhoenixSocket } from 'phoenix'
+import env from 'react-dotenv'
 
-const HTTP_ENDPOINT = '/api/graphql'
-const WS_ENDPOINT = '/socket'
+const HTTP_ENDPOINT = `${env.HTTP_API_HOST}/api`
+const WS_ENDPOINT = `${env.HTTP_API_HOST}/socket`
 
 // @ts-ignore
 // const httpLink = createHttpLink({

@@ -17,3 +17,14 @@ tasks:
     cmds:
       - task: api:test
       - task: web:test
+  
+  reset:
+    cmds:
+      - task: api:reset.hard
+      - task: web:reset
+
+
+  setup:
+    cmds:
+      - task: api:setup
+      - task: web:setup

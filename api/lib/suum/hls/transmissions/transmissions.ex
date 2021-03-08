@@ -1,4 +1,5 @@
 defmodule Suum.Hls.Transmissions do
+  alias Suum.Repo
   alias Suum.Hls.Transmission
   require Crudry.Context
 

@@ -1,7 +1,8 @@
 defmodule SuumWeb.Api.Types.Transmission do
   use Absinthe.Schema.Notation
 
-  object :tranmission do
+  object :transmission do
+    field(:uuid, :id)
     field(:user, :user)
     field(:name, :string)
     field(:type, :string)

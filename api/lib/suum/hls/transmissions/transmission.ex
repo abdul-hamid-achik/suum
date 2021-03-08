@@ -6,20 +6,23 @@ defmodule Suum.Hls.Transmission do
 
   @required [
     :name,
-    :type,
-    :user
+    :type
+    # :user_uuid
   ]
 
   @optional []
 
   defenum(Type, ["live", "vod"])
 
-  schema "tranmissions" do
+  schema "transmissions" do
     field(:name, :string)
     field :type, Type
-    belongs_to :user, User
 
-    has_many(:segment, Segment)
+    belongs_to :user, User,
+      foreign_key: :user_uuid,
+      references: :uuid
+
+    has_many(:segments, Segment)
     timestamps()
   end
 
@@ -27,6 +30,7 @@ defmodule Suum.Hls.Transmission do
     transmission
     |> cast(attrs, @required ++ @optional)
     |> validate_required(@required)
-    |> put_assoc(:user, attrs.user)
+
+    # |> foreign_key_constraint(:user_uuid)
   end
 end

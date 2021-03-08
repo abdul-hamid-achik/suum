@@ -26,6 +26,9 @@ tasks:
     desc: Stops docker images
     cmd: docker-compose down -v
   
+  compose.restart:
+    cmd: docker-compose restart
+  
   deps.get:
     cmd: mix deps.get
 
@@ -35,12 +38,19 @@ tasks:
   compile:
     cmd: mix compile
 
-  reset:
+  reset.hard:
     desc: Restarts development environment
     cmds:
       - task: clean
       - task: setup
 
+  reset:
+    cmds:
+      - task: compose.down
+      - task: compose.up
+      - task: db.reset
+
+  routes: mix phx.routes
   iex:
     desc: Starts interactive elixir session
     deps: [db.migrate]
@@ -74,6 +84,7 @@ tasks:
   db.setup:
     deps: [compose.up]
     cmd: mix ecto.setup
+
   db.reset:
     deps: [compose.up]
     cmd: mix ecto.reset

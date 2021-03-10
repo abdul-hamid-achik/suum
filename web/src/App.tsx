@@ -122,12 +122,9 @@ export const App = () => {
 
   React.useEffect(() => {
     const player = videojs(videoRef.current, {
-      liveui: false,
-      liveTracker: {
-        trackingThreshold: 0,
-      }
+      liveui: false
     })
-    if (transmission) {
+    if (transmission && player) {
       player.ready(() => {
         player.src({
           src: `${env.HTTP_API_HOST}/transmissions/${transmission.uuid}/index.m3u8`,
@@ -141,8 +138,6 @@ export const App = () => {
 
         player.play()
       })
-    } else {
-      // player.dispose()
     }
   }, [transmission])
 

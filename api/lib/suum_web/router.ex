@@ -91,7 +91,7 @@ defmodule SuumWeb.Router do
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm
 
-    get "/transmissions/:uuid/index.m3u8", TransmissionController, :playlist
+    get "/transmissions/:uuid/index.m3u8", TransmissionController, :vod
     get "/transmissions/:uuid/thumbnails.vtt", TransmissionController, :thumbnails
     post "/on_play", RtmpHooksController, :on_play
     post "/on_publish", RtmpHooksController, :on_publish

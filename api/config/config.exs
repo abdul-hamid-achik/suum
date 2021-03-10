@@ -9,7 +9,8 @@ use Mix.Config
 
 config :suum,
   ecto_repos: [Suum.Repo],
-  bucket_name: System.get_env("AWS_BUCKET_NAME", "suum")
+  bucket_name: System.get_env("AWS_BUCKET_NAME", "suum"),
+  base_url: System.get_env("BASE_URL", "http://localhost:4000")
 
 config :suum, Suum.Repo, migration_primary_key: [type: :uuid]
 

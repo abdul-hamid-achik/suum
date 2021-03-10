@@ -31,7 +31,6 @@ defmodule SuumWeb.TransmitChannel do
         } = socket
       ) do
     Porcelain.Process.stop(porcelain_process)
-    # Observer.save(observer_pid, transmission_uuid)
     GenServer.cast(pid, {:save, uuid})
     {:noreply, assign(socket, Map.delete(socket.assigns, :porcelain_process))}
   end

@@ -4,8 +4,8 @@ defmodule SuumWeb.TransmissionController do
 
   alias Suum.Hls
 
-  def playlist(conn, %{"uuid" => uuid} = _params) do
-    Logger.info("Generating Playlist for Transmission #{uuid}")
+  def vod(conn, %{"uuid" => uuid} = _params) do
+    Logger.info("VOD - #{uuid}")
     transmission = Hls.get_transmission(uuid)
 
     segments =
@@ -28,7 +28,7 @@ defmodule SuumWeb.TransmissionController do
     conn
     |> put_resp_content_type("application/vnd.apple.mpegurl")
     |> put_resp_header("accept-ranges", "bytes")
-    |> render("playlist.text", transmission: transmission)
+    |> render("vod.m3u8", transmission: transmission)
   end
 
   def thumbnails(conn, %{"uuid" => uuid} = _params) do
@@ -43,7 +43,6 @@ defmodule SuumWeb.TransmissionController do
           |> Hls.Thumbnail.set_file_url()
           |> Hls.Thumbnail.set_time(elem(&1, 1)))
       )
-      |> IO.inspect()
 
     Logger.info("Thumbnails loaded #{length(thumbnails)}")
 

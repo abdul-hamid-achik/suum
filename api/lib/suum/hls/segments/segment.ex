@@ -24,7 +24,7 @@ defmodule Suum.Hls.Segment do
       primary_key: true
     )
 
-    field(:duration_sec, :integer, virtual: true)
+    field(:duration_sec, :float, virtual: true)
     field(:file_url, :string, virtual: true)
 
     timestamps()
@@ -42,5 +42,5 @@ defmodule Suum.Hls.Segment do
     do: Map.put(segment, :file_url, Uploaders.Segment.url({segment.file, segment}))
 
   def set_duration_sec(segment),
-    do: Map.put(segment, :duration_sec, round(segment.duration / 1000))
+    do: Map.put(segment, :duration_sec, segment.duration / 1000)
 end

@@ -17,6 +17,7 @@ import { useQuery, gql } from "@apollo/client"
 import env from "react-dotenv"
 import client from "./client"
 import { ColorModeSwitcher } from "./ColorModeSwitcher"
+import { Helmet } from "react-helmet"
 import videojs from "video.js"
 import "videojs-vtt-thumbnails"
 import "videojs-contrib-hls"
@@ -37,7 +38,7 @@ export const App = () => {
   const [transmission, setTransmission] = React.useState<Transmission | null>()
 
   const [isPlaying, setPlaying] = React.useState<boolean>(false)
-  const videoRef = React.useRef<HTMLMediaElement>(null)
+  const videoRef = React.useRef<HTMLMediaElement>(null) as React.RefObject<HTMLVideoElement>
   const channel = React.useRef<Channel>()
   const stream = React.useRef<MediaStream>()
   const socket = React.useMemo(() => new Socket(`${env.WS_API_HOST}/socket`), [])
@@ -122,8 +123,10 @@ export const App = () => {
 
   React.useEffect(() => {
     const player = videojs(videoRef.current, {
-      liveui: false
+      liveui: false,
+      errorDisplay: false
     })
+
     if (transmission && player) {
       player.ready(() => {
         player.src({
@@ -143,11 +146,21 @@ export const App = () => {
 
   return (
     <ChakraProvider theme={theme}>
+      <Helmet>
+        <style type="text/css">{`
+          .vjs-default-skin.vjs-paused .vjs-big-play-button {
+            display: none;
+          }
+          
+          .video-js .vjs-big-play-button {
+            display: none;
+          }
+        `}</style>
+      </Helmet>
       <Box textAlign="center" fontSize="xl">
         <Grid minH="80vh" p={3}>
           <ColorModeSwitcher justifySelf="flex-end" />
           <Container centerContent>
-            {/* @ts-ignore */}
             <video className="video-js" controls ref={videoRef} width={640} height={360} />
             <Button onClick={onClick} colorScheme={isPlaying ? "red" : "blue"} rightIcon={isPlaying ? <FaTimes /> : <FaCamera />}>
               {isPlaying ? "Stop" : "Start"}

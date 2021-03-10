@@ -8,7 +8,7 @@ defmodule SuumWeb.Api.Queries.Hls do
       resolve(&Resolvers.Hls.list_transmissions/2)
     end
 
-    field :list_thumbnail, list_of(:thumbnail) do
+    field :list_thumbnails, list_of(:thumbnail) do
       arg(:transmission_uuid, :id)
       resolve(&Resolvers.Hls.list_thumbnails/2)
     end

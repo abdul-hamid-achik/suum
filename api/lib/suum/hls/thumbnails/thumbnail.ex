@@ -25,7 +25,7 @@ defmodule Suum.Hls.Thumbnail do
     field(:from, :string, virtual: true)
     field(:to, :string, virtual: true)
 
-    field(:file_url, :string, virtual: true)
+    field(:url, :string, virtual: true)
 
     timestamps()
   end
@@ -38,8 +38,8 @@ defmodule Suum.Hls.Thumbnail do
     |> foreign_key_constraint(:transmission_uuid)
   end
 
-  def set_file_url(segment),
-    do: Map.put(segment, :file_url, Uploaders.Thumbnail.url({segment.file, segment}))
+  def set_url(segment),
+    do: Map.put(segment, :url, Uploaders.Thumbnail.url({segment.file, segment}))
 
   def set_time(segment, 0) do
     from = ~T[00:00:00.0]

@@ -12,7 +12,7 @@ defmodule SuumWeb.TransmissionController do
       Enum.map(
         Hls.list_segments(transmission_uuid: transmission.uuid),
         &(&1
-          |> Hls.Segment.set_file_url()
+          |> Hls.Segment.set_url()
           |> Hls.Segment.set_duration_sec())
       )
 
@@ -40,7 +40,7 @@ defmodule SuumWeb.TransmissionController do
         Enum.with_index(Hls.list_thumbnails(transmission_uuid: transmission.uuid)),
         &(&1
           |> elem(0)
-          |> Hls.Thumbnail.set_file_url()
+          |> Hls.Thumbnail.set_url()
           |> Hls.Thumbnail.set_time(elem(&1, 1)))
       )
 

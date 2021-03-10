@@ -2,7 +2,7 @@ WEBVTT
 
 <%= for thumbnail <- @thumbnails do %>
 <%= thumbnail.from %> --> <%= thumbnail.to %>
-<%= thumbnail.file_url %>=0,0,320,240
+<%= thumbnail.url %>=0,0,320,240
 
 <% end %>
 <%# 00:00.000 --> 00:05.000

@@ -25,7 +25,7 @@ defmodule Suum.Hls.Segment do
     )
 
     field(:duration_sec, :float, virtual: true)
-    field(:file_url, :string, virtual: true)
+    field(:url, :string, virtual: true)
 
     timestamps()
   end
@@ -38,8 +38,8 @@ defmodule Suum.Hls.Segment do
     |> foreign_key_constraint(:transmission_uuid)
   end
 
-  def set_file_url(segment),
-    do: Map.put(segment, :file_url, Uploaders.Segment.url({segment.file, segment}))
+  def set_url(segment),
+    do: Map.put(segment, :url, Uploaders.Segment.url({segment.file, segment}))
 
   def set_duration_sec(segment),
     do: Map.put(segment, :duration_sec, segment.duration / 1000)

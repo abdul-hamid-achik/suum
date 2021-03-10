@@ -5,6 +5,6 @@ defmodule SuumWeb.Api.Types.Thumbnail do
     field(:uuid, :id)
     field(:transmission, :transmission)
     field(:transmission_uuid, :id)
-    field(:file_url, :string)
+    field(:url, :string)
   end
 end

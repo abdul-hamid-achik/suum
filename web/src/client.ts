@@ -1,4 +1,4 @@
-import { ApolloClient, createHttpLink, InMemoryCache, ApolloLink } from '@apollo/client'
+import { ApolloClient, InMemoryCache, ApolloLink } from '@apollo/client'
 import { setContext } from "@apollo/client/link/context"
 import { hasSubscription } from '@jumpn/utils-graphql'
 import * as AbsintheSocket from '@absinthe/socket'
@@ -9,11 +9,6 @@ import env from 'react-dotenv'
 
 const HTTP_ENDPOINT = `${env.HTTP_API_HOST}/api`
 const WS_ENDPOINT = `${env.HTTP_API_HOST}/socket`
-
-// @ts-ignore
-// const httpLink = createHttpLink({
-//     uri: HTTP_ENDPOINT
-// })
 
 const uploadLink: ApolloLink = createLink({
     uri: HTTP_ENDPOINT
@@ -33,12 +28,6 @@ const authLink = setContext((_, { headers }) => {
     }
 })
 
-// TODO: learn how to join these two if needed
-// const link = 
-//   ApolloLink.from([
-//     socketLink, authLink, uploadLink, httpLink])
-
-//     operation => hasSubscription(operation.query)
 
 const link = ApolloLink.split(
     operation => hasSubscription(operation.query),

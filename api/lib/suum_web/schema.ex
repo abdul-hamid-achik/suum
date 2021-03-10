@@ -6,6 +6,7 @@ defmodule SuumWeb.Schema do
 
   import_types(Absinthe.Type.Custom)
   import_types(Types.Segment)
+  import_types(Types.Thumbnail)
   import_types(Types.Transmission)
   import_types(Types.User)
 

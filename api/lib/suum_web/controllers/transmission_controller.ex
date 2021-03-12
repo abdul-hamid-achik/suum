@@ -37,7 +37,11 @@ defmodule SuumWeb.TransmissionController do
 
   def thumbnails(conn, %{"uuid" => uuid} = _params) do
     Logger.info("Generating Thumbnails VTT for Transmission #{uuid}")
-    transmission = Hls.get_transmission(uuid)
+
+    transmission =
+      uuid
+      |> Hls.get_transmission()
+      |> Hls.Transmission.set_sprite()
 
     thumbnails =
       Enum.map(

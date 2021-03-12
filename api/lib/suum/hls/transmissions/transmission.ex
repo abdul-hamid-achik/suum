@@ -2,7 +2,7 @@ defmodule Suum.Hls.Transmission do
   use Suum.Schema
   use Waffle.Ecto.Schema
 
-  alias Suum.{Accounts.User, Hls.Segment}
+  alias Suum.{Accounts.User, Hls.Segment, Uploaders}
 
   @required [
     :name,

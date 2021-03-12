@@ -23,6 +23,6 @@ defmodule Suum.Uploaders.Sprite do
     "/transmissions/#{transmission_uuid}/#{version}-default.png"
   end
 
-  def default_url(version, {_file, %Transmission{uuid: transmission_uuid}}),
+  def default_url(version, %Transmission{uuid: transmission_uuid}),
     do: "/transmissions/#{transmission_uuid}/#{version}-default.png"
 end

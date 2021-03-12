@@ -7,5 +7,6 @@ defmodule SuumWeb.Api.Types.Transmission do
     field(:name, :string)
     field(:type, :string)
     field(:segments, list_of(:segment))
+    field(:sprite, :string)
   end
 end

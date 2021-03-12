@@ -1,12 +1,18 @@
 version: "3.8"
 
 services:
+  docker-host:
+    container_name: suum-host
+    image: qoomon/docker-host:latest
+    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    mem_limit: 8M
+    restart: on-failure
+
   rtmp:
     container_name: suum-rtmp
     build:
       dockerfile: .docker/rtmp.dockerfile
       context: .
-    # network_mode: host
     ports:
       - 1935:1935
       - 8080:8080

@@ -38,6 +38,12 @@ defmodule SuumWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/", SuumWeb do
+    post "/on_play", RtmpController, :on_play
+    post "/on_publish", RtmpController, :on_publish
+    post "/on_done", RtmpController, :on_done
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", SuumWeb do
   #   pipe_through :api
@@ -60,7 +66,6 @@ defmodule SuumWeb.Router do
   end
 
   ## Authentication routes
-
   scope "/", SuumWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated, :put_session_layout]
 
@@ -93,9 +98,6 @@ defmodule SuumWeb.Router do
 
     get "/transmissions/:uuid/index.m3u8", TransmissionController, :vod
     get "/transmissions/:uuid/thumbnails.vtt", TransmissionController, :thumbnails
-    post "/on_play", RtmpHooksController, :on_play
-    post "/on_publish", RtmpHooksController, :on_publish
-    post "/on_done", RtmpHooksController, :on_done
   end
 
   if Mix.env() == :dev do

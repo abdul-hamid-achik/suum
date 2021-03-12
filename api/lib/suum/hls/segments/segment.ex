@@ -39,7 +39,12 @@ defmodule Suum.Hls.Segment do
   end
 
   def set_url(segment),
-    do: Map.put(segment, :url, Uploaders.Segment.url({segment.file, segment}))
+    do:
+      Map.put(
+        segment,
+        :url,
+        Uploaders.Segment.url({segment.file, segment}, :original, signed: true)
+      )
 
   def set_duration_sec(segment),
     do: Map.put(segment, :duration_sec, segment.duration / 1000)

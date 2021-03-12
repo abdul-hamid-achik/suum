@@ -17,6 +17,8 @@ defmodule Suum.Hls.Transmission do
   schema "transmissions" do
     field(:name, :string)
     field :type, Type
+    field(:sprite, Suum.Uploaders.Sprite.Type)
+    field(:sprite_url, :string, virtual: true)
 
     belongs_to :user, User,
       foreign_key: :user_uuid,
@@ -26,10 +28,19 @@ defmodule Suum.Hls.Transmission do
     timestamps()
   end
 
+  def set_sprite(transmission),
+    do:
+      Map.put(
+        transmission,
+        :sprite_url,
+        Uploaders.Sprite.url({transmission.sprite, transmission}, :original, signed: true)
+      )
+
   def changeset(transmission, attrs) do
     transmission
     |> cast(attrs, @required ++ @optional)
     |> validate_required(@required)
+    |> cast_attachments(attrs, [:sprite])
 
     # |> foreign_key_constraint(:user_uuid)
   end

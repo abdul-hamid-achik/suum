@@ -1,7 +1,7 @@
 defmodule Suum.Hls.Transmissions.Observer do
   use GenServer
   require Logger
-  alias Suum.Hls.Jobs.{UpsertSegment, UpsertThumbnail}
+  alias Suum.Hls.Jobs.UpsertMediaElement
 
   @transmissions_base_path "./mnt/hls/live"
 
@@ -25,12 +25,12 @@ defmodule Suum.Hls.Transmissions.Observer do
       {:ok, raw} = File.read(playlist)
       lines = raw |> String.split("\n") |> Enum.with_index()
 
-      segments =
-        lines
-        |> Enum.reduce(acc, &parse_segment(&1, &2, lines, uuid))
-        |> enqueue_upsert_segments()
-
-      Logger.info("Saving #{length(segments)} segments")
+      case lines
+           |> Enum.reduce(acc, &parse_segment(&1, &2, lines, uuid))
+           |> enqueue_upsert(:segment) do
+        :ok ->
+          Logger.info("Enqueuing jobs to save segments")
+      end
     end
 
     if File.exists?(thumbnails) do
@@ -39,12 +39,12 @@ defmodule Suum.Hls.Transmissions.Observer do
       {:ok, raw} = File.read(thumbnails)
       lines = String.split(raw, "\n")
 
-      thumbnails =
-        lines
-        |> Enum.reduce(acc, &parse_thumbnail(&1, &2, uuid))
-        |> enqueue_upsert_thumbnails()
-
-      Logger.info("Saving #{length(thumbnails)} thumbnails")
+      case lines
+           |> Enum.reduce(acc, &parse_thumbnail(&1, &2, uuid))
+           |> enqueue_upsert(:thumbnail) do
+        :ok ->
+          Logger.info("Enqueuing jobs to save thumbails")
+      end
     end
 
     {:noreply, state}
@@ -73,12 +73,13 @@ defmodule Suum.Hls.Transmissions.Observer do
     file = "#{@transmissions_base_path}/#{uuid}/#{file}"
 
     segment = %{
-      duration: (duration_raw |> String.trim(",") |> String.to_float() |> round()) * 1000,
+      duration: trunc((duration_raw |> String.trim(",") |> String.to_float()) * 1000),
       timestamp: DateTime.from_unix!(timestamp, :millisecond),
       file: file,
       transmission_uuid: uuid
     }
 
+    Logger.info(inspect(segment, pretty: true))
     Logger.info("Processing #{file}")
     [segment | segments]
   end
@@ -87,15 +88,11 @@ defmodule Suum.Hls.Transmissions.Observer do
     segments
   end
 
-  defp enqueue_upsert_segments(segments) do
-    Enum.each(segments, &UpsertSegment.enqueue!(&1))
-    segments
-  end
+  defp enqueue_upsert(segments, :segment),
+    do: Enum.each(segments, &UpsertMediaElement.enqueue!(%{type: :segment, attrs: &1}))
 
-  defp enqueue_upsert_thumbnails(thumbnails) do
-    Enum.each(thumbnails, &UpsertThumbnail.enqueue!(&1))
-    thumbnails
-  end
+  defp enqueue_upsert(thumbnails, :thumbnail),
+    do: Enum.each(thumbnails, &UpsertMediaElement.enqueue!(%{type: :thumbnail, attrs: &1}))
 
   defp get_playlist(transmission_uuid),
     do: "#{@transmissions_base_path}/#{transmission_uuid}/index.m3u8"

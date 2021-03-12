@@ -11,7 +11,7 @@ RUN echo deb http://www.deb-multimedia.org stretch main non-free \
     apt-get -y install deb-multimedia-keyring && \
     apt-get update && \
     apt-get -y dist-upgrade && \
-    apt-get -y install ffmpeg
+    apt-get -y install ffmpeg optipng
 
 RUN apt-get install -y ca-certificates openssl libssl-dev && \
     rm -rf /var/lib/apt/lists/*

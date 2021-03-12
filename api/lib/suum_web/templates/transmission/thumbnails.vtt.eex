@@ -2,17 +2,5 @@ WEBVTT
 
 <%= for thumbnail <- @thumbnails do %>
 <%= thumbnail.from %> --> <%= thumbnail.to %>
-<%= thumbnail.url %>=0,0,320,240
-
+<%= @transmission.sprite_url %>#xywh=0,0,320,240
 <% end %>
-<%# 00:00.000 --> 00:05.000
-thumbs.jpg#xywh=0,0,160,70
-
-00:05.000 --> 00:10.000
-thumbs.jpg#xywh=160,0,160,70
-
-00:10.000 --> 00:15.000
-thumbs.jpg#xywh=0,70,160,70
-
-00:15.000 --> 00:20.000
-thumbs.jpg#xywh=160,70,160,70 %>

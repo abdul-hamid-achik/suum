@@ -13,7 +13,10 @@ tasks:
 
   compose.logs:
     desc: Shows logs from the containers
-    cmd: docker-compose logs --tail=5 -f
+    cmd: docker-compose logs --tail=5 -f {{.CONTAINER_NAME}}
+
+  compose.exec:
+    cmd: docker-compose exec {{.CONTAINER_NAME}} {{.COMMAND}}
 
   compose.ps:
     cmd: docker-compose ps
@@ -25,6 +28,10 @@ tasks:
   compose.down:
     desc: Stops docker images
     cmd: docker-compose down -v
+
+  compose.build:
+    desc: Builds containers
+    cmd: docker-compose build --force-rm
   
   compose.restart:
     cmd: docker-compose restart
@@ -48,9 +55,11 @@ tasks:
     cmds:
       - task: compose.down
       - task: compose.up
+      - task: wait
       - task: db.reset
 
   routes: mix phx.routes
+
   iex:
     desc: Starts interactive elixir session
     deps: [db.migrate]
@@ -63,6 +72,17 @@ tasks:
   server:
     deps: [deps.get]
     cmd: mix phx.server
+
+  server.dry.soft:
+    deps: [compose.restart]
+    cmds:
+      - task: server
+
+  server.dry.hard:
+    cmds:
+      - task: reset.hard
+      - task: wait
+      - task: server
 
   setup:    
     desc: |
@@ -120,3 +140,6 @@ tasks:
     desc: Run work in progress tagged tests
     deps: [compose.up]
     cmd: mix test --only wip
+
+  wait:
+    cmd: sleep 3

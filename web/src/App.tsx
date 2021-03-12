@@ -20,7 +20,8 @@ import { ColorModeSwitcher } from "./ColorModeSwitcher"
 import { Helmet } from "react-helmet"
 import videojs from "video.js"
 import "videojs-vtt-thumbnails"
-import "videojs-contrib-hls"
+import "@videojs/http-streaming"
+// import "videojs-contrib-hls"
 
 const GET_TRANSMISSIONS = gql`
   query {
@@ -128,18 +129,29 @@ export const App = () => {
     })
 
     if (transmission && player) {
-      player.ready(() => {
-        player.src({
-          src: `${env.HTTP_API_HOST}/transmissions/${transmission.uuid}/index.m3u8`,
-          type: "application/x-mpegURL"
-        })
-        // @ts-ignore
-        player.vttThumbnails({
-          src: `${env.HTTP_API_HOST}/transmissions/${transmission.uuid}/thumbnails.vtt`,
-          showTimestamp: true
-        })
+      const srcConfig = {
+        src: `${env.HTTP_API_HOST}/transmissions/${transmission.uuid}/index.m3u8`,
+        type: "application/x-mpegURL"
+      }
+      const thumbnailsConfig = {
+        src: `${env.HTTP_API_HOST}/transmissions/${transmission.uuid}/thumbnails.vtt`,
+        showTimestamp: true
+      }
 
+      player.ready(() => {
+        player.src(srcConfig)
+        player.vttThumbnails(thumbnailsConfig)
         player.play()
+      })
+
+      player.on('error', () => {
+        // player.createModal('Retrying connection')
+        if (player.error().code === 4) {
+          player.retryLock = setTimeout(() => {
+            player.src(srcConfig)
+            player.load()
+          }, 1000)
+        }
       })
     }
   }, [transmission])

@@ -19,6 +19,8 @@ defmodule Suum.Hls.Transmission do
     field :type, Type
     field(:sprite, Suum.Uploaders.Sprite.Type)
     field(:sprite_url, :string, virtual: true)
+    field(:preview, Suum.Uploaders.Preview.Type)
+    field(:preview_url, :string, virtual: true)
 
     belongs_to :user, User,
       foreign_key: :user_uuid,

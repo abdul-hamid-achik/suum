@@ -40,7 +40,6 @@ defmodule SuumWeb.Schema.Mutations.AccountsTest do
   end
 
   describe "`signup` mutation" do
-    @tag :wip
     test "should return token and user info", %{conn: conn} do
       assert %{
                "data" => %{
@@ -69,7 +68,6 @@ defmodule SuumWeb.Schema.Mutations.AccountsTest do
   end
 
   describe "`signin` mutation" do
-    @tag :wip
     test "should return token and user info", %{conn: conn} do
       user =
         insert(:user,

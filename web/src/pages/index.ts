@@ -2,8 +2,10 @@ import Main from './main'
 import SignIn from './signin'
 import SignUp from './signup'
 
-export default {
+const Pages = {
     Main,
     SignIn,
     SignUp
 }
+
+export default Pages

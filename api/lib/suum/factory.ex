@@ -12,8 +12,9 @@ defmodule Suum.Factory do
   def transmission_factory do
     %Transmission{
       name: Faker.Lorem.Shakespeare.En.romeo_and_juliet(),
-      # user_uuid: build(:user),
-      type: :live
+      user: build(:user),
+      preview_url: Faker.Avatar.image_url(),
+      type: :vod
     }
   end
 end

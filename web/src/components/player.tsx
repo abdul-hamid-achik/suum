@@ -4,7 +4,6 @@ import {
     Box,
 } from "@chakra-ui/react"
 import { Socket, Channel } from "phoenix"
-import { useQuery, gql } from "@apollo/client"
 import env from "react-dotenv"
 import { Helmet } from "react-helmet"
 import videojs from "video.js"

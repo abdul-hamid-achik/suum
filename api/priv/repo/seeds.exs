@@ -9,3 +9,8 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+import Suum.Factory
+
+insert(:user, email: "abdulachik@gmail.com")
+insert_list(15, :transmission)

@@ -21,11 +21,10 @@ import { Helmet } from "react-helmet"
 import videojs from "video.js"
 import "videojs-vtt-thumbnails"
 import "@videojs/http-streaming"
-// import "videojs-contrib-hls"
 
 const GET_TRANSMISSIONS = gql`
   query {
-    list_transmissions {
+    transmissions {
       uuid
       name
     }

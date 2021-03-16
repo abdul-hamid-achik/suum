@@ -18,7 +18,10 @@ defmodule Suum.Hls.Jobs.CreateSprite do
         Logger.error("No thumbnails found")
 
       sprite ->
-        {:ok, _transmission} = Hls.update_transmission(transmission, %{sprite: sprite})
+        Logger.info("Saving generated sprite #{inspect(sprite, pretty: true)}")
+        
+        {:ok, _transmission} =
+          Hls.update_transmission(transmission, %{sprite: sprite}) |> IO.inspect()
     end
   end
 

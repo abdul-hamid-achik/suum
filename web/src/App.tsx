@@ -21,7 +21,12 @@ import { Helmet } from "react-helmet"
 import videojs from "video.js"
 import "videojs-vtt-thumbnails"
 import "@videojs/http-streaming"
-// import "videojs-contrib-hls"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom"
+import Pages from "./pages"
 
 const GET_TRANSMISSIONS = gql`
   query {
@@ -32,12 +37,11 @@ const GET_TRANSMISSIONS = gql`
   }
 `
 
-export const App = () => {
+export const App: React.FC = () => {
   const { data } = useQuery(GET_TRANSMISSIONS, {
     client
   })
   const [transmission, setTransmission] = React.useState<Transmission | null>()
-
   const [isPlaying, setPlaying] = React.useState<boolean>(false)
   const videoRef = React.useRef<HTMLMediaElement>(null) as React.RefObject<HTMLVideoElement>
   const channel = React.useRef<Channel>()
@@ -158,8 +162,15 @@ export const App = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      <Helmet>
-        <style type="text/css">{`
+      <ColorModeSwitcher justifySelf="flex-end" />
+      <Router>
+        <Switch>
+          <Route path="/signin" component={Pages.SignIn} />
+          <Route path="/signup" component={Pages.SignUp} />
+          <Route exact path="/" component={Pages.Main} />
+        </Switch>
+        <Helmet>
+          <style type="text/css">{`
           .vjs-default-skin.vjs-paused .vjs-big-play-button {
             display: none;
           }
@@ -168,34 +179,34 @@ export const App = () => {
             display: none;
           }
         `}</style>
-      </Helmet>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="80vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <Container centerContent>
-            <video className="video-js" controls ref={videoRef} width={640} height={360} />
-            <Button onClick={onClick} colorScheme={isPlaying ? "red" : "blue"} rightIcon={isPlaying ? <FaTimes /> : <FaCamera />}>
-              {isPlaying ? "Stop" : "Start"}
-            </Button>
-          </Container>
-        </Grid>
-      </Box>
-      <Box>
-        <Heading>Previous Transmissions</Heading>
-        <Stack spacing={4} direction="row" align="center">
-          {data?.list_transmissions.map(
-            (transmission: Transmission, key: number) => <Box key={key}>
-              <Text>
-                {transmission.uuid}
-              </Text>
-              <Button rightIcon={<FaPlay />} onClick={onTransmissionPlay(transmission)} colorScheme="red">
-                Play
+        </Helmet>
+        <Box textAlign="center" fontSize="xl">
+          <Grid minH="80vh" p={3}>
+            <ColorModeSwitcher justifySelf="flex-end" />
+            <Container centerContent>
+              <video className="video-js" controls ref={videoRef} width={640} height={360} />
+              <Button onClick={onClick} colorScheme={isPlaying ? "red" : "blue"} rightIcon={isPlaying ? <FaTimes /> : <FaCamera />}>
+                {isPlaying ? "Stop" : "Start"}
               </Button>
-            </Box>
-          )}
-        </Stack>
-      </Box>
+            </Container>
+          </Grid>
+        </Box>
+        <Box>
+          <Heading>Previous Transmissions</Heading>
+          <Stack spacing={4} direction="row" align="center">
+            {data?.list_transmissions.map(
+              (transmission: Transmission, key: number) => <Box key={key}>
+                <Text>
+                  {transmission.uuid}
+                </Text>
+                <Button rightIcon={<FaPlay />} onClick={onTransmissionPlay(transmission)} colorScheme="red">
+                  Play
+              </Button>
+              </Box>
+            )}
+          </Stack>
+        </Box>
+      </Router>
     </ChakraProvider >
   )
 }
-

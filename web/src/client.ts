@@ -19,7 +19,7 @@ const socketLink = createAbsintheSocketLink(
 )
 
 const authLink = setContext((_, { headers }) => {
-    const token = localStorage.getItem('auth-token')
+    const token = sessionStorage.getItem('auth-token')
     return {
         headers: {
             ...headers,

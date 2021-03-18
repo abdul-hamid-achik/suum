@@ -21,6 +21,7 @@ interface Thumbnail {
 interface User {
     uuid: UUID
     email: string
+    password?: string
 }
 
 type AuthToken = string

@@ -16,7 +16,7 @@ import { Socket, Channel } from "phoenix"
 import { useQuery, gql } from "@apollo/client"
 import env from "react-dotenv"
 import client from "./client"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
+import ColorModeSwitcher from './components/color_mode_switcher'
 import { Helmet } from "react-helmet"
 import videojs from "video.js"
 import "videojs-vtt-thumbnails"

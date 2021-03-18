@@ -3,6 +3,7 @@ defmodule SuumWeb.Schema do
 
   alias SuumWeb.Api
   import_types(Api.Queries.Hls)
+  import_types(Api.Queries.Account)
   import_types(Api.Mutations.Account)
 
   import_types(Absinthe.Type.Custom)
@@ -13,6 +14,7 @@ defmodule SuumWeb.Schema do
   import_types(Api.Types.User)
 
   query do
+    import_fields(:account_queries)
     import_fields(:hls_queries)
   end
 

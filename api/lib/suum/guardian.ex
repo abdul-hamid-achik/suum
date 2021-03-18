@@ -4,13 +4,13 @@ defmodule Suum.Guardian do
   alias Suum.Accounts
 
   def subject_for_token(resource, _claims) do
-    sub = to_string(resource.id)
+    sub = to_string(resource.uuid)
     {:ok, sub}
   end
 
   def resource_from_claims(claims) do
-    id = claims["sub"]
-    resource = Accounts.get_user!(id)
+    uuid = claims["sub"]
+    resource = Accounts.get_user!(uuid)
     {:ok, resource}
   end
 end

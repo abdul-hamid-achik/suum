@@ -6,8 +6,8 @@ defmodule Suum.Hls.Transmission do
 
   @required [
     :name,
-    :type
-    # :user_uuid
+    :type,
+    :user_uuid
   ]
 
   @optional []
@@ -43,7 +43,6 @@ defmodule Suum.Hls.Transmission do
     |> cast(attrs, @required ++ @optional)
     |> validate_required(@required)
     |> cast_attachments(attrs, [:sprite])
-
-    # |> foreign_key_constraint(:user_uuid)
+    |> foreign_key_constraint(:user_uuid)
   end
 end

@@ -1,6 +1,6 @@
 defmodule SuumWeb.Api.Queries.Hls do
   use Absinthe.Schema.Notation
-  alias SuumWeb.Api.Resolvers
+  alias SuumWeb.Api.{Resolvers, Middleware}
 
   object :hls_queries do
     @desc "Get all transmissions"
@@ -11,7 +11,8 @@ defmodule SuumWeb.Api.Queries.Hls do
     @desc "Get transmission"
     field :transmission, :transmission do
       arg(:uuid, non_null(:id))
-      resolve(&Resolvers.Hls.get_transmission/2)
+      middleware(Middleware.Authenticate)
+      resolve(&Resolvers.Hls.get_transmission/3)
     end
 
     @desc "Get all thumbnails"

@@ -1,14 +1,14 @@
 import 'video.js/dist/video-js.min.css'
+import videojs from "video.js"
+import "videojs-vtt-thumbnails"
+import "@videojs/http-streaming"
 import * as React from "react"
 import {
     Box,
 } from "@chakra-ui/react"
 import { Socket, Channel } from "phoenix"
-import env from "react-dotenv"
 import { Helmet } from "react-helmet"
-import videojs from "video.js"
-import "videojs-vtt-thumbnails"
-import "@videojs/http-streaming"
+import { env } from "../constants"
 
 interface Props {
     transmission: Transmission
@@ -19,7 +19,7 @@ export const Player: React.FC<Props> = ({ transmission }) => {
     const videoRef = React.useRef<HTMLMediaElement>(null) as React.RefObject<HTMLVideoElement>
     const channel = React.useRef<Channel>()
     const stream = React.useRef<MediaStream>()
-    const socket = React.useMemo(() => new Socket(`${env.WS_API_HOST}/socket`), [])
+    const socket = React.useMemo(() => new Socket(`${env?.WS_API_HOST}/socket`), [])
 
     socket.onError(() => console.log("there was an error with the connection!"))
     socket.onClose(() => console.log("the connection dropped"))
@@ -102,11 +102,11 @@ export const Player: React.FC<Props> = ({ transmission }) => {
 
         if (transmission && player) {
             const srcConfig = {
-                src: `${env.HTTP_API_HOST}/transmissions/${transmission.uuid}/index.m3u8`,
+                src: `${env?.HTTP_API_HOST}/transmissions/${transmission.uuid}/index.m3u8`,
                 type: "application/x-mpegURL"
             }
             const thumbnailsConfig = {
-                src: `${env.HTTP_API_HOST}/transmissions/${transmission.uuid}/thumbnails.vtt`,
+                src: `${env?.HTTP_API_HOST}/transmissions/${transmission.uuid}/thumbnails.vtt`,
                 showTimestamp: true
             }
 

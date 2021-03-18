@@ -5,6 +5,7 @@ defmodule SuumWeb.Schema do
   import_types(Api.Queries.Hls)
   import_types(Api.Queries.Account)
   import_types(Api.Mutations.Account)
+  import_types(Api.Mutations.Hls)
 
   import_types(Absinthe.Type.Custom)
   import_types(Api.Types.Segment)
@@ -20,5 +21,6 @@ defmodule SuumWeb.Schema do
 
   mutation do
     import_fields(:account_mutations)
+    import_fields(:hls_mutations)
   end
 end

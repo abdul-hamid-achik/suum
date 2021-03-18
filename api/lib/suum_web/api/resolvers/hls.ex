@@ -6,4 +6,14 @@ defmodule SuumWeb.Api.Resolvers.Hls do
   Crudry.Resolver.generate_functions(Transmissions, Transmission)
   Crudry.Resolver.generate_functions(Segments, Segment)
   Crudry.Resolver.generate_functions(Thumbnails, Thumbnail)
+
+  def create_transmission(_args, params, %{context: %{current_user: user}}) do
+    params
+    |> Map.put(:user_uuid, user.uuid)
+    |> Transmissions.create_transmission()
+  end
+
+  def get_transmission(_args, %{uuid: uuid}, _) do
+    {:ok, Transmissions.get_transmission(uuid)}
+  end
 end

@@ -5,10 +5,10 @@ import * as AbsintheSocket from '@absinthe/socket'
 import { createAbsintheSocketLink } from '@absinthe/socket-apollo-link'
 import { createLink } from 'apollo-absinthe-upload-link'
 import { Socket as PhoenixSocket } from 'phoenix'
-import env from 'react-dotenv'
+import {env} from './constants'
 
-const HTTP_ENDPOINT = `${env.HTTP_API_HOST}/api`
-const WS_ENDPOINT = `${env.HTTP_API_HOST}/socket`
+const HTTP_ENDPOINT = `${env?.HTTP_API_HOST}/api`
+const WS_ENDPOINT = `${env?.HTTP_API_HOST}/socket`
 
 const uploadLink: ApolloLink = createLink({
     uri: HTTP_ENDPOINT

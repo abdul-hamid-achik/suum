@@ -1,4 +1,4 @@
-defmodule SuumWeb.Schema.Middleware.Authenticate do
+defmodule SuumWeb.Api.Middleware.Authenticate do
   @behaviour Absinthe.Middleware
 
   def call(resolution, _) do

@@ -1,11 +1,12 @@
 type UUID = string
+
 interface Transmission {
     uuid: UUID
     name: string
     thumbnails?: Thumbnail[]
     preview: string
     sprite: string
-
+    type: string
     preview_url?: string
     sprite_url?: string
 }
@@ -25,3 +26,9 @@ interface User {
 }
 
 type AuthToken = string
+
+interface Env {
+    HTTP_API_HOST: string
+    WS_API_HOST: string
+    RTMP_HOST: string
+}

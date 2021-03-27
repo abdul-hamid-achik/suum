@@ -12,4 +12,9 @@ export enum TransmissionTypes {
   UPLOAD = 'upload'
 }
 
+export enum Environment {
+  DEV = "DEV",
+  PRODUCTION = "PRODUCTION"
+}
+
 export const env = ENV as unknown as Env | undefined

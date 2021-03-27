@@ -45,6 +45,7 @@ defmodule Suum.MixProject do
       # Absinthe for GraphQL
       {:absinthe, "~> 1.5.0"},
       {:absinthe_plug, "~> 1.5.0"},
+      {:dataloader, "~> 1.0.0"},
 
       # Kaffy administration
       {:kaffy, "~> 0.9.0"},

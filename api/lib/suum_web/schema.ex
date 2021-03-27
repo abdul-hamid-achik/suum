@@ -2,6 +2,7 @@ defmodule SuumWeb.Schema do
   use Absinthe.Schema
 
   alias SuumWeb.Api
+  alias Suum.{Hls, Accounts}
   import_types(Api.Queries.Hls)
   import_types(Api.Queries.Account)
   import_types(Api.Mutations.Account)
@@ -22,5 +23,18 @@ defmodule SuumWeb.Schema do
   mutation do
     import_fields(:account_mutations)
     import_fields(:hls_mutations)
+  end
+
+  def context(ctx) do
+    loader =
+      Dataloader.new()
+      |> Dataloader.add_source(Accounts, Accounts.data())
+      |> Dataloader.add_source(Hls, Hls.data())
+
+    Map.put(ctx, :loader, loader)
+  end
+
+  def plugins do
+    [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
   end
 end

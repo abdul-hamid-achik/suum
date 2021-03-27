@@ -15,6 +15,7 @@ import {
   useHistory
 } from 'react-router-dom'
 import { useForm } from "react-hook-form"
+import { setToken } from "../token"
 
 interface SigninMutation {
   signin: {
@@ -53,7 +54,7 @@ const SignIn: React.FC = () => {
   React.useEffect(() => {
     console.log(data)
     if (data && data.signin) {
-      sessionStorage.setItem("auth-token", data.signin.token)
+      setToken(data.signin.token)
       client.resetStore()
       history.push("/")
     }

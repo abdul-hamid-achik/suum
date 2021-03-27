@@ -1,12 +1,15 @@
 defmodule SuumWeb.Api.Types.Transmission do
   use Absinthe.Schema.Notation
+  import Absinthe.Resolution.Helpers, only: [dataloader: 1]
+  alias Suum.{Accounts, Hls}
 
   object :transmission do
     field(:uuid, :id)
-    field(:user, :user)
+    field(:user, :user, resolve: dataloader(Accounts))
+
     field(:name, :string)
     field(:type, :string)
-    field(:segments, list_of(:segment))
+    field(:segments, list_of(:segment), resolve: dataloader(Hls))
     field(:sprite, :string)
     field(:sprite_url, :string)
 
@@ -16,7 +19,6 @@ defmodule SuumWeb.Api.Types.Transmission do
           {:ok, Faker.Avatar.image_url()}
 
         %{preview: preview}, _, _ ->
-          IO.inspect(preview)
           {:ok, preview}
       end)
     end

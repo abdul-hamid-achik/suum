@@ -57,7 +57,7 @@
     ]
   },
   "react-dotenv": {
-    "whitelist": ["HTTP_API_HOST", "WS_API_HOST", "RTMP_HOST"]
+    "whitelist": ["HTTP_API_HOST", "WS_API_HOST", "RTMP_HOST", "ENVIRONMENT"]
   },
   "devDependencies": {
     "@types/absinthe__socket": "^0.2.1",

@@ -5,6 +5,7 @@ import {
 } from "@chakra-ui/react"
 import {
   BrowserRouter as Router,
+  Redirect,
   Switch,
   Route
 } from "react-router-dom"
@@ -13,6 +14,29 @@ import Navbar from './components/navbar'
 import client from './client'
 import Pages from "./pages"
 import { Urls } from './constants'
+import { getToken } from './token'
+
+// @ts-ignore
+function PrivateRoute({ component: Component, ...rest }) {
+  const isAuthenticated = getToken()
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: Urls.SIGN_IN,
+              state: { from: props.location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}
 
 export const App: React.FC = () => (
   <ApolloProvider client={client}>
@@ -22,8 +46,8 @@ export const App: React.FC = () => (
         <Switch>
           <Route path={Urls.SIGN_IN} component={Pages.SignIn} />
           <Route path={Urls.SIGN_UP} component={Pages.SignUp} />
-          <Route path={Urls.CREATE_TRANSMISSION} component={Pages.Transmissions.Create} />
-          <Route path={Urls.EDIT_TRANSMISSION} component={Pages.Transmissions.Edit} />
+          <PrivateRoute path={Urls.CREATE_TRANSMISSION} component={Pages.Transmissions.Create} />
+          <PrivateRoute path={Urls.EDIT_TRANSMISSION} component={Pages.Transmissions.Edit} />
           <Route exact path="/" component={Pages.Main} />
         </Switch>
       </Router>

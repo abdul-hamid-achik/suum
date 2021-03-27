@@ -7,6 +7,7 @@ interface Transmission {
     preview: string
     sprite: string
     type: string
+    user: User
     preview_url?: string
     sprite_url?: string
 }
@@ -31,4 +32,5 @@ interface Env {
     HTTP_API_HOST: string
     WS_API_HOST: string
     RTMP_HOST: string
+    ENVIRONMENT: "DEV" | "PRODUCTION"
 }

@@ -365,7 +365,7 @@ defmodule Suum.Accounts do
     |> Repo.update()
   end
 
- @doc """
+  @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
 
   ## Examples
@@ -376,5 +376,15 @@ defmodule Suum.Accounts do
   """
   def change_user_avatar(%User{} = user) do
     User.avatar_changeset(user, %{})
+  end
+
+  def data() do
+    Dataloader.Ecto.new(Suum.Repo, query: &query/2)
+  end
+
+  def query(User), do: from(u in User)
+
+  def query(queryable, _params) do
+    queryable
   end
 end

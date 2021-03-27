@@ -6,9 +6,10 @@ import { createAbsintheSocketLink } from '@absinthe/socket-apollo-link'
 import { createLink } from 'apollo-absinthe-upload-link'
 import { Socket as PhoenixSocket } from 'phoenix'
 import {env} from './constants'
+import {getToken} from './token'
 
-const HTTP_ENDPOINT = `${env?.HTTP_API_HOST}/api`
-const WS_ENDPOINT = `${env?.HTTP_API_HOST}/socket`
+const HTTP_ENDPOINT = `${env?.HTTP_API_HOST || "http://localhost:4000"}/api`
+const WS_ENDPOINT = `${env?.HTTP_API_HOST || "ws://localhost:4000"}/socket`
 
 const uploadLink: ApolloLink = createLink({
     uri: HTTP_ENDPOINT
@@ -19,7 +20,7 @@ const socketLink = createAbsintheSocketLink(
 )
 
 const authLink = setContext((_, { headers }) => {
-    const token = sessionStorage.getItem('auth-token')
+    const token = getToken()
     return {
         headers: {
             ...headers,

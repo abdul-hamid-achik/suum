@@ -36,7 +36,6 @@ export const App = () => {
         client
     })
     const [transmission, setTransmission] = React.useState<Transmission | null>()
-
     const [isPlaying, setPlaying] = React.useState<boolean>(false)
     const videoRef = React.useRef<HTMLMediaElement>(null) as React.RefObject<HTMLVideoElement>
     const channel = React.useRef<Channel>()
@@ -173,7 +172,7 @@ export const App = () => {
                     <ColorModeSwitcher justifySelf="flex-end" />
                     <Container centerContent>
                         <video className="video-js" controls ref={videoRef} width={640} height={360} />
-                        <Button onClick={onClick} colorScheme={isPlaying ? "red" : "blue"} rightIcon={isPlaying ? <FaTimes /> : <FaCamera />}>
+                        <Button onClick={onClick} colorScheme={isPlaying ? "red" : "blue"} leftIcon={isPlaying ? <FaTimes /> : <FaCamera />}>
                             {isPlaying ? "Stop" : "Start"}
                         </Button>
                     </Container>
@@ -187,9 +186,9 @@ export const App = () => {
                             <Text>
                                 {transmission.uuid}
                             </Text>
-                            <Button rightIcon={<FaPlay />} onClick={onTransmissionPlay(transmission)} colorScheme="red">
+                            <Button leftIcon={<FaPlay />} onClick={onTransmissionPlay(transmission)} colorScheme="red">
                                 Play
-              </Button>
+                            </Button>
                         </Box>
                     )}
                 </Stack>

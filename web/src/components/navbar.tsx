@@ -31,17 +31,16 @@ const Navbar: React.FC = () => {
 
   const handleCreate = () => isCreatingTransmission ? history.goBack() : history.push(Urls.CREATE_TRANSMISSION)
   const handleSignIn = () => history.push(Urls.SIGN_IN)
-
   return (
     <Stack spacing={4} direction="row" justifyContent="flex-end">
       {!isSigningUp && !isSigningIn && data?.me && <Button colorScheme="red"
-        rightIcon={isCreatingTransmission ? <FaBackward /> : <FaPlus />}
+        leftIcon={isCreatingTransmission ? <FaBackward /> : <FaPlus />}
         onClick={handleCreate}>
         {isCreatingTransmission ? "Go Back" : "Start"}
       </Button>}
       <ColorModeSwitcher />
       {!isSigningUp && !isSigningIn && !data?.me && <Button colorScheme="blue"
-        rightIcon={<FaSignInAlt />}
+        leftIcon={<FaSignInAlt />}
         onClick={handleSignIn}>
         Sign In
       </Button>}

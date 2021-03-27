@@ -15,6 +15,7 @@ import {
   useHistory
 } from 'react-router-dom'
 import { useForm } from "react-hook-form"
+import { setToken } from "../token"
 
 
 const SIGN_IN_MUTATION = gql`
@@ -55,9 +56,8 @@ const SignUp: React.FC = () => {
   }
 
   React.useEffect(() => {
-    console.log(data)
     if (data && data.signup) {
-      sessionStorage.setItem("auth-token", data.signup.token)
+      setToken(data.signup.token)
       client.resetStore()
       history.push("/")
     }

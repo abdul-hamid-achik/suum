@@ -27,12 +27,12 @@ defmodule SuumWeb.TransmissionController do
 
     Logger.info("Segments loaded #{length(segments)}")
 
-    targetduration = segments |> Enum.map(& &1.duration) |> max()
+    targetduration = get_targetduration(segments)
 
     conn
     |> put_resp_content_type("application/vnd.apple.mpegurl")
     |> put_resp_header("accept-ranges", "bytes")
-    |> render("vod.m3u8", transmission: transmission, targetduration: targetduration || 30)
+    |> render("vod.m3u8", transmission: transmission, targetduration: targetduration)
   end
 
   def thumbnails(conn, %{"uuid" => uuid} = _params) do
@@ -66,4 +66,9 @@ defmodule SuumWeb.TransmissionController do
 
   defp check_big(a, b) when a > b, do: a
   defp check_big(a, b) when a <= b, do: b
+
+  defp get_targetduration([]), do: 4
+
+  defp get_targetduration(segments) when is_list(segments) and length(segments) > 0,
+    do: segments |> Enum.map(& &1.duration) |> max()
 end

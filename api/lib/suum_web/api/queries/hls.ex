@@ -10,7 +10,8 @@ defmodule SuumWeb.Api.Queries.Hls do
 
     @desc "Get transmission"
     field :transmission, :transmission do
-      arg(:uuid, non_null(:id))
+      arg(:uuid, :id)
+      arg(:slug, :string)
       middleware(Middleware.Authenticate)
       resolve(&Resolvers.Hls.get_transmission/3)
     end

@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
   const handleCreate = () => isCreatingTransmission ? history.goBack() : history.push(Urls.CREATE_TRANSMISSION)
   const handleSignIn = () => history.push(Urls.SIGN_IN)
   return (
-    <Stack spacing={4} direction="row" justifyContent="flex-end">
+    <Stack spacing={4} direction="row" justifyContent="flex-end" mb="4">
       {!isSigningUp && !isSigningIn && data?.me && <Button colorScheme="red"
         leftIcon={isCreatingTransmission ? <FaBackward /> : <FaPlus />}
         onClick={handleCreate}>

@@ -1,9 +1,11 @@
 import Edit from "./edit"
 import Create from "./create"
+import View from "./view"
 
 const Transmissions = {
   Edit,
-  Create
+  Create,
+  View
 }
 
 export default Transmissions

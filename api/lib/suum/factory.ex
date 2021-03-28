@@ -10,9 +10,12 @@ defmodule Suum.Factory do
   end
 
   def transmission_factory do
+    name = Faker.Lorem.Shakespeare.En.romeo_and_juliet()
+
     %Transmission{
-      name: Faker.Lorem.Shakespeare.En.romeo_and_juliet(),
+      name: name,
       user: build(:user),
+      slug: Slugy.slugify(name),
       preview_url: Faker.Avatar.image_url(),
       type: :vod
     }

@@ -6,7 +6,8 @@ defmodule Suum.Hls.Transmission do
 
   @required [
     :name,
-    :user_uuid
+    :user_uuid,
+    :slug
   ]
 
   @optional [
@@ -17,6 +18,7 @@ defmodule Suum.Hls.Transmission do
 
   schema "transmissions" do
     field(:name, :string)
+    field(:slug, :string)
     field :type, Type, default: :live
     field(:sprite, Suum.Uploaders.Sprite.Type)
     field(:sprite_url, :string, virtual: true)
@@ -39,9 +41,19 @@ defmodule Suum.Hls.Transmission do
         Uploaders.Sprite.url({transmission.sprite, transmission}, :original, signed: true)
       )
 
+  def set_preview(transmission),
+    do:
+      Map.put(
+        transmission,
+        :preview_url,
+        Uploaders.Preview.url({transmission.preview, transmission}, :original, signed: true)
+      )
+
   def changeset(transmission, attrs) do
     transmission
     |> cast(attrs, @required ++ @optional)
+    |> slugify(:name)
+    |> unique_constraint(:slug, name: :transmissions_slug_index)
     |> validate_required(@required)
     |> cast_attachments(attrs, [:sprite, :preview])
     |> foreign_key_constraint(:user_uuid)

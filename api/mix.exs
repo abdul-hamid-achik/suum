@@ -41,6 +41,7 @@ defmodule Suum.MixProject do
       {:ex_machina, "~> 2.7.0"},
       {:corsica, "~> 1.0"},
       {:timex, "~> 3.6"},
+      {:slugy, "~> 4.1.0"},
 
       # Absinthe for GraphQL
       {:absinthe, "~> 1.5.0"},

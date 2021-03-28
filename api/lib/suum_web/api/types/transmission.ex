@@ -8,6 +8,7 @@ defmodule SuumWeb.Api.Types.Transmission do
     field(:user, :user, resolve: dataloader(Accounts))
 
     field(:name, :string)
+    field(:slug, :string)
     field(:type, :string)
     field(:segments, list_of(:segment), resolve: dataloader(Hls))
     field(:sprite, :string)

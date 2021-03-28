@@ -17,6 +17,7 @@ const GET_TRANSMISSIONS = gql`
         transmissions {
             uuid
             name
+            slug
             preview
             user {
               uuid

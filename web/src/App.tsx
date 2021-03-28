@@ -48,6 +48,7 @@ export const App: React.FC = () => (
           <Route path={Urls.SIGN_UP} component={Pages.SignUp} />
           <PrivateRoute path={Urls.CREATE_TRANSMISSION} component={Pages.Transmissions.Create} />
           <PrivateRoute path={Urls.EDIT_TRANSMISSION} component={Pages.Transmissions.Edit} />
+          <Route path={Urls.VIEW_TRANSMISSION} component={Pages.Transmissions.View} />
           <Route exact path="/" component={Pages.Main} />
         </Switch>
       </Router>

@@ -2,6 +2,7 @@ type UUID = string
 
 interface Transmission {
     uuid: UUID
+    slug: string
     name: string
     thumbnails?: Thumbnail[]
     preview: string

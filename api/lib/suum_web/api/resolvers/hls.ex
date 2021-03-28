@@ -16,4 +16,14 @@ defmodule SuumWeb.Api.Resolvers.Hls do
   def get_transmission(_args, %{uuid: uuid}, _) do
     {:ok, Transmissions.get_transmission(uuid)}
   end
+
+  def get_transmission(_args, %{slug: slug}, _) do
+    case Transmissions.get_transmission_by!(slug: slug) do
+      {:error, reason} ->
+        IO.inspect(reason)
+
+      transmission ->
+        {:ok, transmission}
+    end
+  end
 end

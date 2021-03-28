@@ -32,7 +32,7 @@ defmodule SuumWeb.TransmissionController do
     conn
     |> put_resp_content_type("application/vnd.apple.mpegurl")
     |> put_resp_header("accept-ranges", "bytes")
-    |> render("vod.m3u8", transmission: transmission, targetduration: targetduration)
+    |> render("vod.m3u8", transmission: transmission, targetduration: targetduration || 30)
   end
 
   def thumbnails(conn, %{"uuid" => uuid} = _params) do
@@ -62,6 +62,7 @@ defmodule SuumWeb.TransmissionController do
 
   defp max([a]), do: a
   defp max([head | tail]), do: Enum.reduce(tail, head, &check_big/2)
+  defp max([]), do: nil
 
   defp check_big(a, b) when a > b, do: a
   defp check_big(a, b) when a <= b, do: b

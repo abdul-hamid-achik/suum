@@ -36,6 +36,7 @@ defmodule Suum.Hls.Segment do
     |> validate_required(@required)
     |> cast_attachments(attrs, [:file])
     |> foreign_key_constraint(:transmission_uuid)
+    |> unique_constraint(:slug)
   end
 
   def set_url(segment),

@@ -108,6 +108,7 @@ tasks:
       - task: compile
       - task: db.setup
       - npm install --prefix assets
+      - brew install fswatch
     status:
       - test -d ./assets/node_modules
       - test -d ./_build

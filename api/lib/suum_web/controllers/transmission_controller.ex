@@ -6,33 +6,32 @@ defmodule SuumWeb.TransmissionController do
 
   def vod(conn, %{"uuid" => uuid} = _params) do
     Logger.info("VOD - #{uuid}")
-    transmission = Hls.get_transmission(uuid)
 
-    segments =
-      Enum.map(
-        Hls.filter_segments(transmission_uuid: transmission.uuid),
-        &(&1
-          |> Hls.Segment.set_url()
-          |> Hls.Segment.set_duration_sec())
-      )
+    with transmission when not is_nil(transmission) <- Hls.get_transmission(uuid),
+         segments <-
+           Enum.map(
+             Hls.filter_segments(transmission_uuid: transmission.uuid),
+             &(&1
+               |> Hls.Segment.set_url()
+               |> Hls.Segment.set_duration_sec())
+           ),
+         transmission <-
+           Map.put(
+             transmission,
+             :segments,
+             segments
+           ),
+         targetduration <- get_targetduration(segments) do
+      Logger.info(inspect(Enum.map(segments, & &1.uuid), pretty: true))
+      Logger.info("Segments loaded #{length(segments)}")
 
-    Logger.info(inspect(Enum.map(segments, & &1.uuid), pretty: true))
-
-    transmission =
-      Map.put(
-        transmission,
-        :segments,
-        segments
-      )
-
-    Logger.info("Segments loaded #{length(segments)}")
-
-    targetduration = get_targetduration(segments)
-
-    conn
-    |> put_resp_content_type("application/vnd.apple.mpegurl")
-    |> put_resp_header("accept-ranges", "bytes")
-    |> render("vod.m3u8", transmission: transmission, targetduration: targetduration)
+      conn
+      |> put_resp_content_type("application/vnd.apple.mpegurl")
+      |> put_resp_header("accept-ranges", "bytes")
+      |> render("vod.m3u8", transmission: transmission, targetduration: targetduration)
+    else
+      error -> Logger.error(inspect(error, pretty: true))
+    end
   end
 
   def thumbnails(conn, %{"uuid" => uuid} = _params) do

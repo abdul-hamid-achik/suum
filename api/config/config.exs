@@ -97,6 +97,11 @@ config :task_bunny,
     queues: [[name: "normal", jobs: :default]]
   ]
 
+config :tus, SuumWeb.UploadController,
+  storage: Tus.Storage.S3,
+  s3_host: System.get_env("AWS_HOST", "127.0.0.1"),
+  s3_bucket: System.get_env("AWS_BUCKET_NAME", "suum")
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

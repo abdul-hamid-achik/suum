@@ -10,7 +10,7 @@ export enum Urls {
 
 export enum TransmissionTypes {
   LIVE = 'live',
-  UPLOAD = 'upload'
+  VOD = 'vod'
 }
 
 export enum Environment {

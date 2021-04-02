@@ -11,7 +11,8 @@ defmodule Suum.Hls.Transmission do
   ]
 
   @optional [
-    :type
+    :type,
+    :ip_address
   ]
 
   defenum(Type, ["live", "vod"])
@@ -20,6 +21,8 @@ defmodule Suum.Hls.Transmission do
     field(:name, :string)
     field(:slug, :string)
     field :type, Type, default: :live
+    field :ip_address, :string
+    field :pid, :integer
     field(:sprite, Suum.Uploaders.Sprite.Type)
     field(:sprite_url, :string, virtual: true)
     field(:preview, Suum.Uploaders.Preview.Type)
@@ -33,6 +36,11 @@ defmodule Suum.Hls.Transmission do
     timestamps()
   end
 
+  @spec set_sprite(%{:sprite => any, optional(any) => any}) :: %{
+          :sprite => any,
+          :sprite_url => any,
+          optional(any) => any
+        }
   def set_sprite(transmission),
     do:
       Map.put(
@@ -53,7 +61,6 @@ defmodule Suum.Hls.Transmission do
     transmission
     |> cast(attrs, @required ++ @optional)
     |> slugify(:name)
-    |> unique_constraint(:slug, name: :transmissions_slug_index)
     |> validate_required(@required)
     |> cast_attachments(attrs, [:sprite, :preview])
     |> foreign_key_constraint(:user_uuid)

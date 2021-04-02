@@ -40,6 +40,10 @@ defmodule Suum.MixProject do
       {:faker, "~> 0.16"},
       {:ex_machina, "~> 2.7.0"},
       {:corsica, "~> 1.0"},
+      {:tus, "~> 0.1.0"},
+      {:tus_storage_s3, "~> 0.1.0"},
+      {:file_system, "~> 0.2"},
+      # {:sentix, "~> 1.0"},
       {:timex, "~> 3.6"},
       {:slugy, "~> 4.1.0"},
 

@@ -2,6 +2,7 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://localhost:3000",
   "dependencies": {
     "@absinthe/socket": "^0.2.1",
     "@absinthe/socket-apollo-link": "^0.2.1",
@@ -50,11 +51,7 @@
     "extends": "react-app"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -62,12 +59,7 @@
     ]
   },
   "react-dotenv": {
-    "whitelist": [
-      "HTTP_API_HOST",
-      "WS_API_HOST",
-      "RTMP_HOST",
-      "ENVIRONMENT"
-    ]
+    "whitelist": ["HTTP_API_HOST", "WS_API_HOST", "RTMP_HOST", "ENVIRONMENT"]
   },
   "devDependencies": {
     "@types/absinthe__socket": "^0.2.1",

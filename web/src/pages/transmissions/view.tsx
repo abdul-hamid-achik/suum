@@ -27,7 +27,6 @@ const View: React.FC = () => {
   const { data } = useQuery<TransmissionQuery, Pick<Transmission, "slug">>(GET_TRANSMISSION_QUERY, {
     variables: { slug }
   })
-  console.log(data)
 
   return (
     <Box bg={mode('gray.50', 'inherit')} minH="100vh" py="12" px={{ sm: '6', lg: '8' }}>

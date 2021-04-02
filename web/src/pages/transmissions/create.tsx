@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useEffect } from "react"
 import {
   Box,
   FormControl,
+  useToast,
   FormLabel,
   FormHelperText,
   useColorModeValue as mode,
@@ -18,7 +19,7 @@ import { useForm } from "react-hook-form"
 import { useHistory } from "react-router-dom"
 import { useMutation, gql } from "@apollo/client"
 import { FaPlus } from "react-icons/fa"
-import { TransmissionTypes } from '../../constants'
+import { TransmissionTypes, Urls } from '../../constants'
 
 const CREATE_TRANSMISSION = gql`
   mutation CreateTransmission($name: String!, $type: String!) {
@@ -38,20 +39,29 @@ interface CreateTransmissionMutation {
 }
 
 const Create = () => {
+  const toast = useToast()
   const { register, handleSubmit, errors } = useForm()
   const history = useHistory()
-  const [CreateTransmission, createTransmissionMutation] = useMutation<CreateTransmissionMutation, Pick<Transmission, "name" | "type">>(CREATE_TRANSMISSION)
+  const [CreateTransmission, { loading, error: MutationError }] = useMutation<CreateTransmissionMutation, Pick<Transmission, "name" | "type">>(CREATE_TRANSMISSION)
   const onSubmit = async (variables: Pick<Transmission, "name" | "type">) => {
     try {
       const { data } = await CreateTransmission({ variables })
-      console.log(createTransmissionMutation)
       if (data?.createTransmission)
-        history.push(data?.createTransmission.uuid)
+        history.push(`${Urls.EDIT_TRANSMISSION}`.replace(":uuid", data?.createTransmission.uuid))
     } catch (exception) {
       console.error(exception)
     }
-
   }
+
+  useEffect(() => {
+    if (!loading && MutationError) toast({
+      title: "Error ocurred creating transmission.",
+      description: MutationError.message,
+      status: "error",
+      duration: 9000,
+      isClosable: true,
+    })
+  }, [loading, MutationError, toast])
 
   return (
     <Box bg={mode('gray.50', 'inherit')} minH="100vh" py="12" px={{ sm: '6', lg: '8' }}>
@@ -84,8 +94,8 @@ const Create = () => {
                   <Radio name="type" ref={register({ required: true })} value={TransmissionTypes.LIVE}>
                     {TransmissionTypes.LIVE}
                   </Radio>
-                  <Radio name="type" ref={register({ required: true })} value={TransmissionTypes.UPLOAD}>
-                    {TransmissionTypes.UPLOAD}
+                  <Radio name="type" ref={register({ required: true })} value={TransmissionTypes.VOD}>
+                    {TransmissionTypes.VOD}
                   </Radio>
                 </HStack>
               </RadioGroup>

@@ -1,9 +1,12 @@
 defmodule SuumWeb.CORS do
   use Corsica.Router,
-    origins: ["http://localhost", ~r{^https?://(.*\.)?suum\.io$}],
+    origins: "*",
+    max_age: 600,
     allow_credentials: true,
-    max_age: 600
+    allow_methods: :all,
+    allow_headers: :all,
+    log: [rejected: :error]
 
   resource("/api", origins: "*")
-  # resource("/*")
+  resource("/uploads", origins: "*")
 end

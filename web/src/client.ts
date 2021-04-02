@@ -37,6 +37,7 @@ const link = ApolloLink.split(
     authLink.concat(uploadLink)
 )
 
+
 const client = new ApolloClient({
     link: link,
     cache: new InMemoryCache()

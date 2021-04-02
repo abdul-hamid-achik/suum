@@ -23,6 +23,7 @@ defmodule SuumWeb do
 
       import Plug.Conn
       import SuumWeb.Gettext
+      import Corsica
       alias SuumWeb.Router.Helpers, as: Routes
     end
   end

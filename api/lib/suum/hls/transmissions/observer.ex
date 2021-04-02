@@ -15,39 +15,67 @@ defmodule Suum.Hls.Transmissions.Observer do
   end
 
   @impl true
-  def handle_cast({:save, uuid}, state) do
+  def handle_cast(:sync, %{transmission_uuid: uuid} = state) do
     playlist = get_playlist(uuid)
     thumbnails = get_thumbnails(uuid)
 
-    if File.exists?(playlist) do
-      Logger.info("Received order to save #{playlist}")
-      acc = []
-      {:ok, raw} = File.read(playlist)
-      lines = raw |> String.split("\n") |> Enum.with_index()
+    {:ok, pid} = FileSystem.start_link(dirs: [playlist], name: :playlist)
+    FileSystem.subscribe(pid)
 
-      case lines
-           |> Enum.reduce(acc, &parse_segment(&1, &2, lines, uuid))
-           |> enqueue_upsert(:segment) do
-        :ok ->
-          Logger.info("Enqueuing jobs to save segments")
-      end
-    end
+    {:noreply,
+     Map.merge(state, %{
+       transmission_uuid: uuid,
+       pid: pid,
+       thumbnails: thumbnails,
+       playlist: playlist,
+       processed_lines: []
+     })}
+  end
 
-    if File.exists?(thumbnails) do
-      Logger.info("Received order to save #{thumbnails}")
-      acc = []
-      {:ok, raw} = File.read(thumbnails)
-      lines = String.split(raw, "\n")
-
-      case lines
-           |> Enum.reduce(acc, &parse_thumbnail(&1, &2, uuid))
-           |> enqueue_upsert(:thumbnail) do
-        :ok ->
-          Logger.info("Enqueuing jobs to save thumbails")
-      end
-    end
-
+  def handle_cast(:stop, %{thumbnails: thumbnails, transmission_uuid: uuid} = state) do
+    save_thumbnails(thumbnails, uuid)
     {:noreply, state}
+  end
+
+  @impl true
+  def handle_info(
+        {:file_event, _watcher_pid, {playlist, _events}},
+        %{transmission_uuid: uuid, processed_lines: processed_lines} = state
+      ) do
+    acc = []
+    {:ok, raw} = File.read(playlist)
+
+    lines = raw |> String.split("\n") |> Enum.with_index()
+
+    case lines
+         |> Enum.reject(&Enum.member?(processed_lines, &1))
+         |> Enum.reduce(acc, &parse_segment(&1, &2, lines, uuid))
+         |> enqueue_upsert(:segment) do
+      :ok ->
+        Logger.info("Enqueuing jobs to save segments")
+    end
+
+    {:noreply, Map.merge(state, %{processed_lines: lines})}
+  end
+
+  def handle_info({:file_event, watcher_pid, :stop}, state) do
+    # Your own logic when monitor stop
+    IO.inspect({watcher_pid}, label: "handle info file events  STOP")
+    {:noreply, state}
+  end
+
+  defp save_thumbnails(thumbnails, uuid) do
+    Logger.info("Received order to save #{thumbnails}")
+    acc = []
+    {:ok, raw} = File.read(thumbnails)
+    lines = String.split(raw, "\n")
+
+    case lines
+         |> Enum.reduce(acc, &parse_thumbnail(&1, &2, uuid))
+         |> enqueue_upsert(:thumbnail) do
+      :ok ->
+        Logger.info("Enqueuing jobs to save thumbails")
+    end
   end
 
   defp parse_thumbnail("", thumbnails, _uuid), do: thumbnails

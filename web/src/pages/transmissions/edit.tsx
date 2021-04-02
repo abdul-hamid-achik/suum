@@ -1,11 +1,13 @@
 import React from "react"
-import { Code, Text, Box, Button, Select, VStack, HStack, Container, StackDivider } from "@chakra-ui/react"
+import { Code, Text, Input, FormControl, Progress, FormLabel, FormHelperText, useToast, Box, Button, Select, VStack, HStack, Container, StackDivider } from "@chakra-ui/react"
 import { useParams } from "react-router-dom"
+import * as UpChunk from '@mux/upchunk'
 import { FaCamera, FaMicrophone, FaPlay, FaStop } from "react-icons/fa"
 import { useQuery, gql } from "@apollo/client"
 import { Socket, Channel } from "phoenix"
 import { env } from "../../constants"
 import Player from "../../components/player"
+import { getToken } from '../../token'
 
 
 const GET_TRANSMISSION = gql`
@@ -26,6 +28,7 @@ interface TransmissionQuery {
 }
 
 const Edit: React.FC = () => {
+  const toast = useToast()
   const { uuid } = useParams<TransmissionUUID>()
   const { data } = useQuery<TransmissionQuery, TransmissionUUID>(GET_TRANSMISSION, { variables: { uuid } })
   const [devices, setDevices] = React.useState<MediaDeviceInfo[] | InputDeviceInfo[]>()
@@ -34,20 +37,16 @@ const Edit: React.FC = () => {
   const [audioDevice, setAudioDevice] = React.useState<MediaDeviceInfo>()
   const [videoDevice, setVideoDevice] = React.useState<MediaDeviceInfo>()
   const [isTransmitting, setTransmitting] = React.useState<boolean>(false)
+  const [uploadProgress, setUploadProgress] = React.useState<number>(0)
+  const [isRecording] = React.useState<boolean>(true)
   const videoRef = React.useRef<HTMLMediaElement>(null) as React.RefObject<HTMLVideoElement>
   const channel = React.useRef<Channel>()
   const stream = React.useRef<MediaStream>()
-  const socket = React.useMemo(() => new Socket(`${env?.WS_API_HOST}/socket`), [])
-
-  socket.onError(() => console.log("there was an error with the connection!"))
-  socket.onClose(() => console.log("the connection dropped"))
+  const socket = React.useRef<Socket>()
 
   const onDataAvailable = ({ data }: BlobEvent) => {
     const reader = new FileReader()
-    reader.onloadend = () => {
-      channel.current?.push("segment", { data: reader.result })
-    }
-
+    reader.onloadend = () => isRecording && channel.current?.push("segment", { data: reader.result })
     reader.readAsDataURL(data)
   }
 
@@ -68,11 +67,7 @@ const Edit: React.FC = () => {
   const onRecordClick = async () => {
     if (isTransmitting && stream.current) {
       stream.current.getTracks().forEach(track => track.stop())
-      channel.current?.push("stop", {})
     } else {
-      // setTransmission(null)
-      channel.current?.push("start", {})
-
       const constraints = {
         audio: { deviceId: audioDevice?.deviceId },
         video: {
@@ -81,9 +76,8 @@ const Edit: React.FC = () => {
           height: { min: 576, ideal: 720, max: 1080 }
         }
       }
-
-      if (!socket.isConnected()) {
-        socket.connect()
+      if (!socket.current?.isConnected()) {
+        socket.current?.connect()
       }
 
       try {
@@ -106,6 +100,14 @@ const Edit: React.FC = () => {
       setDevices(await navigator.mediaDevices.enumerateDevices())
     } catch (error) {
       console.error(error)
+
+      toast({
+        title: "Error ocurred opening Multimedia devices.",
+        description: "please hold on",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      })
     }
   }
 
@@ -117,6 +119,47 @@ const Edit: React.FC = () => {
       return device
     }
   }
+  const handleFileChange = ({ target: { files } }: React.ChangeEvent<HTMLInputElement>) => {
+    if (!files) return
+    const upload = UpChunk.createUpload({
+      endpoint: `${env?.HTTP_API_HOST}/uploads`,
+      file: files[0],
+      chunkSize: 5_120, // Uploads the file in ~5mb chunks
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Tus-Resumable": "1.0.0"
+      }
+    })
+
+    // subscribe to events
+    upload.on('error', err => {
+      console.error('💥 🙀', err.detail)
+      setUploadProgress(100)
+    });
+
+    upload.on('progress', progress => {
+      console.log(`So far we've uploaded ${progress.detail}% of this file.`)
+      setUploadProgress(progress.detail)
+    });
+
+    upload.on('success', () => {
+      console.log("Wrap it up, we're done here. 👋")
+      setUploadProgress(0)
+    })
+  }
+
+  const token = getToken()
+  React.useEffect(() => {
+    if (token) {
+      socket.current = new Socket(`${env?.WS_API_HOST}/socket`, { params: { token } })
+      socket.current.onError(() => console.log("there was an error with the connection!"))
+      socket.current.onClose(() => console.log("the connection dropped"))
+    }
+    loadDevices()
+    return socket.current?.disconnect()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token])
 
   React.useEffect(() => {
     if (devices && devices.length > 0) {
@@ -126,24 +169,21 @@ const Edit: React.FC = () => {
   }, [devices])
 
   React.useEffect(() => {
-    if (!channel.current) {
-      channel.current = socket.channel("transmit:video")
+    if (!channel.current && socket.current) {
+      channel.current = socket.current.channel(`transmit:${uuid}`)
       channel.current.onError(() => console.error("there was an error!"))
       channel.current.onClose(() => {
         setTransmitting(false)
         console.warn("the channel has gone away gracefully")
       })
+
       channel.current
         .join()
         .receive("ok", (response) => console.info(response))
         .receive("error", (response) => console.error(response))
     }
-    return socket.disconnect()
-  }, [socket])
+  }, [socket, uuid])
 
-  React.useEffect(() => {
-    loadDevices()
-  }, [uuid])
 
   const defaultAudioDevice = getDefaultDevice(audioDevices)
   const defaultVideoDevice = getDefaultDevice(videoDevices)
@@ -196,6 +236,18 @@ const Edit: React.FC = () => {
           </HStack>
         </Box>
       </VStack> : <>
+        {/* <Player uuid={uuid} forwardRef={videoRef} />
+         */}
+        <FormControl>
+          <FormLabel>
+            Upload
+          </FormLabel>
+          <Input onChange={handleFileChange} type="file" />
+          <FormHelperText>
+            Wait
+          </FormHelperText>
+        </FormControl>
+        <Progress value={uploadProgress} />
       </>}
     </Box>
   </Box>

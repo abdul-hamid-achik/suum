@@ -39,9 +39,16 @@ defmodule SuumWeb.Router do
   end
 
   scope "/", SuumWeb do
-    post "/on_play", RtmpController, :on_play
     post "/on_publish", RtmpController, :on_publish
-    post "/on_done", RtmpController, :on_done
+    post "/on_publish_done", RtmpController, :on_publish_done
+
+    scope "/uploads" do
+      options "/", UploadController, :options
+      match :head, "/:uid", UploadController, :head
+      post "/", UploadController, :post
+      patch "/:uid", UploadController, :patch
+      delete "/:uid", UploadController, :delete
+    end
   end
 
   # Other scopes may use custom stacks.

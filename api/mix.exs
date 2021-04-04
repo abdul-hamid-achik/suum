@@ -42,6 +42,7 @@ defmodule Suum.MixProject do
       {:corsica, "~> 1.0"},
       {:tus, "~> 0.1.0"},
       {:tus_storage_s3, "~> 0.1.0"},
+      {:tus_cache_redis, "~> 0.1.0"},
       {:file_system, "~> 0.2"},
       # {:sentix, "~> 1.0"},
       {:timex, "~> 3.6"},

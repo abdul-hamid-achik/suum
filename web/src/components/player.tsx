@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet"
 import { env } from "../constants"
 import { useToast, AspectRatio } from "@chakra-ui/react"
 import "@videojs/http-streaming"
+import "videojs-vtt-thumbnails"
 
 interface Props {
   uuid: Transmission['uuid'],
@@ -16,6 +17,7 @@ type VideoSource = {
   src: string,
   type: string
 }
+
 const Player: React.FC<Props> = ({ uuid, forwardRef, play = false }) => {
   const [sources, setSources] = React.useState<VideoSource[]>([])
   const videoRef = React.useRef<HTMLMediaElement>(null) as React.RefObject<HTMLVideoElement>
@@ -37,21 +39,26 @@ const Player: React.FC<Props> = ({ uuid, forwardRef, play = false }) => {
 
         player.ready(() => {
           player.src(srcConfig)
-          // player.play()
+          player.vttThumbnails({
+            src: `${env?.HTTP_API_HOST}/transmissions/${uuid}/thumbnails.vtt`,
+            showTimestamp: true
+          })
+          if (play) {
+            player.play()
+          }
         })
-
 
         player.on('error', () => {
-          // player.createModal('Retrying connection')
-          // if (player.error().code === 4) {
-          //   player.retryLock = setTimeout(() => {
-          //     player.src(srcConfig)
-          //     player.load()
-          //   }, 1000)
-          // }
+          player.createModal('Retrying connection')
+          if (player.error().code === 4) {
+            player.retryLock = setTimeout(() => {
+              player.src(srcConfig)
+              player.load()
+            }, 1000)
+          }
         })
 
-        // setSources([srcConfig])
+        setSources([srcConfig])
         return () => player.dispose()
       }
 
@@ -68,7 +75,6 @@ const Player: React.FC<Props> = ({ uuid, forwardRef, play = false }) => {
 
     return () => { }
   }, [uuid, mainRef, play, toast])
-  console.log(sources)
   return (
     <AspectRatio maxW="600px" ratio={16 / 9}>
       <video className="video-js" ref={mainRef} controls autoPlay={play}>

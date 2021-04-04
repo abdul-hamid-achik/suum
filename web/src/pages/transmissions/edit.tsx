@@ -1,13 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react"
 import { Code, Text, Input, FormControl, Progress, FormLabel, FormHelperText, useToast, Box, Button, Select, VStack, HStack, Container, StackDivider } from "@chakra-ui/react"
 import { useParams } from "react-router-dom"
-import * as UpChunk from '@mux/upchunk'
 import { FaCamera, FaMicrophone, FaPlay, FaStop } from "react-icons/fa"
 import { useQuery, gql } from "@apollo/client"
 import { Socket, Channel } from "phoenix"
 import { env } from "../../constants"
 import Player from "../../components/player"
 import { getToken } from '../../token'
+import useUpload from "../../hooks/upload"
 
 
 const GET_TRANSMISSION = gql`
@@ -21,6 +22,7 @@ const GET_TRANSMISSION = gql`
     }
   }
 `
+
 type TransmissionUUID = Pick<Transmission, "uuid">
 
 interface TransmissionQuery {
@@ -30,6 +32,7 @@ interface TransmissionQuery {
 const Edit: React.FC = () => {
   const toast = useToast()
   const { uuid } = useParams<TransmissionUUID>()
+  const { isUploading, progress, upload } = useUpload(uuid)
   const { data } = useQuery<TransmissionQuery, TransmissionUUID>(GET_TRANSMISSION, { variables: { uuid } })
   const [devices, setDevices] = React.useState<MediaDeviceInfo[] | InputDeviceInfo[]>()
   const [audioDevices, setAudioDevices] = React.useState<InputDeviceInfo[]>([])
@@ -37,7 +40,6 @@ const Edit: React.FC = () => {
   const [audioDevice, setAudioDevice] = React.useState<MediaDeviceInfo>()
   const [videoDevice, setVideoDevice] = React.useState<MediaDeviceInfo>()
   const [isTransmitting, setTransmitting] = React.useState<boolean>(false)
-  const [uploadProgress, setUploadProgress] = React.useState<number>(0)
   const [isRecording] = React.useState<boolean>(true)
   const videoRef = React.useRef<HTMLMediaElement>(null) as React.RefObject<HTMLVideoElement>
   const channel = React.useRef<Channel>()
@@ -112,44 +114,15 @@ const Edit: React.FC = () => {
   }
 
   const getDevice = (deviceId: MediaDeviceInfo['deviceId'], devices: MediaDeviceInfo[]) => devices.find(device => device.deviceId === deviceId)
-  const getDefaultDevice = (devices: MediaDeviceInfo[]): MediaDeviceInfo | undefined => {
-    // @ts-ignore
-    const [device] = devices.filter(({ deviceId }): MediaDeviceInfo => deviceId === 'default')
-    if (device) {
-      return device
-    }
-  }
+  const getDefaultDevice = (devices: MediaDeviceInfo[]): MediaDeviceInfo | undefined => getDevice('default', devices)
+
   const handleFileChange = ({ target: { files } }: React.ChangeEvent<HTMLInputElement>) => {
     if (!files) return
-    const upload = UpChunk.createUpload({
-      endpoint: `${env?.HTTP_API_HOST}/uploads`,
-      file: files[0],
-      chunkSize: 5_120, // Uploads the file in ~5mb chunks
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Tus-Resumable": "1.0.0"
-      }
-    })
-
-    // subscribe to events
-    upload.on('error', err => {
-      console.error('💥 🙀', err.detail)
-      setUploadProgress(100)
-    });
-
-    upload.on('progress', progress => {
-      console.log(`So far we've uploaded ${progress.detail}% of this file.`)
-      setUploadProgress(progress.detail)
-    });
-
-    upload.on('success', () => {
-      console.log("Wrap it up, we're done here. 👋")
-      setUploadProgress(0)
-    })
+    upload(files[0])
   }
 
   const token = getToken()
+
   React.useEffect(() => {
     if (token) {
       socket.current = new Socket(`${env?.WS_API_HOST}/socket`, { params: { token } })
@@ -158,7 +131,6 @@ const Edit: React.FC = () => {
     }
     loadDevices()
     return socket.current?.disconnect()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token])
 
   React.useEffect(() => {
@@ -235,20 +207,21 @@ const Edit: React.FC = () => {
             </Select>
           </HStack>
         </Box>
-      </VStack> : <>
-        {/* <Player uuid={uuid} forwardRef={videoRef} />
-         */}
+      </VStack> : <VStack
+        divider={<StackDivider borderColor="gray.200" />}
+        spacing={4}
+        align="stretch">
         <FormControl>
           <FormLabel>
             Upload
           </FormLabel>
           <Input onChange={handleFileChange} type="file" />
           <FormHelperText>
-            Wait
+            Drag and Drop or select a file to start transmitting, it has to be mp4
           </FormHelperText>
         </FormControl>
-        <Progress value={uploadProgress} />
-      </>}
+        {isUploading && <Progress value={progress} />}
+      </VStack>}
     </Box>
   </Box>
 }

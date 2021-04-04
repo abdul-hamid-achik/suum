@@ -23,6 +23,16 @@ defmodule Suum.Uploaders.Sprite do
     "/transmissions/#{transmission_uuid}/#{version}-default.png"
   end
 
+  def storage_dir(_version, {%Waffle.File{path: "./mnt/uploads/" <> file_path}, _scope}) do
+    [transmission_uuid, _file] = String.split(file_path, "/")
+    "/transmissions/#{transmission_uuid}/"
+  end
+
+  def default_url(version, {%Waffle.File{path: "./mnt/uploads/" <> file_path}, _scope}) do
+    [transmission_uuid, _file] = String.split(file_path, "/")
+    "/transmissions/#{transmission_uuid}/#{version}-default.png"
+  end
+
   def default_url(version, %Transmission{uuid: transmission_uuid}),
     do: "/transmissions/#{transmission_uuid}/#{version}-default.png"
 end

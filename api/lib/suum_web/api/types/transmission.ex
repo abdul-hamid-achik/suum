@@ -11,6 +11,7 @@ defmodule SuumWeb.Api.Types.Transmission do
     field(:slug, :string)
     field(:type, :string)
     field(:ip_address, :string)
+    field(:pid, :string)
     field(:segments, list_of(:segment), resolve: dataloader(Hls))
     field(:sprite, :string)
     field(:sprite_url, :string)

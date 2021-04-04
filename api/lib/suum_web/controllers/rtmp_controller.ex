@@ -1,7 +1,8 @@
 defmodule SuumWeb.RtmpController do
+  @transmissions_base_path "./mnt/hls/live"
+
   use SuumWeb, :controller
   require Logger
-
   alias Suum.{Hls.Jobs, Hls.Transmissions.Observer, Hls}
 
   @spec on_publish(Plug.Conn.t(), map) :: Plug.Conn.t()
@@ -20,15 +21,22 @@ defmodule SuumWeb.RtmpController do
           "type" => _type
         } = _params
       ) do
-    {:ok, pid} = Observer.start_link(%{transmission_uuid: transmission_uuid})
+    {:ok, pid} =
+      Observer.start_link(%{
+        transmission_uuid: transmission_uuid,
+        transmissions_base_path: @transmissions_base_path
+      })
+
     GenServer.cast(pid, :sync)
     transmission = Hls.get_transmission(transmission_uuid)
 
-    Hls.update_transmission(transmission, %{
-      pid: pid,
-      ip_address: ip_address,
-      type: :live
-    })
+    IO.inspect(:erlang.pid_to_list(pid))
+    {:ok, %Hls.Transmission{}} =
+      Hls.update_transmission(transmission, %{
+        pid: :erlang.pid_to_list(pid),
+        ip_address: ip_address,
+        type: :live
+      })
 
     send_resp(conn, 200, "")
   end
@@ -38,7 +46,7 @@ defmodule SuumWeb.RtmpController do
     Logger.info("VOD - #{transmission_uuid} | creating sprites")
     transmission = Hls.get_transmission(transmission_uuid)
     Hls.update_transmission(transmission, %{pid: nil, type: :vod})
-    GenServer.call(transmission.pid, :stop)
+    GenServer.call(:erlang.list_to_pid(transmission.pid), :stop)
     Jobs.CreateSprite.enqueue!(transmission_uuid)
     send_resp(conn, 200, "")
   end

@@ -42,7 +42,7 @@ defmodule SuumWeb.Router do
     post "/on_publish", RtmpController, :on_publish
     post "/on_publish_done", RtmpController, :on_publish_done
 
-    scope "/uploads" do
+    scope "/upload" do
       options "/", UploadController, :options
       match :head, "/:uid", UploadController, :head
       post "/", UploadController, :post

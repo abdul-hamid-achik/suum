@@ -5,8 +5,10 @@ defmodule SuumWeb.CORS do
     allow_credentials: true,
     allow_methods: :all,
     allow_headers: :all,
-    log: [rejected: :error]
+    expose_headers: ~W(Location Upload-Offset),
+    log: [rejected: :error, invalid: :warn, accepted: :info]
 
   resource("/api", origins: "*")
-  resource("/uploads", origins: "*")
+  resource("/upload/*", origins: "*")
+  resource("/transmissions/*", origins: "*")
 end

@@ -15,16 +15,18 @@ import Navbar from './components/navbar'
 import client from './client'
 import Pages from "./pages"
 import { Urls } from './constants'
-import { getToken } from './token'
+import useAuthToken from './hooks/auth_token'
 
 // @ts-ignore
 function PrivateRoute({ component: Component, ...rest }) {
-  const isAuthenticated = getToken()
+  const { get } = useAuthToken()
+  const token = get()
+
   return (
     <Route
       {...rest}
       render={props =>
-        isAuthenticated ? (
+        token ? (
           <Component {...props} />
         ) : (
           <Redirect

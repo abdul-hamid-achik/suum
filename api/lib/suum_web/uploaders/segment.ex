@@ -24,6 +24,16 @@ defmodule Suum.Uploaders.Segment do
     "/transmissions/#{transmission_uuid}/segments/default-#{version}.ts"
   end
 
+  def storage_dir(_version, {%Waffle.File{path: "./mnt/uploads/" <> file_path}, _scope}) do
+    [transmission_uuid, _file] = String.split(file_path, "/")
+    "/transmissions/#{transmission_uuid}/segments" |> IO.inspect()
+  end
+
+  def default_url(version, {%Waffle.File{path: "./mnt/uploads/" <> file_path}, _scope}) do
+    [transmission_uuid, _file] = String.split(file_path, "/")
+    "/transmissions/#{transmission_uuid}/segments/default-#{version}.ts"
+  end
+
   def default_url(version, {_file, %Segment{transmission_uuid: transmission_uuid}}),
     do: "/transmissions/#{transmission_uuid}/segments/default-#{version}.ts"
 end

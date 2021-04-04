@@ -12,7 +12,8 @@ defmodule Suum.Hls.Transmission do
 
   @optional [
     :type,
-    :ip_address
+    :ip_address,
+    :pid
   ]
 
   defenum(Type, ["live", "vod"])
@@ -22,7 +23,7 @@ defmodule Suum.Hls.Transmission do
     field(:slug, :string)
     field :type, Type, default: :live
     field :ip_address, :string
-    field :pid, :integer
+    field :pid, :string
     field(:sprite, Suum.Uploaders.Sprite.Type)
     field(:sprite_url, :string, virtual: true)
     field(:preview, Suum.Uploaders.Preview.Type)

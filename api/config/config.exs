@@ -97,10 +97,15 @@ config :task_bunny,
     queues: [[name: "normal", jobs: :default]]
   ]
 
+config :tus, controllers: [SuumWeb.UploadController]
+
 config :tus, SuumWeb.UploadController,
-  storage: Tus.Storage.S3,
   s3_host: System.get_env("AWS_HOST", "127.0.0.1"),
-  s3_bucket: System.get_env("AWS_BUCKET_NAME", "suum")
+  s3_bucket: System.get_env("AWS_BUCKET_NAME", "suum"),
+  storage: Tus.Storage.Local,
+  base_path: "mnt/uploads/",
+  cache: Tus.Cache.Memory,
+  max_size: 20_971_520
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

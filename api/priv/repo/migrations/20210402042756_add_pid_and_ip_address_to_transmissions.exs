@@ -3,7 +3,7 @@ defmodule Suum.Repo.Migrations.AddPidAndIpAddressToTransmissions do
 
   def change do
     alter table(:transmissions) do
-      add :pid, :integer
+      add :pid, :string
       add :ip_address, :string
     end
   end

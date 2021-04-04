@@ -13,6 +13,12 @@ defmodule SuumWeb.Api.Resolvers.Hls do
     |> Transmissions.create_transmission()
   end
 
+  def update_transmission(args, %{params: params, uuid: uuid}, %{context: %{current_user: _user}}) do
+    IO.inspect({params, args})
+    transmission = Transmissions.get_transmission!(uuid)
+    Transmissions.update_transmission(transmission, params) |> IO.inspect()
+  end
+
   def get_transmission(_args, %{uuid: uuid}, _) do
     {:ok, Transmissions.get_transmission(uuid)}
   end

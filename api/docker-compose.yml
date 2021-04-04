@@ -2,9 +2,9 @@ version: "3.8"
 
 services:
   docker-host:
-    container_name: suum-host
     image: qoomon/docker-host:latest
-    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    container_name: suum-host
+    cap_add: ["NET_ADMIN", "NET_RAW"]
     mem_limit: 8M
     restart: on-failure
 
@@ -25,16 +25,16 @@ services:
     image: rabbitmq:3.8.14-alpine
     container_name: suum-rabbitmq
     environment:
-        RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:-local_access}
-        RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-local_access}
-        RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-local_access}
+      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:-local_access}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-local_access}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-local_access}
     ports:
-        - 5672:5672
-        - 15672:15672
+      - 5672:5672
+      - 15672:15672
 
   db:
-    container_name: suum-db
     image: postgres:latest
+    container_name: suum-db
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_PASSWORD: postgres
@@ -46,8 +46,8 @@ services:
       - "5432:5432"
 
   db-admin:
-    container_name: suum-db-admin
     image: dpage/pgadmin4:latest
+    container_name: suum-db-admin
     depends_on:
       - db
     environment:
@@ -62,8 +62,8 @@ services:
       - "db:pgsql-server"
 
   minio:
-    container_name: suum-minio
     image: minio/minio
+    container_name: suum-minio
     volumes:
       - minio-data:/data
     ports:

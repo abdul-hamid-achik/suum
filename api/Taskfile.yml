@@ -13,37 +13,47 @@ tasks:
 
   compose.logs:
     desc: Shows logs from the containers
-    cmd: docker-compose logs --tail=5 -f {{.CONTAINER_NAME}}
+    cmds:
+      - docker-compose logs --tail=5 -f {{.CONTAINER_NAME}}
 
   compose.exec:
-    cmd: docker-compose exec {{.CONTAINER_NAME}} {{.COMMAND}}
+    cmds:
+      - docker-compose exec {{.CONTAINER_NAME}} {{.COMMAND}}
 
   compose.ps:
-    cmd: docker-compose ps
+    cmds:
+      - docker-compose ps
 
   compose.up:
     desc: Starts docker images
-    cmd: docker-compose up -d
+    cmds:
+      - docker-compose up -d
 
   compose.down:
     desc: Stops docker images
-    cmd: docker-compose down -v
+    cmds:
+      - docker-compose down -v
 
   compose.build:
     desc: Builds containers
-    cmd: docker-compose build --force-rm
+    cmds:
+      - docker-compose build --force-rm
   
   compose.restart:
-    cmd: docker-compose restart
+    cmds:
+    - docker-compose restart
   
   deps.get:
-    cmd: mix deps.get
+    cmds:
+    - mix deps.get
 
   deps.compile:
-    cmd: mix deps.compile
+    cmds:
+      - mix deps.compile
 
   compile:
-    cmd: mix compile
+    cmds:
+      - mix compile
 
   reset.hard:
     desc: Restarts development environment
@@ -63,15 +73,18 @@ tasks:
   iex:
     desc: Starts interactive elixir session
     deps: [db.migrate]
-    cmd: iex -S mix
+    cmds:
+      - iex -S mix
 
   iex.server:
     deps: [deps.get]
-    cmd: iex -S mix phx.server
+    cmds:
+      - iex -S mix phx.server
 
   server:
     deps: [deps.get]
-    cmd: mix phx.server
+    cmds:
+      - mix phx.server
 
   server.dry.soft:
     deps: [compose.restart]
@@ -95,6 +108,7 @@ tasks:
       - task: compile
       - task: db.setup
       - npm install --prefix assets
+      - brew install fswatch
     status:
       - test -d ./assets/node_modules
       - test -d ./_build
@@ -103,23 +117,28 @@ tasks:
 
   db.setup:
     deps: [compose.up]
-    cmd: mix ecto.setup
+    cmds:
+      - mix ecto.setup
 
   db.reset:
     deps: [compose.up]
-    cmd: mix ecto.reset
+    cmds:
+      - mix ecto.reset
 
   db.migrate:
     deps: [compose.up]
-    cmd: mix ecto.migrate
+    cmds:
+      - mix ecto.migrate
   
   format:
     desc: Formats elixir code
-    cmd: mix format
+    cmds:
+      - mix format
 
   format.check:
     desc: Runs formatting checking for elixir
-    cmd: mix format --check-formatted
+    cmds:
+      - mix format --check-formatted
 
   dialyzer.check:
     desc: Runs Dialyzer for elixir
@@ -129,17 +148,21 @@ tasks:
 
   seed:
     desc: Seeds database with testing data
-    cmd: mix run priv/repo/seeds.exs
+    cmds:
+    - mix run priv/repo/seeds.exs
 
   test:
     desc: Run tests
     deps: [compose.up]
-    cmd: mix test
+    cmds:
+      - mix test
 
   test.wip:
     desc: Run work in progress tagged tests
     deps: [compose.up]
-    cmd: mix test --only wip
+    cmds:
+      - mix test --only wip
 
   wait:
-    cmd: sleep 3
+    cmds:
+      - sleep 3

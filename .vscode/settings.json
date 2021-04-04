@@ -1,4 +1,6 @@
 {
   "elixirLS.projectDir": "./api",
-  "elixirLS.fetchDeps": false
+  "elixirLS.fetchDeps": false,
+  "editor.tabSize": 2,
+  "cSpell.words": ["cmds", "deps", "drop", "ecto", "mkdir", "plts", "priv"]
 }

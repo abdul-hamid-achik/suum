@@ -6,6 +6,7 @@ defmodule Suum.Schema do
       import Crudry.Query
       import Ecto.Query
       import EctoEnum
+      import Slugy
 
       @primary_key {:uuid, :binary_id, autogenerate: true}
       @foreign_key_type :binary_id

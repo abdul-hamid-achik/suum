@@ -24,6 +24,16 @@ defmodule Suum.Uploaders.Thumbnail do
     "/transmissions/#{transmission_uuid}/thumbnails/#{version}-default.jpeg"
   end
 
+  def storage_dir(_version, {%Waffle.File{path: "./mnt/uploads/" <> file_path}, _scope}) do
+    [transmission_uuid, _file] = String.split(file_path, "/")
+    "/transmissions/#{transmission_uuid}/thumbnails/"
+  end
+
+  def default_url(version, {%Waffle.File{path: "./mnt/uploads/" <> file_path}, _scope}) do
+    [transmission_uuid, _file] = String.split(file_path, "/")
+    "/transmissions/#{transmission_uuid}/thumbnails/#{version}-default.jpeg"
+  end
+
   def default_url(version, {_file, %Thumbnail{transmission_uuid: transmission_uuid}}),
     do: "/transmissions/#{transmission_uuid}/thumbnails/#{version}-default.jpeg"
 end

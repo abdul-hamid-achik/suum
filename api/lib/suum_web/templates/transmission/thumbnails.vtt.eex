@@ -2,5 +2,5 @@ WEBVTT
 
 <%= for thumbnail <- @thumbnails do %>
 <%= thumbnail.from %> --> <%= thumbnail.to %>
-<%= @transmission.sprite_url %>#xywh=0,0,320,240
+<%= thumbnail.url %>
 <% end %>

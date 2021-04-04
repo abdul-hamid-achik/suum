@@ -27,3 +27,20 @@ tasks:
     desc: Runs tests in watch mode
     cmds:
       - npm run test.watch --inspect-brk --runInBand --coverage false
+
+  npm.install:
+    desc: Set variable PACKAGE_NAME to install a npm package like `npm install --save $PACKAGE_NAME`
+    cmds:
+      - npm install --save {{.PACKAGE_NAME}}
+
+  npm.install.dev:
+    desc: Set variable PACKAGE_NAME to install a npm package like `npm install --save-dev $PACKAGE_NAME`
+    cmds:
+      - npm install --save-dev {{.PACKAGE_NAME}}
+
+  npm.uninstall:
+    desc: Set variable PACKAGE_NAME to uninstall a npm package like `npm uninstall -S $PACKAGE_NAME`
+    cmds:
+      - npm uninstall -S {{.PACKAGE_NAME}}
+
+      

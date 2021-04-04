@@ -1,6 +1,6 @@
 defmodule SuumWeb.Context do
   @behaviour Plug
-
+  require Logger
   import Plug.Conn
 
   alias Suum.Accounts
@@ -24,7 +24,7 @@ defmodule SuumWeb.Context do
          user <- Accounts.get_user_by_session_token(token) do
       {:ok, %{current_user: user}}
     else
-      error -> IO.inspect(error, label: "error ")
+      error -> Logger.error(inspect(error, label: "error "))
     end
   end
 end

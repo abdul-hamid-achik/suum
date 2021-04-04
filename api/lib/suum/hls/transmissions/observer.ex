@@ -123,7 +123,7 @@ defmodule Suum.Hls.Transmissions.Observer do
 
   def handle_info({:file_event, watcher_pid, :stop}, state) do
     # Your own logic when monitor stop
-    IO.inspect({watcher_pid}, label: "handle info file events  STOP")
+    # IO.inspect({watcher_pid}, label: "handle info file events  STOP")
     {:noreply, state}
   end
 

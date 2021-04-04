@@ -16,7 +16,7 @@ defmodule Suum.Uploaders.Segment do
 
   def storage_dir(_version, {%Waffle.File{path: "./mnt/hls/live/" <> file_path}, _scope}) do
     [transmission_uuid, _file] = String.split(file_path, "/")
-    "/transmissions/#{transmission_uuid}/segments" |> IO.inspect()
+    "/transmissions/#{transmission_uuid}/segments"
   end
 
   def default_url(version, {%Waffle.File{path: "./mnt/hls/live/" <> file_path}, _scope}) do
@@ -26,7 +26,7 @@ defmodule Suum.Uploaders.Segment do
 
   def storage_dir(_version, {%Waffle.File{path: "./mnt/uploads/" <> file_path}, _scope}) do
     [transmission_uuid, _file] = String.split(file_path, "/")
-    "/transmissions/#{transmission_uuid}/segments" |> IO.inspect()
+    "/transmissions/#{transmission_uuid}/segments"
   end
 
   def default_url(version, {%Waffle.File{path: "./mnt/uploads/" <> file_path}, _scope}) do

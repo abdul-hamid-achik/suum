@@ -30,7 +30,6 @@ defmodule SuumWeb.RtmpController do
     GenServer.cast(pid, :sync)
     transmission = Hls.get_transmission(transmission_uuid)
 
-    IO.inspect(:erlang.pid_to_list(pid))
     {:ok, %Hls.Transmission{}} =
       Hls.update_transmission(transmission, %{
         pid: :erlang.pid_to_list(pid),

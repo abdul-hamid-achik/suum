@@ -12,6 +12,7 @@ defmodule Suum.Application do
       SuumWeb.Telemetry,
       {Phoenix.PubSub, name: Suum.PubSub},
       SuumWeb.Endpoint,
+      {Registry, keys: :unique, name: TransmissionRegistry},
       Service
     ]
 

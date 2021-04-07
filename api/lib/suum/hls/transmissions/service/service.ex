@@ -13,12 +13,26 @@ defmodule Suum.Hls.Transmissions.Service do
   @initial_state %State{}
   @default_interval 5_000
 
+  def start_link(transmission),
+    do:
+      GenServer.start_link(
+        __MODULE__,
+        [
+          transmission: transmission,
+          processed_lines: []
+        ],
+        name: process_name(transmission)
+      )
+
+  defp process_name(transmission),
+    do: {:via, Registry, {TransmissionRegistry, "transmission_#{transmission.uuid}"}}
+
   @impl true
   def init(args) do
     Logger.info(inspect(args, pretty: true))
     Process.send_after(__MODULE__, :watch, 1_000)
 
-    {:ok, [transmission: nil, processed_lines: []]}
+    {:ok, args}
   end
 
   def on_start(opts) do
@@ -26,8 +40,6 @@ defmodule Suum.Hls.Transmissions.Service do
     Logger.info(inspect(opts, pretty: true))
     opts
   end
-
-  def start_link(_opts), do: GenServer.start_link(__MODULE__, [], name: __MODULE__)
 
   @impl true
   def handle_cast(

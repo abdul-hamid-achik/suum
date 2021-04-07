@@ -1,14 +1,17 @@
 defmodule Suum.Hls.Transmissions.Kickstarter do
-  use GenServer
+  use DynamicSupervisor
+  alias Suum.Hls.Transmissions.Service
 
-  def start_link(args) do
-    Genserver.start_link(__MODULE__, args, name: __MODULE__)
-  end
+  def start_link(arg),
+    do: DynamicSupervisor.start_link(__MODULE__, arg, name: __MODULE__)
 
-  def init(opts) do
-    {:ok, opts}
-  end
+  def init(_arg),
+    do: DynamicSupervisor.init(strategy: :one_for_one)
 
-  def handle_call({:boot, transmission_uuid}, _state) do
-  end
+  def process(transmission),
+    do:
+      DynamicSupervisor.start_child(
+        __MODULE__,
+        {Service, [transmission: transmission, previous_lines: []]}
+      )
 end

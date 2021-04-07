@@ -4,13 +4,15 @@ defmodule Suum.Application do
   @moduledoc false
 
   use Application
+  alias Suum.Hls.Transmissions.Service
 
   def start(_type, _args) do
     children = [
       Suum.Repo,
       SuumWeb.Telemetry,
       {Phoenix.PubSub, name: Suum.PubSub},
-      SuumWeb.Endpoint
+      SuumWeb.Endpoint,
+      Service
     ]
 
     opts = [strategy: :one_for_one, name: Suum.Supervisor]

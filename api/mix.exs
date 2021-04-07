@@ -20,7 +20,7 @@ defmodule Suum.MixProject do
   def application do
     [
       mod: {Suum.Application, []},
-      extra_applications: [:logger, :runtime_tools, :task_bunny, :corsica]
+      extra_applications: [:logger, :runtime_tools, :task_bunny, :corsica, :dataloader]
     ]
   end
 
@@ -33,6 +33,7 @@ defmodule Suum.MixProject do
   defp deps do
     [
       {:porcelain, "~> 2.0.3"},
+      {:machinery, "~> 1.0.0"},
       {:task_bunny, "~> 0.3.2"},
       {:tesla, "~> 1.4.0"},
       {:crudry, "~> 2.3.1"},

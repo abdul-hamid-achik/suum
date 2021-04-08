@@ -5,7 +5,7 @@ defmodule SuumWeb.RtmpController do
   alias Suum.{
     Hls,
     Hls.Jobs,
-    # Hls.Transmissions.Observer,
+    Hls.Transmissions.Kickstarter,
     Hls.Transmission
   }
 
@@ -30,6 +30,7 @@ defmodule SuumWeb.RtmpController do
            Hls.update_transmission(transmission, %{
              ip_address: ip_address
            }),
+         {:ok, _pid} <- Kickstarter.process(transmission),
          {:ok, _} <- maybe_transition_to_streaming(transmission) do
       send_resp(conn, 200, "")
     end

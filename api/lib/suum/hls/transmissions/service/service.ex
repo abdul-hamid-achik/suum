@@ -13,6 +13,7 @@ defmodule Suum.Hls.Transmissions.Service do
   @initial_state %State{}
   @default_interval 5_000
 
+  # Process.flag(:trap_exit, true)
   def start_link(transmission),
     do:
       GenServer.start_link(
@@ -24,21 +25,11 @@ defmodule Suum.Hls.Transmissions.Service do
         name: process_name(transmission)
       )
 
-  defp process_name(transmission),
-    do: {:via, Registry, {TransmissionRegistry, "transmission_#{transmission.uuid}"}}
-
   @impl true
   def init(args) do
-    Logger.info(inspect(args, pretty: true))
-    Process.send_after(__MODULE__, :watch, 1_000)
-
+    Logger.info("Initializing Transmission with args: #{inspect(args, pretty: true)}")
+    Process.send_after(__MODULE__, :watch, @default_interval)
     {:ok, args}
-  end
-
-  def on_start(opts) do
-    Logger.info("on start callback")
-    Logger.info(inspect(opts, pretty: true))
-    opts
   end
 
   @impl true
@@ -48,8 +39,7 @@ defmodule Suum.Hls.Transmissions.Service do
       ) do
     transmission = Hls.get_transmission(uuid)
     transmission_path = "#{base_path(transmission.type)}/#{uuid}"
-    %Porcelain.Result{} = result = Porcelain.exec("mkdir", ["-p", transmission_path])
-    Logger.info("Created folder - #{transmission_path} - #{inspect(result, pretty: true)}")
+    {:ok, _, _} = :exec.run("mkdir -p #{transmission_path}", [])
     {:noreply, state}
   end
 
@@ -76,7 +66,7 @@ defmodule Suum.Hls.Transmissions.Service do
                uuid: uuid,
                upload_name: upload_name,
                uid: uid
-             } = transmission
+             } = _transmission
          ]},
         state
       ) do
@@ -93,43 +83,32 @@ defmodule Suum.Hls.Transmissions.Service do
     video_file_path = "#{transmission_path}/#{upload_name}"
     Logger.info("Created #{transmission_path}")
 
-    _rename_file =
-      Porcelain.exec("mv", [
-        "#{base_path}/#{file_dir}/#{uid}",
-        "#{video_file_path}"
-      ])
-
-    Logger.info("Copied #{base_path}/#{file_dir}/#{uid} to #{transmission_path}")
-    Logger.info("Processing #{video_file_path}")
-
-    opts = [
-      "-re",
-      "-nostdin",
-      "-i",
-      video_file_path,
-      "-vcodec",
-      "libx264",
-      "-preset:v",
-      "ultrafast",
-      "-acodec",
-      "aac",
-      "-f",
-      "flv",
-      "#{rtmp_host()}/live/#{uuid}"
-    ]
-
-    IO.inspect("ffmpeg #{Enum.join(opts, " ")}")
-
-    %Porcelain.Result{status: 0} =
-      result =
-      Porcelain.exec(
-        "ffmpeg",
-        opts
+    {:ok, _, _} =
+      :exec.run(
+        ~w(
+          mv
+          #{base_path}/#{file_dir}/#{uid}
+          #{video_file_path}
+        ),
+        []
       )
 
-    Logger.info("Streamed #{inspect(result, pretty: true)}")
-    :timer.sleep(2000)
-    {:ok, _} = Transmission.transition_to(transmission, "processing")
+    Logger.info("Copied #{base_path}/#{file_dir}/#{uid} to #{transmission_path}")
+
+    command = ~w(
+      /usr/local/bin/ffmpeg
+      -re -nostdin
+      -i #{video_file_path}
+      -vcodec libx264
+      -preset:v ultrafast
+      -acodec aac
+      -f flv
+      #{rtmp_host()}/live/#{uuid}
+      )
+
+    {:ok, _, _} = :exec.run(command, [])
+    # {:ok, _} = Transmission.transition_to(transmission, "processing")
+    Logger.info("Processing #{video_file_path}")
     {:noreply, state}
   end
 
@@ -291,4 +270,7 @@ defmodule Suum.Hls.Transmissions.Service do
     do: "#{base_path}/#{transmission_uuid}/thumbnails.txt"
 
   defp rtmp_host, do: System.get_env("RTMP_HOST", "rtmp://localhost:1935")
+
+  defp process_name(transmission),
+    do: {:via, Registry, {TransmissionRegistry, transmission.uuid}}
 end

@@ -32,7 +32,7 @@ defmodule Suum.Hls.Transmission do
     field(:sprite_url, :string, virtual: true)
     field(:preview_url, :string, virtual: true)
     field :type, Type, default: :live
-    field :state, :string
+    field :state, :string, default: "created"
 
     field :upload_name, :string
     field :content_type, :string

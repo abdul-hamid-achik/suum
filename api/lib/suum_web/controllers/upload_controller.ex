@@ -7,6 +7,7 @@ defmodule SuumWeb.UploadController do
 
   alias Suum.{
     Hls,
+    Hls.Transmissions.Kickstarter,
     Hls.Transmission
   }
 
@@ -25,6 +26,7 @@ defmodule SuumWeb.UploadController do
              content_type: filetype,
              uid: uid
            }),
+         {:ok, _pid} <- Kickstarter.process(transmission),
          {:ok, _transmission} <- Transmission.transition_to(transmission, "uploading") do
       :ok
     else

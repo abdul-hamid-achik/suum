@@ -4,7 +4,7 @@ defmodule Suum.Application do
   @moduledoc false
 
   use Application
-  alias Suum.Hls.Transmissions.Service
+  alias Suum.Hls.Transmissions.{Service, Kickstarter}
 
   def start(_type, _args) do
     children = [
@@ -13,7 +13,7 @@ defmodule Suum.Application do
       {Phoenix.PubSub, name: Suum.PubSub},
       SuumWeb.Endpoint,
       {Registry, keys: :unique, name: TransmissionRegistry},
-      Service
+      Kickstarter
     ]
 
     opts = [strategy: :one_for_one, name: Suum.Supervisor]

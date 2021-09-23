@@ -1,9 +1,9 @@
 version: '3'
 
 includes:
-  api: 
-    taskfile: ./api/Taskfile.yml
-    dir: ./api
+  server: 
+    taskfile: ./server/Taskfile.yml
+    dir: ./server
 
   web: 
     taskfile: ./web/Taskfile.yml
@@ -15,16 +15,16 @@ tasks:
   test:
     desc: Runs all tests both api and web
     cmds:
-      - task: api:test
+      - task: server:test
       - task: web:test
   
   reset:
     cmds:
-      - task: api:reset.hard
+      - task: server:reset.hard
       - task: web:reset
 
 
   setup:
     cmds:
-      - task: api:setup
+      - task: server:setup
       - task: web:setup

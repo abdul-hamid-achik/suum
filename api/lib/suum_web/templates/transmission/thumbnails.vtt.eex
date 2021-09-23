@@ -1,6 +1,0 @@
-WEBVTT
-
-<%= for thumbnail <- @thumbnails do %>
-<%= thumbnail.from %> --> <%= thumbnail.to %>
-<%= thumbnail.url %>
-<% end %>

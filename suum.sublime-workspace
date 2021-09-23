@@ -1,0 +1,1868 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"to",
+				"toString"
+			],
+			[
+				"useA",
+				"useAsyncRetryMock"
+			],
+			[
+				"mockReturn",
+				"mockReturnValue"
+			],
+			[
+				"canA",
+				"canAutoPlayVideo"
+			],
+			[
+				"mockIm",
+				"mockImplementationOnce"
+			],
+			[
+				"toHaveBeen",
+				"toHaveBeenCalledTimes"
+			],
+			[
+				"setPlay",
+				"setHasPlaybackFailed"
+			],
+			[
+				"has",
+				"hasPlaybackFailed"
+			],
+			[
+				"testing-lib",
+				"@testing-library/react"
+			],
+			[
+				"fallba",
+				"FALLBACK_ELEMENT"
+			],
+			[
+				"retry",
+				"retryFailure"
+			],
+			[
+				"captu",
+				"captureException"
+			],
+			[
+				"mockretu",
+				"mockReturnValue"
+			],
+			[
+				"defi",
+				"defineProperty"
+			],
+			[
+				"getB",
+				"getByTestId"
+			],
+			[
+				"savi",
+				"@savi/types"
+			],
+			[
+				"toMac",
+				"toMatchSnapshot"
+			],
+			[
+				"thu",
+				"thumbnailUrl"
+			],
+			[
+				"GR",
+				"GRAPHQL_URI"
+			],
+			[
+				"mocK",
+				"mockResponse"
+			],
+			[
+				"mockR",
+				"mockResolvedValue"
+			],
+			[
+				"defau",
+				"defaultProps"
+			],
+			[
+				"thum",
+				"thumbnailUrl"
+			],
+			[
+				"cap",
+				"captureException"
+			],
+			[
+				"mock",
+				"mockClear"
+			],
+			[
+				"user-",
+				"@testing-library/user-event"
+			],
+			[
+				"toBeD",
+				"toBeDisabled"
+			],
+			[
+				"MediaElement",
+				"HTMLMediaElement"
+			],
+			[
+				"mockRetu",
+				"mockReturnValue"
+			],
+			[
+				"videojs",
+				"VideoJsPlayerOptions"
+			],
+			[
+				"pl",
+				"Player"
+			],
+			[
+				"reset",
+				"resetAllMocks"
+			],
+			[
+				"wat",
+				"watchToken"
+			],
+			[
+				"Array",
+				"ArrayBuffer"
+			],
+			[
+				"utf",
+				"utf8"
+			],
+			[
+				"b",
+				"base64url"
+			],
+			[
+				"ty",
+				"\"types\""
+			],
+			[
+				"__D",
+				"__dirname"
+			],
+			[
+				"mockRe",
+				"mockReturnValue"
+			],
+			[
+				"mockRes",
+				"mockResolvedValue"
+			],
+			[
+				"ffmpeg-",
+				"ffmpeg-worker-mp4"
+			],
+			[
+				"FF",
+				"FFMPEG_DIR"
+			],
+			[
+				"Date",
+				"DateTime"
+			],
+			[
+				"Videoj",
+				"VideoJsPlayerOptions"
+			],
+			[
+				"VideojS",
+				"VideoJsPlayerOptions"
+			],
+			[
+				"stringify",
+				"stringifyUrl"
+			],
+			[
+				"string",
+				"stringifyUrl"
+			],
+			[
+				"ffm",
+				"ffmpeg-worker-mp4"
+			],
+			[
+				"mockReso",
+				"mockResolvedValue"
+			],
+			[
+				"readF",
+				"readFileSync"
+			],
+			[
+				"findALlBy",
+				"findAllByTestId"
+			],
+			[
+				"getElement",
+				"getElementsByClassName"
+			],
+			[
+				"getElementBy",
+				"getElementsByClassName"
+			],
+			[
+				"findAllByT",
+				"findAllByTestId"
+			],
+			[
+				"capture",
+				"captureMessage"
+			],
+			[
+				"R",
+				"ReactZoomPanPinchProps"
+			],
+			[
+				"s",
+				"onZoomStart"
+			],
+			[
+				"zo",
+				"zoomAnimation"
+			],
+			[
+				"zoom",
+				"onZoom"
+			],
+			[
+				"wrapp",
+				"wrapperStyle"
+			],
+			[
+				"Trasn",
+				"TransformComponent"
+			],
+			[
+				"Transfor",
+				"TransformComponent"
+			],
+			[
+				"Transform",
+				"TransformWrapper"
+			],
+			[
+				"Transof",
+				"TransformComponent"
+			],
+			[
+				"try",
+				"tryAutoplay"
+			],
+			[
+				"fallbacK",
+				"fallbackRender"
+			],
+			[
+				"toStr",
+				"toLocaleString"
+			],
+			[
+				"setR",
+				"setRequestHandler"
+			],
+			[
+				"use",
+				"useRealTimers"
+			],
+			[
+				"a",
+				"wrapper"
+			],
+			[
+				"testing",
+				"@testing-library/react"
+			],
+			[
+				"playerS",
+				"playerSyncPosition"
+			],
+			[
+				"scale",
+				"startScale"
+			],
+			[
+				"getBYT",
+				"getByTestId"
+			],
+			[
+				"vm",
+				"VMS_URL"
+			],
+			[
+				"pla",
+				"Player"
+			],
+			[
+				"CA",
+				"CACHE_FIRST"
+			],
+			[
+				"set",
+				"setRequestHandler"
+			],
+			[
+				"test",
+				"@testing-library/react"
+			],
+			[
+				"setRe",
+				"setRequestHandler"
+			],
+			[
+				"u",
+				"useRealTimers"
+			],
+			[
+				"date",
+				"DateTime"
+			],
+			[
+				"align-",
+				"align-items"
+			],
+			[
+				"component",
+				"componentWillUpdate"
+			],
+			[
+				"Got",
+				"GotSignUpMsg"
+			],
+			[
+				"Mess",
+				"MessageReaction"
+			],
+			[
+				"None",
+				"none"
+			],
+			[
+				"uui",
+				"uuid4/0"
+			],
+			[
+				"c",
+				"calculate_price/1\t  (function) LiveViewStudio.SandboxCalculator.calculate_price(weight)"
+			],
+			[
+				"Live",
+				"LiveViewStudioWeb\t  module"
+			],
+			[
+				"setP",
+				"setPlayingVideo"
+			],
+			[
+				"isPl",
+				"isPlayingVideo"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Elixir/Elixir - elixir $file.sublime-build",
+					""
+				],
+				[
+					"Packages/Elixir/Elixir - mix test $file.sublime-build",
+					""
+				],
+				[
+					"Packages/Elixir/Elixir - mix test.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Elixir/Elixir - mix test $file.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Elixir/Elixir - elixir $file.sublime-build",
+					""
+				],
+				[
+					"Packages/Elixir/Elixir - mix test $file.sublime-build",
+					""
+				],
+				[
+					"Packages/Elixir/Elixir - mix test.sublime-build",
+					""
+				],
+				[
+					"Packages/Elixir/Elixir.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Elixir/Elixir.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Elixir/Elixir - elixir $file.sublime-build",
+					""
+				],
+				[
+					"Packages/Elixir/Elixir - mix test $file.sublime-build",
+					""
+				],
+				[
+					"Packages/Elixir/Elixir - mix test.sublime-build",
+					""
+				],
+				[
+					"Packages/User/Phoenix.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Elixir/Elixir - elixir $file.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Elixir/Elixir - elixir $file.sublime-build",
+					""
+				],
+				[
+					"Packages/Elixir/Elixir - mix test $file.sublime-build",
+					""
+				],
+				[
+					"Packages/Elixir/Elixir - mix test.sublime-build",
+					""
+				],
+				[
+					"Packages/User/elixir.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/User/elixir.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"restart",
+				"LSP: Restart Server"
+			],
+			[
+				"rest",
+				"LSP: Restart Server"
+			],
+			[
+				"res",
+				"LSP: Restart Server"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"restar",
+				"LSP: Restart Server"
+			],
+			[
+				"resta",
+				"LSP: Restart Server"
+			],
+			[
+				"format",
+				"JsPrettier: Format Code"
+			],
+			[
+				"lsp",
+				"LSP: Troubleshoot Server"
+			],
+			[
+				"set syntax make",
+				"Set Syntax: Makefile Plus"
+			],
+			[
+				"save",
+				"Debugger: Force Save"
+			],
+			[
+				"disable",
+				"LSP: Disable Language Server in Project"
+			],
+			[
+				"tabs",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"save fil",
+				"File: Save All"
+			],
+			[
+				"convert tab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"conv",
+				"Convert Case: Lower Case"
+			],
+			[
+				"tab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"re",
+				"LSP: Restart Server"
+			],
+			[
+				"merge",
+				"Sublime Merge: Open Repository"
+			],
+			[
+				"package remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"terminal",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"package ins",
+				"Package Control: Install Package"
+			],
+			[
+				"eslint",
+				"Preferences: LSP-eslint Settings"
+			],
+			[
+				"terminus",
+				"Preferences: Terminus Settings"
+			],
+			[
+				"types",
+				"Preferences: LSP-typescript Settings"
+			],
+			[
+				"package remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"package inst",
+				"Package Control: Install Package"
+			],
+			[
+				"package in",
+				"Package Control: Install Package"
+			],
+			[
+				"icons",
+				"A File Icon: Revert to a Freshly Installed State"
+			],
+			[
+				"mono",
+				"Monokai Pro: select theme"
+			],
+			[
+				"packa",
+				"Preferences: Browse Packages"
+			],
+			[
+				"theme",
+				"Terminus Utilities: Select Theme"
+			],
+			[
+				"enabl",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"ui sele",
+				"UI: Select Color Scheme"
+			],
+			[
+				"ayu",
+				"ayu: Activate theme"
+			],
+			[
+				"brows",
+				"Preferences: Browse Packages"
+			],
+			[
+				"colorsch",
+				"UI: Select Color Scheme"
+			],
+			[
+				"act",
+				"ayu: Activate theme"
+			],
+			[
+				"ui",
+				"UI: Select Color Scheme"
+			],
+			[
+				"color sc",
+				"UI: Select Color Scheme"
+			],
+			[
+				"color sch",
+				"UI: Select Color Scheme"
+			],
+			[
+				"remove p",
+				"Package Control: Remove Package"
+			],
+			[
+				"refresh",
+				"Project: Refresh Folders"
+			],
+			[
+				"update",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"package re",
+				"Package Control: Remove Package"
+			],
+			[
+				"prettier",
+				"JsPrettier: Format Code"
+			],
+			[
+				"term",
+				"Terminal: Open in project folder"
+			],
+			[
+				"open termin",
+				"Terminal: Open in project folder"
+			],
+			[
+				"sk",
+				"Snippet: ELM - Skeleton simple"
+			],
+			[
+				"elm",
+				"Snippet: ELM - Skeleton simple"
+			],
+			[
+				"tern",
+				"Terminal: Open"
+			],
+			[
+				"open repos",
+				"Sublime Merge: Open Repository"
+			],
+			[
+				"reposit",
+				"Package Control: Add Repository"
+			],
+			[
+				"repository",
+				"Package Control: Add Repository"
+			],
+			[
+				"lsp enable",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"enable lsp",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"subilmme merge",
+				"Sublime Merge: Open Repository"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"lsp disable",
+				"LSP: Disable Language Server in Project"
+			],
+			[
+				"open terminal",
+				"Terminal: Open in project folder"
+			],
+			[
+				"ui sel",
+				"UI: Select Theme"
+			],
+			[
+				"colorscheme",
+				"UI: Select Color Scheme"
+			],
+			[
+				"build",
+				"Build With: Elixir - mix test $file"
+			],
+			[
+				"settings",
+				"Preferences: LSP-elixir Settings"
+			],
+			[
+				"enable",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"packages",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"reinstall",
+				"Package Control: Advanced Install Package"
+			],
+			[
+				"elixir",
+				"Preferences: LSP-elixir Settings"
+			],
+			[
+				"lsp en",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"preferences",
+				"Preferences: Settings"
+			],
+			[
+				"prefe",
+				"Preferences: LSP-elixir Settings"
+			],
+			[
+				"react",
+				"ReactIDE: Switch between component and test"
+			],
+			[
+				"browse",
+				"Preferences: Browse Packages"
+			],
+			[
+				"termin",
+				"Terminal: Open in project folder"
+			],
+			[
+				"view",
+				"View Package File"
+			],
+			[
+				"cancel",
+				"Build: Cancel"
+			],
+			[
+				"View P",
+				"View Package File"
+			],
+			[
+				"pack",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 244.0,
+		"history":
+		[
+			"settings",
+			"sublime.packages_path()",
+			"sublime.packages_path",
+			"dir(sublime)",
+			"sublime.settings",
+			"sublime",
+			"settings"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/sicksid/savi/mono/.github/workflows/ci_web.yml",
+		"/Users/sicksid/savi/mono/services/apps/hardware/lib/hardware/user_clips/user_clips.ex",
+		"/Users/sicksid/savi/mono/services/apps/backbone/lib/query.ex",
+		"/Users/sicksid/savi/mono/services/apps/hardware/test/user_clips/user_clips_test.exs",
+		"/Users/sicksid/savi/mono/services/apps/api/lib/api_web/schema/queries/replays.ex",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Form/Form.Clip/Form.Clip.tsx",
+		"/Users/sicksid/savi/mono/services/apps/hardware/lib/hardware/factory.ex",
+		"/Users/sicksid/savi/mono/web/.secrets",
+		"/Users/sicksid/savi/mono/web/.env",
+		"/Users/sicksid/savi/mono/web/README.md",
+		"/Users/sicksid/savi/mono/web/package.json",
+		"/Users/sicksid/savi/mono/web/modules/sdk/package.json",
+		"/Users/sicksid/savi/mono/web/yarn.lock",
+		"/Users/sicksid/savi/mono/web/modules/sdk/tests/thumbnail.test.ts",
+		"/Users/sicksid/savi/mono/.github/workflows/ci_licensed.yml",
+		"/Users/sicksid/savi/mono/.github/workflows/ci_services.yml",
+		"/Users/sicksid/savi/mono/.licensed.yml",
+		"/Users/sicksid/savi/mono/web/.yarnrc",
+		"/Users/sicksid/savi/mono/web/modules/sdk/tests/__mocks__/@savi/test/thumb.jpeg",
+		"/Users/sicksid/savi/mono/web/.npmrc",
+		"/Users/sicksid/savi/mono/.gitignore",
+		"/Users/sicksid/savi/mono/web/savi-app/.env.dev.sh",
+		"/Users/sicksid/savi/mono/services/apps/api/lib/api_web/schema/event.ex",
+		"/Users/sicksid/savi/mono/services/apps/api/lib/api_web/schema/queries/events.ex",
+		"/Users/sicksid/savi/mono/services/apps/events/lib/factory.ex",
+		"/Users/sicksid/savi/mono/services/apps/backbone/lib/pagination.ex",
+		"/Users/sicksid/savi/mono/services/apps/events/lib/events/events.ex",
+		"/Users/sicksid/savi/mono/services/apps/events/lib/events/events_summary.ex",
+		"/Users/sicksid/savi/mono/services/apps/api/lib/api_web/schema/event_list.ex",
+		"/Users/sicksid/savi/mono/services/apps/events/priv/repo/seeds.exs",
+		"/Users/sicksid/savi/mono/services/apps/hardware/priv/repo/seeds.exs",
+		"/Users/sicksid/savi/mono/services/apps/id/lib/id/users/users.ex",
+		"/Users/sicksid/savi/mono/services/Makefile",
+		"/Users/sicksid/savi/mono/services/config/dev.exs",
+		"/Users/sicksid/savi/mono/services/.env.dev",
+		"/Users/sicksid/savi/mono/services/apps/transactions/priv/repo/seeds.exs",
+		"/Users/sicksid/savi/mono/services/apps/events/lib/application.ex",
+		"/Users/sicksid/savi/mono/services/apps/events/lib/events/materialized_views/jobs/event_summary_refresher.ex",
+		"/Users/sicksid/savi/mono/services/apps/events/priv/repo/migrations/20200624155527_create_events_summary.exs",
+		"/Users/sicksid/savi/mono/web/modules/sdk/src/thumbnail.ts",
+		"/Users/sicksid/savi/mono/web/modules/ui/test/setup.jest.ts",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Header/UserDropdown/mutation.Logout.graphql",
+		"/Users/sicksid/.npmrc",
+		"/Users/sicksid/savi/mono/web/node_modules/@savisolutions/ffmpeg/types.d.ts",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Event/Event.Expanded.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Transaction/Transaction.Summary.tsx",
+		"/Users/sicksid/savi/mono/services/apps/api/lib/api_web/schema/feed.ex",
+		"/Users/sicksid/savi/mono/services/apps/api/lib/api_web/schema/queries/feeds.ex",
+		"/Users/sicksid/savi/mono/web/savi-app/tsconfig.json",
+		"/Users/sicksid/savi/mono/services/apps/hardware/lib/hardware/streams/stream.ex",
+		"/Users/sicksid/savi/mono/web/savi-app/src/ApolloClient.ts",
+		"/Users/sicksid/savi/mono/web/modules/player/__mocks__/can-autoplay.js",
+		"/Users/sicksid/savi/mono/web/modules/player/tests/setup.jest.ts",
+		"/Users/sicksid/savi/mono/web/modules/player/jest.config.js",
+		"/Users/sicksid/savi/mono/web/modules/player/src/Player/Player.tsx",
+		"/Users/sicksid/savi/mono/web/modules/player/tests/Player/Player.test.tsx",
+		"/Users/sicksid/savi/mono/web/modules/player/package.json",
+		"/Users/sicksid/savi/mono/web/modules/player/src/Player/Stream.tsx",
+		"/Users/sicksid/savi/mono/web/modules/player/tests/Player/Stream.test.tsx",
+		"/Users/sicksid/savi/mono/README.md",
+		"/Users/sicksid/savi/mono/web/modules/player/__mocks__/react-use.js",
+		"/Users/sicksid/savi/mono/web/modules/player/tests/__mocks__/@savi/ffmpeg.js",
+		"/Users/sicksid/savi/mono/web/node_modules/video.js/dist/video.cjs.js",
+		"/Users/sicksid/savi/mono/web/modules/player/__mocks__/@savi/ffmpeg.js",
+		"/Users/sicksid/savi/mono/web/savi-app/src/pages/Events/Events.tsx",
+		"/Users/sicksid/savi/mono/web/modules/player/tests/Player/__snapshots__/Player.test.tsx.snap",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/List/List.VideoClips.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/pages/Video/query.VideoSources.graphql",
+		"/Users/sicksid/savi/mono/web/savi-app/src/pages/Audits/Audits.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/pages/Video/Video.SavedClips/Video.SavedClips.List/query.SavedClips.graphql",
+		"/Users/sicksid/savi/mono/services/config/prod.exs",
+		"/Users/sicksid/savi/mono/web/modules/sdk/src/segment.ts",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/List/List.Locations.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/pages/Video/Video.tsx",
+		"/Users/sicksid/savi/mono/services/apps/api/test/savi_api_web/schemas/queries/feeds_test.exs",
+		"/Users/sicksid/savi/mono/web/modules/ui/src/Mobile/Mobile.Timeline/__tests__/utils.cycle-determinization.test.ts",
+		"/Users/sicksid/savi/mono/web/modules/ui/src/Mobile/Mobile.Timeline/__tests__/utils.Vectors.test.ts",
+		"/Users/sicksid/savi/mono/web/modules/ui/src/__mocks__/map-cache-ttl.js",
+		"/Users/sicksid/savi/mono/web/modules/sdk/tests/__mocks__/map-cache-ttl.js",
+		"/Users/sicksid/savi/mono/web/savi-app/src/containers/Player/Player.Composer.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/containers/Player/__tests__/Player.Composer.test.tsx",
+		"/Users/sicksid/savi/mono/web/modules/service-worker/package.json",
+		"/Users/sicksid/savi/mono/web/modules/types/package.json",
+		"/Users/sicksid/savi/mono/web/modules/ui/package.json",
+		"/Users/sicksid/savi/mono/web/modules/ui/src/Select/__tests__/Select.test.tsx",
+		"/Users/sicksid/savi/mono/web/modules/ui/src/Select/Select.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/test/setup.jest.ts",
+		"/Users/sicksid/savi/mono/web/modules/ui/src/Thumbnail/Thumbnail.test.tsx",
+		"/Users/sicksid/savi/mono/web/modules/ui/src/Thumbnail/Thumbnail.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/pages/Video/Video.SavedClips/Video.SavedClips.Detail/Video.SavedClips.Detail.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/AuditCase/AuditCase.Expanded/AuditCase.Expanded.VideoPlayer.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/AuditCase/AuditCase.Expanded/__tests__/AuditCase.Expanded.VideoPlayer.test.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/pages/Video/Video.SavedClips/Video.SavedClips.Detail/__tests__/Video.SavedClips.Detail.test.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/containers/Player/Player.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/containers/Player/__tests__/Player.test.tsx",
+		"/Users/sicksid/savi/mono/web/modules/ffmpeg/package.json",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Filters/Filter.DateRange.test.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Filters/__snapshots__/Filter.DateRange.test.tsx.snap",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Video/Video.Controls/Video.Controls.SaveClip.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/containers/Player/Player.Toolbar.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Video/Video.Controls/Video.Controls.Pagination.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Form/Form.Clip/Form.Clip.Cameras/Form.Clip.Cameras.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Form/Form.Clip/Form.Clip.Cameras/Form.Clip.Camera.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Form/Form.Clip/__tests__/Form.Clip.test.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Form/Form.Clip/Form.Clip.DateTimePicker.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Filters/Filter.DateRange.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Event/Event.Condensed.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Authentication/Authentication.SetPassword.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Authentication/Authentication.Login.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Authentication/Authentication.ForgotPassword.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/AuditCase/AuditCase.Expanded/__tests__/__snapshots__/AuditCase.Expanded.test.tsx.snap",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/AuditCase/AuditCase.Expanded/AuditCase.Expanded.Comments.tsx",
+		"/Users/sicksid/savi/mono/web/modules/ui/src/Timeline/Timeline.Track/Timeline.Track.Playhead.tsx",
+		"/Users/sicksid/savi/mono/web/modules/player/src/Player/Clip.tsx",
+		"/Users/sicksid/savi/mono/web/modules/ui/jest.config.js",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Form/Form.Clip/Form.Clip.Cameras/__tests__/Form.Clip.Cameras.test.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Form/Form.Clip/Form.Clip.Cameras/__tests__/Form.Clip.Camera.test.tsx",
+		"/Users/sicksid/savi/mono/proxy_http_sibling/lib/proxy_http_sibling.ex",
+		"/Users/sicksid/savi/mono/web/savi-app/src/containers/Player/Player.VXG/Player.VXG.test.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/AuditCase/AuditCase.Expanded/__tests__/AuditCase.Expanded.test.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/AuditCase/AuditCase.Expanded/AuditCase.Expanded.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/test/setupPlayer.ts",
+		"/Users/sicksid/savi/mono/web/savi-app/src/pages/Video/__tests__/Video.state.test.ts",
+		"/Users/sicksid/savi/mono/web/savi-app/src/containers/Player/Player.VXG/Player.VXG.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/__mocks__/@savi/ffmpeg.js",
+		"/Users/sicksid/savi/mono/web/savi-app/src/__mocks__/@savi/sdk.js",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Video/Video.Controls/__tests__/Video.Controls.SaveClip.test.tsx",
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Video/Video.Controls/__tests__/Video.Controls.Pagination.test.tsx"
+	],
+	"find":
+	{
+		"height": 52.0
+	},
+	"find_in_files":
+	{
+		"height": 187.0,
+		"where_history":
+		[
+			"",
+			"**/seeds.exs",
+			"**/seed.exs",
+			"",
+			"*.tsx",
+			"",
+			"*",
+			"",
+			"*.ts",
+			"*.tsx",
+			"",
+			"*.gql",
+			"*.tsx",
+			"*.ts",
+			"",
+			"*.tsx",
+			"*.ts",
+			"",
+			"**/migrations/*",
+			"**/migrations",
+			"*/migrations",
+			"",
+			"*.ex",
+			"*.ts",
+			"*.tsx",
+			"",
+			"*.tsx",
+			"*.ts",
+			"",
+			"*.ts",
+			"*.tsx",
+			"",
+			"/Users/sicksid/savi/mono/web/modules/sdk/src/ffmpeg.js,<project filters>",
+			"*.ts",
+			"",
+			"*.tsx",
+			"*.ts",
+			"*.tsx",
+			"",
+			"*.tsx",
+			"",
+			"*.graphql",
+			"",
+			"*.tsx",
+			"",
+			"\"moment-timezone\": \"^0.5.33\"",
+			"",
+			"**/modules",
+			"**/modules/sdk",
+			"",
+			"*.tsx",
+			"*.graphql",
+			"*.ts",
+			"",
+			"*.tsx",
+			"*.ts",
+			"*.tsx",
+			"",
+			"/Users/sicksid/savi/mono/.licenses,<project filters>",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"deleted_at",
+			"list_db_user_clips",
+			"setCameras",
+			"cameras",
+			"new Array(4 - cameras.length - 1)",
+			"device.name",
+			"list_user_clips_by_location",
+			"getMimeType",
+			"resolve(__dirname,",
+			"buffer",
+			"ffmpeg",
+			"husky",
+			"|> IO.inspect(label: \"results\")",
+			"Paginate",
+			"summaries",
+			"\n  use Paginate",
+			"\n  use Backbone.Paginate",
+			"Pagination",
+			"events_summary",
+			":line_item",
+			"Factory",
+			":transactions",
+			":transaction",
+			"Factory",
+			"Transaction.Factory",
+			"trans",
+			".mocks",
+			"test",
+			"events.load_test",
+			"refresh_events_join_view",
+			"REFRESH_MATERIALIZED_VIEWS",
+			"refresh_materialized_views?",
+			"EventSummaryRefresher",
+			"events_summary",
+			"location_guids",
+			":event",
+			"list_events_summaries_query",
+			"def list_events_summaries",
+			"list_locations_by_access",
+			"ffmpeg",
+			"@savi/ffmpeg",
+			"1",
+			"@savi/ffmpeg",
+			"expanded-main",
+			"transaction-summary-table",
+			"console.log",
+			"canAutoPlayVideo",
+			"catch",
+			"attempt autoplay",
+			"catch",
+			"attemptPlay",
+			"isReady",
+			"isReadt",
+			"console.log",
+			"play",
+			"isReady",
+			"load",
+			"play = ",
+			"play()",
+			"play",
+			"Sentry.",
+			"play",
+			"attemptPlay",
+			"src",
+			"attemptPlay",
+			"src",
+			"play",
+			"attemptPlay",
+			"attemptAutoplay",
+			"CanAutoPlay",
+			"attemptAutoplay",
+			"console.log",
+			"retrying",
+			"!isPlaying",
+			");\n",
+			"setRetryCount",
+			"retryTimeout",
+			"retryCount",
+			"shouldPlay",
+			"play()",
+			"retrying",
+			"play(",
+			"play",
+			"playerDimensionsStyles",
+			"retry",
+			"play",
+			"retrying",
+			"play",
+			"uuid",
+			"test",
+			"vmsStreamGuid",
+			"rerender",
+			"refreshSessionGuid",
+			"generateMocks(sourceGuid, [])",
+			"FALLBACK_ELEMENT",
+			"// 68-80,125,127,138-139,145-148,166",
+			"zoomIn",
+			"isMigrated",
+			"console",
+			"describe.each",
+			"isMigrated",
+			"isMigrated.mockReturnValue(true)",
+			"isMigrated.mockReturnValue(true);",
+			"\n  isMigrated.mockReturnValue(true);",
+			"switches to fallback when stream insertedAt has not been migrated at sync position",
+			"VMS_URL",
+			"watchToken",
+			"src",
+			"retry",
+			"src",
+			"reset",
+			"cancel",
+			"reset",
+			"useTimeoutFn",
+			"reset",
+			"retry",
+			"attemptAutoplay",
+			"try",
+			"<=",
+			"console.log",
+			"retryCount",
+			"play",
+			"shouldPlay",
+			"play",
+			"retry",
+			"retryCount ** retry",
+			"play",
+			"setTimeout"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"attemptPlay",
+			"timeout",
+			"count",
+			"/savi-player/i",
+			"",
+			"import centered from '@storybook/addon-centered/react'",
+			"['/mp4.js$/']",
+			"**/mp4.js",
+			"",
+			" ",
+			"",
+			"--changedSince",
+			"time_start",
+			"HLS_PLACEHOLDER",
+			"playerState",
+			",\n",
+			"location",
+			"",
+			"web/node_modules/@savi",
+			"      - name: Download Artifacts\n        uses: actions/download-artifact@v2\n        with:\n          path: node_modules/@savi",
+			"      # - name: Setup Savi Private Repo Access\n        # run: git config --global url.\"https://${{ secrets.SAVI_MU_TOKEN }}:@github.com/\".insteadOf \"https://github.com/\"\n",
+			"      # - name: Cancel Previous Runs\n      #   uses: styfle/cancel-workflow-action@0.9.0\n      #   with:\n      #     access_token: ${{ github.token }}",
+			"../web/",
+			"web/node_modules/@savi",
+			"      - name: Download Artifacts\n        uses: actions/download-artifact@v2\n        with:\n             path: web/node_modules/@savi",
+			"Pick<Schema.Feed, 'guid' | 'vmsStreamGuid' | 'watchToken'>;",
+			""
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 66.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.Debugger":
+	{
+		"height": 136.0
+	},
+	"output.Debugger: Console":
+	{
+		"height": 0.0
+	},
+	"output.Debugger: Protocol":
+	{
+		"height": 0.0
+	},
+	"output.Terminus":
+	{
+		"height": 138.0
+	},
+	"output.YAMLMacros":
+	{
+		"height": 109.0
+	},
+	"output.diagnostics":
+	{
+		"height": 316.0
+	},
+	"output.doc":
+	{
+		"height": 0.0
+	},
+	"output.elm_format":
+	{
+		"height": 267.0
+	},
+	"output.exec":
+	{
+		"height": 308.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.language servers":
+	{
+		"height": 433.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups-dummy":
+	{
+		"height": 0.0
+	},
+	"output.mix_format":
+	{
+		"height": 338.0
+	},
+	"output.project_environment_log":
+	{
+		"height": 100.0
+	},
+	"output.references":
+	{
+		"height": 640.0
+	},
+	"pinned_build_system": "Packages/Elixir/Elixir - mix test $file.sublime-build",
+	"project": "suum.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"query",
+				"services/apps/backbone/lib/query.ex"
+			],
+			[
+				"user_clips_test",
+				"services/apps/hardware/test/user_clips/user_clips_test.exs"
+			],
+			[
+				"user_clip",
+				"services/apps/hardware/lib/hardware/user_clips/user_clips.ex"
+			],
+			[
+				"services/apps/hardware/lib/hardware/user_clips/user_clips.ex",
+				"services/apps/hardware/lib/hardware/user_clips/user_clips.ex"
+			],
+			[
+				"ci_web",
+				"mono/.github/workflows/ci_web.yml"
+			],
+			[
+				"user_clips",
+				"services/apps/hardware/lib/hardware/user_clips/user_clips.ex"
+			],
+			[
+				"factory",
+				"services/apps/hardware/lib/hardware/factory.ex"
+			],
+			[
+				"replays",
+				"services/apps/api/lib/api_web/schema/queries/replays.ex"
+			],
+			[
+				"ci_lic",
+				"mono/.github/workflows/ci_licensed.yml"
+			],
+			[
+				"licensed.",
+				"mono/.licensed.yml"
+			],
+			[
+				"tests/thumbnail.test.ts",
+				"web/modules/sdk/tests/thumbnail.test.ts"
+			],
+			[
+				"package.json",
+				"web/modules/sdk/package.json"
+			],
+			[
+				"package.son",
+				"web/package.json"
+			],
+			[
+				"events.ex",
+				"services/apps/api/lib/api_web/schema/queries/events.ex"
+			],
+			[
+				".env.dev.sh",
+				"web/savi-app/.env.dev.sh"
+			],
+			[
+				"event_summ",
+				"services/apps/events/lib/events/events_summary.ex"
+			],
+			[
+				"event.ex",
+				"services/apps/api/lib/api_web/schema/event.ex"
+			],
+			[
+				"seeds.exs",
+				"services/apps/hardware/priv/repo/seeds.exs"
+			],
+			[
+				"transactions/seed",
+				"services/apps/transactions/priv/repo/seeds.exs"
+			],
+			[
+				"make",
+				"services/Makefile"
+			],
+			[
+				"factory.ex",
+				"services/apps/hardware/lib/hardware/factory.ex"
+			],
+			[
+				"seeds.ex",
+				"services/apps/hardware/priv/repo/seeds.exs"
+			],
+			[
+				"events/seed",
+				"services/apps/events/priv/repo/seeds.exs"
+			],
+			[
+				"event_summary",
+				"services/apps/events/lib/events/events_summary.ex"
+			],
+			[
+				"factory.",
+				"services/apps/events/lib/factory.ex"
+			],
+			[
+				"queries/event",
+				"services/apps/api/lib/api_web/schema/queries/events.ex"
+			],
+			[
+				"mutation.logout",
+				"web/savi-app/src/components/Header/UserDropdown/mutation.Logout.graphql"
+			],
+			[
+				"readme.md",
+				"web/README.md"
+			],
+			[
+				"licensed",
+				"mono/.licensed.yml"
+			],
+			[
+				"thumbnail",
+				"web/modules/sdk/src/thumbnail.ts"
+			],
+			[
+				"feeds.ex",
+				"services/apps/api/lib/api_web/schema/queries/feeds.ex"
+			],
+			[
+				"feed.ex",
+				"services/apps/api/lib/api_web/schema/feed.ex"
+			],
+			[
+				"readme",
+				"web/README.md"
+			],
+			[
+				"readme.",
+				"mono/README.md"
+			],
+			[
+				"Apollo",
+				"web/savi-app/src/ApolloClient.ts"
+			],
+			[
+				"stream.ex",
+				"services/apps/hardware/lib/hardware/streams/stream.ex"
+			],
+			[
+				"config/prod.exs",
+				"services/config/prod.exs"
+			],
+			[
+				"SavedClips",
+				"web/savi-app/src/pages/Video/Video.SavedClips/Video.SavedClips.List/query.SavedClips.graphql"
+			],
+			[
+				"tests/Player/Player.test.tsx",
+				"web/modules/player/tests/Player/Player.test.tsx"
+			],
+			[
+				"videoSoources",
+				"web/savi-app/src/pages/Video/query.VideoSources.graphql"
+			],
+			[
+				"Events.tsx",
+				"web/savi-app/src/pages/Events/Events.tsx"
+			],
+			[
+				"Video.tsx",
+				"web/savi-app/src/pages/Video/Video.tsx"
+			],
+			[
+				"feeds",
+				"services/apps/api/lib/api_web/schema/queries/feeds.ex"
+			],
+			[
+				"Player.tsx",
+				"web/modules/player/src/Player/Player.tsx"
+			],
+			[
+				"Locations.tsx",
+				"web/savi-app/src/components/List/List.Locations.tsx"
+			],
+			[
+				"Video.",
+				"web/savi-app/src/pages/Video/Video.tsx"
+			],
+			[
+				"feeds_test",
+				"services/apps/api/test/savi_api_web/schemas/queries/feeds_test.exs"
+			],
+			[
+				"segment.",
+				"web/modules/sdk/src/segment.ts"
+			],
+			[
+				"map-cache",
+				"web/modules/sdk/tests/__mocks__/map-cache-ttl.js"
+			],
+			[
+				"src/Select/__tests__/Select.test.tsx",
+				"web/modules/ui/src/Select/__tests__/Select.test.tsx"
+			],
+			[
+				"src/containers/Player/__tests__/Player.test.tsx",
+				"web/savi-app/src/containers/Player/__tests__/Player.test.tsx"
+			],
+			[
+				"Expanded/__tests__/AuditCase.Expanded.VideoPlayer.test.tsx",
+				"web/savi-app/src/components/AuditCase/AuditCase.Expanded/__tests__/AuditCase.Expanded.VideoPlayer.test.tsx"
+			],
+			[
+				"ail/__tests__/Video.SavedClips.Detail.test.tsx",
+				"web/savi-app/src/pages/Video/Video.SavedClips/Video.SavedClips.Detail/__tests__/Video.SavedClips.Detail.test.tsx"
+			],
+			[
+				"src/containers/Player/__tests__/Player.Composer.test.tsx",
+				"web/savi-app/src/containers/Player/__tests__/Player.Composer.test.tsx"
+			],
+			[
+				"src/Thumbnail/Thumbnail.test.tsx",
+				"web/modules/ui/src/Thumbnail/Thumbnail.test.tsx"
+			],
+			[
+				"src/components/Form/Form.Clip/Form.Clip.Cameras/__tests__/Form.Clip.Camera.test.tsx",
+				"web/savi-app/src/components/Form/Form.Clip/Form.Clip.Cameras/__tests__/Form.Clip.Camera.test.tsx"
+			],
+			[
+				"src/components/Form/Form.Clip/Form.Clip.Cameras/__tests__/Form.Clip.Cameras.test.tsx",
+				"web/savi-app/src/components/Form/Form.Clip/Form.Clip.Cameras/__tests__/Form.Clip.Cameras.test.tsx"
+			],
+			[
+				"src/components/AuditCase/AuditCase.Expanded/__tests__/AuditCase.Expanded.VideoPlayer.test.tsx",
+				"web/savi-app/src/components/AuditCase/AuditCase.Expanded/__tests__/AuditCase.Expanded.VideoPlayer.test.tsx"
+			],
+			[
+				"src/pages/Video/Video.SavedClips/Video.SavedClips.Detail/__tests__/Video.SavedClips.Detail.test.tsx",
+				"web/savi-app/src/pages/Video/Video.SavedClips/Video.SavedClips.Detail/__tests__/Video.SavedClips.Detail.test.tsx"
+			],
+			[
+				"Player.Composer.test.tsx",
+				"web/savi-app/src/containers/Player/__tests__/Player.Composer.test.tsx"
+			],
+			[
+				"Form.Clip",
+				"web/savi-app/src/components/Form/Form.Clip/Form.Clip.tsx"
+			],
+			[
+				"sdk.js",
+				"web/savi-app/src/__mocks__/@savi/sdk.js"
+			],
+			[
+				"src/components/Form/Form.Clip/__tests__/Form.Clip.test.tsx",
+				"web/savi-app/src/components/Form/Form.Clip/__tests__/Form.Clip.test.tsx"
+			],
+			[
+				"setupPl",
+				"web/savi-app/test/setupPlayer.ts"
+			],
+			[
+				"src/containers/Player/Player.VXG/Player.VXG.test.tsx",
+				"web/savi-app/src/containers/Player/Player.VXG/Player.VXG.test.tsx"
+			],
+			[
+				"Form.Cli",
+				"web/savi-app/src/components/Form/Form.Clip/Form.Clip.tsx"
+			],
+			[
+				"Thumbnail.tsx",
+				"web/modules/ui/src/Thumbnail/Thumbnail.tsx"
+			],
+			[
+				" src/containers/Player/Player.VXG/Player.VXG.test.tsx",
+				"web/savi-app/src/containers/Player/Player.VXG/Player.VXG.test.tsx"
+			],
+			[
+				"Stream.tsx",
+				"web/modules/player/src/Player/Stream.tsx"
+			],
+			[
+				"webpack.config.dev",
+				"web/savi-app/webpack.config.dev.js"
+			],
+			[
+				"Controls.tsx",
+				"web/savi-app/src/components/Video/Video.Controls/Video.Controls.tsx"
+			],
+			[
+				"timeline",
+				"web/modules/types/src/Timeline.ts"
+			],
+			[
+				"src/components/AuditCase/AuditCase.Expanded/__tests__/AuditCase.Expanded.test.tsx",
+				"web/savi-app/src/components/AuditCase/AuditCase.Expanded/__tests__/AuditCase.Expanded.test.tsx"
+			],
+			[
+				"setup",
+				"web/savi-app/test/setupPlayer.ts"
+			],
+			[
+				"Player.composer",
+				"web/savi-app/src/containers/Player/__tests__/Player.Composer.test.tsx"
+			],
+			[
+				"Player.Comp",
+				"web/savi-app/src/containers/Player/Player.Composer.tsx"
+			],
+			[
+				"Player.ts",
+				"web/modules/player/src/Player/Player.tsx"
+			],
+			[
+				"src/containers/Player/Player.tsx",
+				"web/savi-app/src/containers/Player/Player.tsx"
+			],
+			[
+				"savi-app/src/pages/Video/Video.SavedClips/Video.SavedClips.Detail/Video.SavedClips.Detail.tsx",
+				"web/savi-app/src/pages/Video/Video.SavedClips/Video.SavedClips.Detail/Video.SavedClips.Detail.tsx"
+			],
+			[
+				"Expanded.Vi",
+				"web/savi-app/src/components/AuditCase/AuditCase.Expanded/AuditCase.Expanded.VideoPlayer.tsx"
+			],
+			[
+				"apps/api/test/savi_api_web/schemas/queries/feeds_test.exs",
+				"services/apps/api/test/savi_api_web/schemas/queries/feeds_test.exs"
+			],
+			[
+				"lib/hardware/streams/stream.ex",
+				"services/apps/hardware/lib/hardware/streams/stream.ex"
+			],
+			[
+				"seed.ex",
+				"services/apps/hardware/priv/repo/seeds.exs"
+			],
+			[
+				" src/containers/Player/Player.tsx",
+				"web/savi-app/src/containers/Player/Player.tsx"
+			],
+			[
+				"web/savi-app/package.json",
+				"web/savi-app/package.json"
+			],
+			[
+				"licensed.yml",
+				"mono/.licensed.yml"
+			],
+			[
+				"hardware.ex",
+				"services/apps/hardware/lib/hardware.ex"
+			],
+			[
+				"Detail.",
+				"web/savi-app/src/pages/Video/Video.SavedClips/Video.SavedClips.Detail/Video.SavedClips.Detail.tsx"
+			],
+			[
+				"ApolloClient",
+				"web/savi-app/src/ApolloClient.ts"
+			],
+			[
+				"src/components/AuditCase/AuditCase.Expanded/AuditCase.Expanded.VideoPlayer.tsx",
+				"web/savi-app/src/components/AuditCase/AuditCase.Expanded/AuditCase.Expanded.VideoPlayer.tsx"
+			],
+			[
+				"streams.",
+				"services/apps/hardware/lib/hardware/streams/streams.ex"
+			],
+			[
+				"Mak",
+				"services/Makefile"
+			],
+			[
+				"sources.ex",
+				"services/apps/hardware/lib/hardware/sources/sources.ex"
+			],
+			[
+				"Feeds.ex",
+				"services/apps/media_capture/lib/media_capture/feeds.ex"
+			],
+			[
+				"source.ex",
+				"services/apps/hardware/lib/hardware/sources/source.ex"
+			],
+			[
+				"streams.ex",
+				"services/apps/hardware/lib/hardware/streams/streams.ex"
+			],
+			[
+				"state/i",
+				"web/savi-app/src/pages/Video/state/index.ts"
+			],
+			[
+				"VideoSources",
+				"web/savi-app/src/pages/Video/query.VideoSources.graphql"
+			],
+			[
+				"SavedClip",
+				"web/savi-app/src/pages/Video/Video.SavedClips/Video.SavedClips.List/query.SavedClips.graphql"
+			],
+			[
+				"Schema.ts",
+				"web/modules/types/src/Schema.ts"
+			],
+			[
+				"Thumbnail.ts",
+				"web/modules/sdk/src/thumbnail.ts"
+			],
+			[
+				"THumbnail.te",
+				"web/modules/ui/src/Thumbnail/Thumbnail.test.tsx"
+			],
+			[
+				"FOrm.clip.camera",
+				"web/savi-app/src/components/Form/Form.Clip/Form.Clip.Cameras/Form.Clip.Camera.tsx"
+			],
+			[
+				"thumbnail.ts",
+				"web/modules/sdk/src/thumbnail.ts"
+			],
+			[
+				"Dashboard.tsx",
+				"web/savi-app/src/pages/Dashboard/Dashboard.tsx"
+			],
+			[
+				"start",
+				"web/savi-app/scripts/start.sh"
+			],
+			[
+				"Card.Video",
+				"web/savi-app/src/components/Card/Card.VideoClip.tsx"
+			],
+			[
+				"config.yml",
+				"mono/.circleci/config.yml"
+			],
+			[
+				"deploy",
+				"mono/scripts/deploy-combined.prod.sh"
+			],
+			[
+				"CLip.tsx",
+				"web/modules/player/src/Player/Clip.tsx"
+			],
+			[
+				"ci/confi",
+				"mono/.circleci/config.yml"
+			],
+			[
+				"AuditCase.Ex",
+				"web/savi-app/src/components/AuditCase/AuditCase.Expanded/AuditCase.Expanded.tsx"
+			],
+			[
+				"VideoPlayer",
+				"web/savi-app/src/components/AuditCase/AuditCase.Expanded/AuditCase.Expanded.VideoPlayer.tsx"
+			],
+			[
+				"Timeline.Track.Thumbnail.test.tsx",
+				"web/modules/ui/src/Timeline/Timeline.Track/__tests__/Timeline.Track.Thumbnail.test.tsx"
+			],
+			[
+				"Card.Vu",
+				"web/savi-app/src/components/Card/Card.QueuedVideoClip.tsx"
+			],
+			[
+				"Card",
+				"web/savi-app/src/components/Card/Card.VideoClip.tsx"
+			],
+			[
+				"AuditCase.Type.Transaction.Condensed.tsx",
+				"web/savi-app/src/components/AuditCase/AuditCase.Type.Transaction/AuditCase.Type.Transaction.Condensed.tsx"
+			],
+			[
+				"boots",
+				"web/savi-app/bootstrap.js"
+			],
+			[
+				"src/index.stories.ts",
+				"web/modules/ui/src/index.stories.ts"
+			],
+			[
+				"Condens",
+				"web/savi-app/src/components/Event/Event.Condensed.tsx"
+			],
+			[
+				"Card.Vi",
+				"web/savi-app/src/components/Card/Card.VideoClip.tsx"
+			],
+			[
+				"AuditCond",
+				"web/savi-app/src/components/AuditCase/AuditCase.Condensed/AuditCase.Condensed.tsx"
+			],
+			[
+				"event.co",
+				"web/savi-app/src/components/Event/Event.Condensed.tsx"
+			],
+			[
+				"FormClipCame",
+				"web/savi-app/src/components/Form/Form.Clip/Form.Clip.Cameras/Form.Clip.Camera.tsx"
+			],
+			[
+				"circleci",
+				"mono/.circleci/config.yml"
+			],
+			[
+				"src/Timeline/Timeline.test.tsx",
+				"web/modules/ui/src/Timeline/Timeline.test.tsx"
+			],
+			[
+				"src/react-router.ts",
+				"web/modules/types/src/react-router.ts"
+			],
+			[
+				"src/Player.ts",
+				"web/modules/types/src/Player.ts"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/savi/vms_mono/vms_mono.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 253.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 520.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 321.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

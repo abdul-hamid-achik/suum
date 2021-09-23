@@ -53,51 +53,44 @@ defmodule Suum.Hls.Jobs.CreateSprite do
       |> Enum.map(&get_file_path(&1, base_path))
       |> Enum.join(" ")
 
-    args = [
-      "-geometry",
-      "100x",
-      listed_thumbnails
-    ]
+    command = ~w(mogrify -geometry 100x #{listed_thumbnails})
 
     Logger.info("resizing - #{listed_thumbnails}")
-    result = Porcelain.exec("mogrify", args)
-    Logger.info("resizing done - #{inspect(result, pretty: true)}")
+    {:ok, _pid, _} = :exec.run(command, [:debug])
     thumbnails
   end
 
   defp analyze(thumbnails, base_path) do
-    thumbnails
-    |> Enum.map(fn thumbnail ->
+    Enum.map(thumbnails, fn thumbnail ->
       file = get_file_path(thumbnail, base_path)
 
-      args = [
-        "-format",
-        "\"%g - %f\"",
-        file
-      ]
+      command = ~w(identify -format "%g - %f" #{file})
 
       Logger.info("analyzing - #{inspect(thumbnail, pretty: true)}")
-      result = Porcelain.exec("identify", args)
-      Logger.info("analyzing done - #{inspect(result, pretty: true)}")
-      Hls.Thumbnail.set_analyzis(thumbnail, result.out)
+      {:ok, [out]} = :exec.run(command, [:stdout])
+      {:ok, thumbnail} = Hls.Thumbnail.set_analyzis(thumbnail, out)
+      thumbnail
     end)
   end
 
   defp montage(base_path, sprite) do
-    args = [
-      "#{base_path}/*.jpeg",
-      "-tile",
-      "2x2",
-      "-geometry",
-      "100x55+0+0",
-      sprite
-    ]
+    command = ~w(
+      montage
+      #{base_path}/*.jpeg
+      -tile
+      2x2
+      -geometry
+      100x55+0+0
+      #{sprite}
+    )
 
-    Porcelain.exec("montage", args)
+    {:ok, [out]} = :exec.run(command, [:stdout])
+    out
   end
 
   defp compress(sprite) do
-    Porcelain.exec("optipng", [sprite])
+    {:ok, [out]} = :exec.run("optipng #{sprite}", [:stdout])
+    out
   end
 
   defp download(thumbnail, tmp_dir) do

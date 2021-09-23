@@ -7,15 +7,15 @@ defmodule SuumWeb.TransmitChannel do
     {:ok,
      assign(socket,
        transmission_uuid: transmission_uuid,
-       porcelain_process: spawn_ffmpeg(transmission_uuid)
+       pid: spawn_ffmpeg(transmission_uuid)
      )}
   end
 
   @impl true
-  def terminate(reason, %{assigns: %{porcelain_process: porcelain_process}} = _socket)
-      when not is_nil(porcelain_process) do
+  def terminate(reason, %{assigns: %{pid: pid}} = _socket)
+      when not is_nil(pid) do
     Logger.error("Exited #{inspect(reason)}")
-    :exec.kill(porcelain_process, 0)
+    :exec.kill(pid, 0)
   end
 
   def terminate(reason, _) do
@@ -27,19 +27,19 @@ defmodule SuumWeb.TransmitChannel do
   def handle_in(
         "segment",
         %{"data" => "data:video/x-matroska;codecs=avc1,opus;base64," <> data},
-        %{assigns: %{porcelain_process: porcelain_process}} = socket
+        %{assigns: %{pid: pid}} = socket
       )
-      when not is_nil(porcelain_process) and not is_nil(data) do
-    :ok = :exec.send(porcelain_process, Base.decode64!(data))
+      when not is_nil(pid) and not is_nil(data) do
+    :ok = :exec.send(pid, Base.decode64!(data))
     {:noreply, socket}
   end
 
   def handle_in(
         "segment",
         %{"data" => "data:video/webm;codecs=vp8;base64," <> data},
-        %{assigns: %{porcelain_process: porcelain_process}} = socket
+        %{assigns: %{pid: pid}} = socket
       ) do
-    :ok = :exec.send(porcelain_process, Base.decode64!(data))
+    :ok = :exec.send(pid, Base.decode64!(data))
     {:noreply, socket}
   end
 
@@ -57,8 +57,8 @@ defmodule SuumWeb.TransmitChannel do
       /usr/local/bin/ffmpeg
       -i pipe:0
       -hide_banner
-      -loglevel fatal
       -stats
+      -loglevel fatal
       -fflags nobuffer
       -rtsp_transport tcp
       -preset ultrafast
@@ -68,19 +68,20 @@ defmodule SuumWeb.TransmitChannel do
       #{rtmp_host()}/live/#{transmission_uuid}
     )
 
-    {:ok, pid, _os_pid} = :exec.run_link(command, [:stdin, {:stderr, self()}, :monitor])
+    Logger.info(command |> Enum.join(" "))
+    {:ok, pid, _os_pid} = :exec.run_link(command, [:stdin, :debug])
 
     pid
   end
 
   @impl true
   def handle_info({:stderr, os_pid, message}, state) do
-    Logger.error("#{os_pid} - #{message}")
+    Logger.error("#{inspect(os_pid)} - #{inspect(message)}")
     {:noreply, state}
   end
 
   def handle_info({:stdout, os_pid, message}, state) do
-    Logger.error("#{inspect(os_pid)} - #{inspect(message)}")
+    Logger.info("#{inspect(os_pid)} - #{inspect(message)}")
     {:noreply, state}
   end
 

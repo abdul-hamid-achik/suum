@@ -12,21 +12,21 @@ defmodule SuumWeb.Api.Types.Transmission do
     field(:type, :string)
     field(:ip_address, :string)
     field(:pid, :string)
-    field :state, :string
+    field(:state, :string)
     field(:segments, list_of(:segment), resolve: dataloader(Hls))
     field(:sprite, :string)
-    field(:sprite_url, :string)
+    field(:presigned_sprite_url, :string)
 
     field :preview, :string do
       resolve(fn
-        %{preview: nil}, _, _ ->
+        %{presigned_preview_url: nil}, _, _ ->
           {:ok, Faker.Avatar.image_url()}
 
-        %{preview: preview}, _, _ ->
-          {:ok, preview}
+        %{presigned_preview_url: presigned_preview_url}, _, _ ->
+          {:ok, presigned_preview_url}
       end)
     end
 
-    field(:preview_url, :string)
+    field(:presigned_preview_url, :string)
   end
 end

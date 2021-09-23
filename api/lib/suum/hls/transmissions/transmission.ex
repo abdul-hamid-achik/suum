@@ -3,7 +3,7 @@ defmodule Suum.Hls.Transmission do
   use Waffle.Ecto.Schema
 
   require Logger
-  alias Suum.{Accounts.User, Hls.Segment, Hls.Transmissions.StateMachine, Uploaders}
+  alias Suum.{Accounts.User, Hls.Segment, Uploaders}
 
   @required [
     :name,
@@ -25,18 +25,14 @@ defmodule Suum.Hls.Transmission do
   schema "transmissions" do
     field(:name, :string)
     field(:slug, :string)
-    field :ip_address, :string
-    field(:sprite, Suum.Uploaders.Sprite.Type)
-    field(:preview, Suum.Uploaders.Preview.Type)
-
-    field(:sprite_url, :string, virtual: true)
-    field(:preview_url, :string, virtual: true)
+    field(:description, :string)
+    field :tags, {:array, :string}
+    field :ready?, :boolean, default: false
+    field(:sprite, Uploaders.Image.Type)
+    field(:preview, Uploaders.Image.Type)
     field :type, Type, default: :live
-    field :state, :string, default: "created"
-
-    field :upload_name, :string
-    field :content_type, :string
-    field :uid, Ecto.UUID
+    field(:presigned_sprite_url, :string, virtual: true)
+    field(:presigned_preview_url, :string, virtual: true)
 
     belongs_to :user, User,
       foreign_key: :user_uuid,
@@ -48,22 +44,27 @@ defmodule Suum.Hls.Transmission do
 
   @spec set_sprite(%{:sprite => any, optional(any) => any}) :: %{
           :sprite => any,
-          :sprite_url => any,
+          :presigned_sprite_url => any,
           optional(any) => any
         }
   def set_sprite(transmission),
     do:
       Map.put(
         transmission,
-        :sprite_url,
+        :presigned_sprite_url,
         Uploaders.Sprite.url({transmission.sprite, transmission}, :original, signed: true)
       )
 
+  @spec set_preview(%{:preview => any, optional(any) => any}) :: %{
+          :preview => any,
+          :presigned_preview_url => any,
+          optional(any) => any
+        }
   def set_preview(transmission),
     do:
       Map.put(
         transmission,
-        :preview_url,
+        :presigned_preview_url,
         Uploaders.Preview.url({transmission.preview, transmission}, :original, signed: true)
       )
 
@@ -87,8 +88,4 @@ defmodule Suum.Hls.Transmission do
     |> cast_attachments(attrs, [:sprite, :preview])
     |> foreign_key_constraint(:user_uuid)
   end
-
-  @spec transition_to(t(), State.t()) :: {:ok, t()} | {:error, String.t()}
-  def transition_to(transmission, state),
-    do: Machinery.transition_to(transmission, StateMachine, state)
 end

@@ -10,17 +10,15 @@ defmodule Suum.Hls.Transmissions.Service do
 
   require Logger
 
-  @initial_state %State{}
   @default_interval 5_000
 
-  # Process.flag(:trap_exit, true)
   def start_link(transmission),
     do:
       GenServer.start_link(
         __MODULE__,
         [
           transmission: transmission,
-          processed_lines: []
+          segments: []
         ],
         name: process_name(transmission)
       )
@@ -28,26 +26,35 @@ defmodule Suum.Hls.Transmissions.Service do
   @impl true
   def init(args) do
     Logger.info("Initializing Transmission with args: #{inspect(args, pretty: true)}")
-    Process.send_after(__MODULE__, :watch, @default_interval)
+    Process.send_after(__MODULE__, :waiting, @default_interval)
     {:ok, args}
   end
 
   @impl true
   def handle_cast(
-        {:uploading, [transmission: %Transmission{type: :vod, uuid: uuid}]},
+        {:created, %Transmission{}},
         state
       ) do
-    transmission = Hls.get_transmission(uuid)
-    transmission_path = "#{base_path(transmission.type)}/#{uuid}"
-    {:ok, _, _} = :exec.run("mkdir -p #{transmission_path}", [])
     {:noreply, state}
   end
 
   def handle_cast(
-        {:streaming,
-         [
-           transmission: %Transmission{type: :live, uuid: uuid} = transmission
-         ]},
+        {:waiting, %Transmission{}},
+        state
+      ) do
+    keep_waiting()
+    {:noreply, state}
+  end
+
+  def handle_cast(
+        {:uploading, %Transmission{type: :vod}},
+        state
+      ) do
+    {:noreply, state}
+  end
+
+  def handle_cast(
+        {:streaming, %Transmission{type: :live, uuid: uuid} = transmission},
         state
       ) do
     Logger.info("Sync Playlist Request #{uuid}")
@@ -59,16 +66,13 @@ defmodule Suum.Hls.Transmissions.Service do
 
   def handle_cast(
         {:streaming,
-         [
-           transmission:
-             %Transmission{
-               type: :vod,
-               uuid: uuid,
-               upload_name: upload_name,
-               uid: uid
-             } = _transmission
-         ]},
-        state
+         %Transmission{
+           type: :vod,
+           uuid: uuid
+         } = _transmission},
+        %State{
+          upload: %Upload{uuid: uid}
+        } = state
       ) do
     file_dir =
       uid
@@ -78,73 +82,57 @@ defmodule Suum.Hls.Transmissions.Service do
       |> Enum.join("/")
 
     base_path = base_path(:vod)
-    transmission_path = "#{base_path}/#{uuid}"
-
-    video_file_path = "#{transmission_path}/#{upload_name}"
-    Logger.info("Created #{transmission_path}")
-
-    {:ok, _, _} =
-      :exec.run(
-        ~w(
-          mv
-          #{base_path}/#{file_dir}/#{uid}
-          #{video_file_path}
-        ),
-        []
-      )
-
-    Logger.info("Copied #{base_path}/#{file_dir}/#{uid} to #{transmission_path}")
+    video_file_path = "#{base_path}/#{file_dir}/#{uid}"
 
     command = ~w(
       /usr/local/bin/ffmpeg
-      -re -nostdin
+      -re
+      -nostdin
       -i #{video_file_path}
       -vcodec libx264
       -preset:v ultrafast
       -acodec aac
       -f flv
       #{rtmp_host()}/live/#{uuid}
-      )
+    )
 
-    {:ok, _, _} = :exec.run(command, [])
-    # {:ok, _} = Transmission.transition_to(transmission, "processing")
+    {:ok, _, _} = :exec.run(command, [:debug])
+
     Logger.info("Processing #{video_file_path}")
     {:noreply, state}
   end
 
+  # def handle_cast(
+  #       {:processing, %Transmission{type: :live, uuid: uuid} = transmission},
+  #       state
+  #     ) do
+  #   Logger.info("Processing #{uuid}")
+  #   base_path = base_path(:live)
+  #   thumbnails = get_thumbnails(base_path, uuid)
+  #   save_thumbnails(thumbnails, uuid, base_path)
+  #   {:ok, _} = Transmission.transition_to(transmission, "ready")
+  #   {:noreply, state}
+  # end
+
   def handle_cast(
-        {:processing, [transmission: %Transmission{type: :live, uuid: uuid} = transmission]},
+        {:processing, %Transmission{uuid: uuid} = transmission},
         state
       ) do
     Logger.info("Processing #{uuid}")
     base_path = base_path(:live)
     thumbnails = get_thumbnails(base_path, uuid)
     save_thumbnails(thumbnails, uuid, base_path)
-    :timer.sleep(2000)
     {:ok, _} = Transmission.transition_to(transmission, "ready")
     {:noreply, state}
   end
 
   def handle_cast(
-        {:processing, [transmission: %Transmission{type: :vod, uuid: uuid} = transmission]},
-        state
-      ) do
-    Logger.info("Processing #{uuid}")
-    base_path = base_path(:live)
-    thumbnails = get_thumbnails(base_path, uuid)
-    playlist = get_playlist(base_path, uuid)
-    save_thumbnails(thumbnails, uuid, base_path)
-    save_playlist(transmission, playlist, [])
-    {:ok, _} = Transmission.transition_to(transmission, "ready")
-    {:noreply, state}
-  end
-
-  def handle_cast(
-        {:ready,
-         [transmission: %Transmission{name: name, type: type, uuid: uuid} = _transmission]},
+        {:ready, %Transmission{name: name, type: type, uuid: uuid} = transmission},
         state
       ) do
     Logger.info("Ready to watch #{type} - #{uuid} | #{name}")
+    {:ok} = Hls.update_transmission(transmission, %{ready?: true})
+    GenServer.stop(self(), :normal, @default_interval)
     {:noreply, state}
   end
 
@@ -156,45 +144,63 @@ defmodule Suum.Hls.Transmissions.Service do
   @impl true
   def handle_info(
         {:file_event, _watcher_pid, {playlist, events}},
-        [
-          processed_lines: processed_lines,
+        %State{
+          segments: segments,
           transmission: %Transmission{} = transmission
-        ] = state
+        } = state
       ) do
     Logger.info("file event - #{playlist} -  #{inspect(events, pretty: true)}")
-    next_processed_lines = save_playlist(transmission, playlist, processed_lines)
-    # state = State.put_processed_lines(state, processed_lines)
-    state = Keyword.put(state, :processed_lines, next_processed_lines)
+    next_segments = save_playlist(transmission, playlist, segments)
+
+    with %Ecto.Changeset{valid?: true} = changeset <-
+           State.changeset(state, %{segments: next_segments}),
+         {:ok, state} <- State.upsert_segments(changeset, next_segments) do
+      {:noreply, state}
+    end
+  end
+
+  def handle_info(:waiting, state) do
+    Logger.info("waiting....")
+    transmissions = Hls.list_transmissions(%{state: "created"})
+    Logger.info("found #{length(transmissions)} transmissions")
+
+    keep_waiting()
     {:noreply, state}
   end
 
-  def handle_info(:watch, state) do
-    Logger.info("watching....")
-    transmissions = Hls.list_transmissions(%{state: "created"})
+  def handle_info({:stdout, _os_pid, message}, state) do
+    Logger.info(message)
+    {:noreply, state}
+  end
 
-    Logger.info("found #{length(transmissions)} transmissions")
+  def handle_info({:stderr, _os_pid, message}, state) do
+    Logger.error(message)
+    {:noreply, state}
+  end
 
-    Process.send_after(__MODULE__, :watch, @default_interval)
+  def handle_info({:DOWN, _os_pid, :process, pid, :normal}, state) do
+    Logger.warn("Attempting to exit")
+    terminate(pid, :normal)
     {:noreply, state}
   end
 
   defp save_playlist(
          %Transmission{uuid: uuid} = _transmission,
          playlist_path,
-         processed_lines
+         segments
        ) do
     acc = []
     {:ok, raw} = File.read(playlist_path)
     base_path = base_path(:live)
     lines = raw |> String.split("\n") |> Enum.with_index()
 
-    next_processed_lines =
+    next_segments =
       lines
-      |> Enum.reject(&Enum.member?(processed_lines, &1))
+      |> Enum.reject(&Enum.member?(segments, &1))
       |> Enum.reduce(acc, &parse_segment(&1, &2, lines, uuid, base_path))
 
-    enqueue_upsert(next_processed_lines, :segment)
-    next_processed_lines
+    enqueue_upsert(next_segments, :segment)
+    next_segments
   end
 
   defp save_thumbnails(thumbnails, uuid, base_path) do
@@ -273,4 +279,6 @@ defmodule Suum.Hls.Transmissions.Service do
 
   defp process_name(transmission),
     do: {:via, Registry, {TransmissionRegistry, transmission.uuid}}
+
+  defp keep_waiting, do: Process.send_after(__MODULE__, :waiting, @default_interval)
 end

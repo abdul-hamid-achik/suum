@@ -24,6 +24,7 @@ defmodule Suum.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Suum.DataCase
+      import Suum.Factory
     end
   end
 

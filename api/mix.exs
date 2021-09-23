@@ -33,7 +33,7 @@ defmodule Suum.MixProject do
   defp deps do
     [
       # deps
-      {:porcelain, "~> 2.0.3"},
+      {:mimic, "~> 1.4", only: :test},
       {:machinery, "~> 1.0.0"},
       {:task_bunny, "~> 0.3.2"},
       {:tesla, "~> 1.4.0"},
@@ -49,6 +49,7 @@ defmodule Suum.MixProject do
       {:erlexec, "~> 1.18"},
       {:timex, "~> 3.6"},
       {:slugy, "~> 4.1.0"},
+      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
 
       # Absinthe for GraphQL
       {:absinthe, "~> 1.5.0"},

@@ -43,26 +43,32 @@ defmodule Suum.Hls.Thumbnail do
     |> foreign_key_constraint(:transmission_uuid)
   end
 
-  def set_url(thumbnail),
-    do:
-      Map.put(
-        thumbnail,
-        :url,
-        Uploaders.Thumbnail.url({thumbnail.file, thumbnail}, :original, signed: true)
-      )
+  def set_url(thumbnail) do
+    Map.put(
+      thumbnail,
+      :url,
+      Uploaders.Thumbnail.url({thumbnail.file, thumbnail}, :original, signed: true)
+    )
+  end
 
+  @spec set_analyzis(__MODULE__.t(), String.t()) ::
+          {:ok, __MODULE__.t()} | {:error, Ecto.Changeset.t()}
   def set_analyzis(thumbnail, output) do
     [dimensions, _] = String.split(output, " - ")
     [width, height_dirty] = String.split(dimensions, "x")
 
     [height, x, y] = String.split(height_dirty, "+")
 
-    Map.merge(thumbnail, %{
+    params = %{
       width: width,
       height: height,
       x: x,
       y: y
-    })
+    }
+
+    thumbnail
+    |> changeset(params)
+    |> apply_action(:insert)
   end
 
   def set_time(thumbnail, 0) do
@@ -70,10 +76,14 @@ defmodule Suum.Hls.Thumbnail do
     elapsed_seconds = 8
     to = Time.add(from, elapsed_seconds, :second)
 
-    Map.merge(thumbnail, %{
+    params = %{
       from: from,
       to: to
-    })
+    }
+
+    thumbnail
+    |> changeset(params)
+    |> apply_action(:insert)
   end
 
   def set_time(thumbnail, index) do
@@ -82,9 +92,11 @@ defmodule Suum.Hls.Thumbnail do
     elapsed_seconds = 8 + start_seconds
     to = Time.add(from, elapsed_seconds, :second)
 
-    Map.merge(thumbnail, %{
+    params = %{
       from: from,
       to: to
-    })
+    }
+
+    thumbnail |> changeset(params) |> apply_action(:insert)
   end
 end

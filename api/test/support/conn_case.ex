@@ -23,7 +23,7 @@ defmodule SuumWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import SuumWeb.ConnCase
-
+      import Suum.Factory
       alias SuumWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing

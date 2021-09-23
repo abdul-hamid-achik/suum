@@ -107,7 +107,6 @@ config :tus, SuumWeb.UploadController,
   cache: Tus.Cache.Memory,
   max_size: 20_971_520
 
-config :porcelain, goon_warn_if_missing: false
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -9,8 +9,8 @@ interface Transmission {
     sprite: string
     type: string
     user: User
-    preview_url?: string
-    sprite_url?: string
+    presigned_preview_url?: string
+    presigned_sprite_url?: string
 }
 
 interface Thumbnail {

@@ -162,7 +162,16 @@ tasks:
     deps: [compose.up]
     cmds:
       - mix test --only wip
-
+  test.watch:
+    desc: Run work in progress tagged tests
+    deps: [compose.up]
+    cmds:
+      - mix test.watch
+  test.watch.wip:
+    desc: Run work in progress tagged tests
+    deps: [compose.up]
+    cmds:
+      - mix test.watch --only wip
   wait:
     cmds:
       - sleep 3

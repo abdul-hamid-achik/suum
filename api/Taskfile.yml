@@ -1,0 +1,36 @@
+version: "3"
+
+tasks:
+  compose.up: docker compose up -d
+  compose.pause: docker compose pause
+  compose.down: docker compose down -v
+  compose.unpause: docker compose unpause
+
+  up:
+    desc: runs compose and setups project
+    deps: [compose.up]
+    cmds:
+      - rails db:setup
+      - task: seed
+
+  reset:
+    desc: resets project config and services
+    cmds:
+      - task: down
+      - task: up
+
+  down:
+    desc: wipes up services and tmp
+    cmds:
+      - rails db:drop
+      - rails tmp:clear
+
+  seed:
+    desc: adds data for development
+    cmds:
+      - rails db:seed
+
+  server:
+    deps: [compose.unpause]
+    cmds:
+      - rails server

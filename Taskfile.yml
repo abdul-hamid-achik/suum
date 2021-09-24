@@ -1,30 +1,29 @@
-version: '3'
+version: "3"
 
 includes:
-  server: 
-    taskfile: ./server/Taskfile.yml
-    dir: ./server
+  api:
+    taskfile: ./api/Taskfile.yml
+    dir: ./api
 
-  web: 
+  web:
     taskfile: ./web/Taskfile.yml
     dir: ./web
 
-dotenv: ['api/.env', 'web/.env']
+dotenv: ["api/.env", "web/.env"]
 
 tasks:
   test:
     desc: Runs all tests both api and web
     cmds:
-      - task: server:test
+      - task: api:test
       - task: web:test
-  
+
   reset:
     cmds:
-      - task: server:reset.hard
+      - task: api:reset
       - task: web:reset
 
-
-  setup:
+  up:
     cmds:
-      - task: server:setup
+      - task: api:up
       - task: web:setup

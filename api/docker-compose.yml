@@ -1,40 +1,32 @@
 version: "3.8"
 
 services:
-  docker-host:
+  host:
     image: qoomon/docker-host:latest
-    container_name: suum-host
     cap_add: ["NET_ADMIN", "NET_RAW"]
     mem_limit: 8M
     restart: on-failure
 
   rtmp:
-    container_name: suum-rtmp
     build:
-      dockerfile: .docker/rtmp.dockerfile
-      context: .
+      dockerfile: rtmp.dockerfile
+      context: config
     ports:
       - 1935:1935
       - 8080:8080
     volumes:
-      - ./mnt/hls:/mnt/hls
+      - ./tmp/rtmp:/tmp/rtmp
       - ./scripts/thumbnail.sh:/usr/local/bin/thumbnail.sh
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
 
   rabbitmq:
-    image: rabbitmq:3.8.14-alpine
-    container_name: suum-rabbitmq
-    environment:
-      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:-local_access}
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-local_access}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-local_access}
+    image: rabbitmq:latest
     ports:
-      - 5672:5672
-      - 15672:15672
+      - 5672
+      - 15671:15672
 
   db:
     image: postgres:latest
-    container_name: suum-db
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_PASSWORD: postgres
@@ -43,11 +35,10 @@ services:
     volumes:
       - database:/var/lib/postgresql/data/pgdata
     ports:
-      - "5432:5432"
+      - 5432:5432
 
-  db-admin:
+  pgadmin:
     image: dpage/pgadmin4:latest
-    container_name: suum-db-admin
     depends_on:
       - db
     environment:
@@ -55,43 +46,21 @@ services:
       PGADMIN_DEFAULT_PASSWORD: password
       PGADMIN_LISTEN_PORT: 80
     ports:
-      - "5433:80"
+      - 5431:80
     volumes:
-      - pg-admin:/var/lib/pgadmin
+      - pgadmin:/var/lib/pgadmin
     links:
       - "db:pgsql-server"
 
   minio:
-    image: minio/minio
-    container_name: suum-minio
-    volumes:
-      - minio-data:/data
+    image: minio/minio:latest
     ports:
-      - 9000:9000
-    environment:
-      MINIO_ACCESS_KEY: ${AWS_ACCESS_KEY_ID:-local_access}
-      MINIO_SECRET_KEY: ${AWS_SECRET_ACCESS_KEY:-local_access}
-      MINIO_ROOT_USER: ${AWS_ACCESS_KEY_ID:-local_access}
-      MINIO_ROOT_PASSWORD: ${AWS_SECRET_ACCESS_KEY:-local_access}
-      AWS_BUCKET_NAME: ${AWS_BUCKET_NAME:-suum}
-    command: server /data
-
-  mc:
-    image: minio/mc:latest
-    container_name: suum-mc
-    environment:
-      MINIO_ACCESS_KEY: ${AWS_ACCESS_KEY_ID:-local_access}
-      MINIO_SECRET_KEY: ${AWS_SECRET_ACCESS_KEY:-local_access}
-    depends_on:
-      - minio
-    entrypoint: /usr/bin/mc-entrypoint.sh
+      - "9000:9000"
     volumes:
-      - ./scripts/mc-entrypoint.sh:/usr/bin/mc-entrypoint.sh
+      - bucket:/data
+    entrypoint: minio server /data
 
 volumes:
-  minio-data:
-    name: suum-bucket
+  bucket:
   database:
-    name: suum-database
-  pg-admin:
-    name: suum-database-admin
+  pgadmin:

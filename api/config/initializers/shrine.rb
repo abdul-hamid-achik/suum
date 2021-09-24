@@ -1,9 +1,18 @@
-require "shrine"
-require "shrine/storage/file_system"
+require 'shrine'
+require 'shrine/storage/s3'
+
+config = {
+  bucket: ENV['AWS_BUCKET'],
+  access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+  secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+  region: ENV['AWS_REGION'],
+  endpoint: ENV['AWS_ENDPOINT'],
+  force_path_style: true
+}
 
 Shrine.storages = {
-  cache: Shrine::Storage::FileSystem.new("public", prefix: "uploads/cache"), # temporary
-  store: Shrine::Storage::FileSystem.new("public", prefix: "uploads"),       # permanent
+  cache: Shrine::Storage::S3.new(prefix: 'cache', **config),
+  store: Shrine::Storage::S3.new(prefix: 'public', **config)
 }
 
 Shrine.plugin :activerecord           # loads Active Record integration

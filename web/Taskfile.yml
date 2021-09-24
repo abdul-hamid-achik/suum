@@ -1,22 +1,18 @@
-version: '3'
+version: "3"
 
 tasks:
-  server:
-    cmd: npm start
+  server: npm start
 
-  setup:
-    cmd: npm install
+  setup: npm install
 
-  build:
-    cmd: npm run build
+  build: npm run build
 
   reset:
-    cmds: 
+    cmds:
       - task: clean
       - task: setup
 
-  clean:
-    cmd: rm -rf ./node_modules
+  clean: rm -rf ./node_modules
 
   test:
     desc: Runs tests
@@ -42,5 +38,3 @@ tasks:
     desc: Set variable PACKAGE_NAME to uninstall a npm package like `npm uninstall -S $PACKAGE_NAME`
     cmds:
       - npm uninstall -S {{.PACKAGE_NAME}}
-
-      

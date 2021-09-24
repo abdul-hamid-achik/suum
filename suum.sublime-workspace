@@ -375,6 +375,121 @@
 	},
 	"buffers":
 	[
+		{
+			"file": ".tool-versions",
+			"settings":
+			{
+				"buffer_size": 53,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					3,
+					1,
+					"insert",
+					{
+						"characters": "\nruby"
+					},
+					"BQAAACoAAAAAAAAAKwAAAAAAAAAAAAAAKwAAAAAAAAAsAAAAAAAAAAAAAAAsAAAAAAAAAC0AAAAAAAAAAAAAAC0AAAAAAAAALgAAAAAAAAAAAAAALgAAAAAAAAAvAAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAKgAAAAAAAAAqAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					4,
+					1,
+					"insert",
+					{
+						"characters": " 3.0.2"
+					},
+					"BgAAAC8AAAAAAAAAMAAAAAAAAAAAAAAAMAAAAAAAAAAxAAAAAAAAAAAAAAAxAAAAAAAAADIAAAAAAAAAAAAAADIAAAAAAAAAMwAAAAAAAAAAAAAAMwAAAAAAAAA0AAAAAAAAAAAAAAA0AAAAAAAAADUAAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAALwAAAAAAAAAvAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					7,
+					1,
+					"left_delete",
+					null,
+					"AQAAACcAAAAAAAAAJwAAAAAAAAABAAAANg",
+					"AQAAAAAAAAABAAAAKAAAAAAAAAAoAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					8,
+					1,
+					"insert",
+					{
+						"characters": "8"
+					},
+					"AQAAACcAAAAAAAAAKAAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAJwAAAAAAAAAnAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					9,
+					1,
+					"left_delete",
+					null,
+					"AQAAACcAAAAAAAAAJwAAAAAAAAABAAAAOA",
+					"AQAAAAAAAAABAAAAKAAAAAAAAAAoAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					10,
+					1,
+					"insert",
+					{
+						"characters": "7"
+					},
+					"AQAAACcAAAAAAAAAKAAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAJwAAAAAAAAAnAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					12,
+					1,
+					"left_delete",
+					null,
+					"AQAAACkAAAAAAAAAKQAAAAAAAAABAAAAMA",
+					"AQAAAAAAAAABAAAAKgAAAAAAAAAqAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					13,
+					1,
+					"insert",
+					{
+						"characters": "5"
+					},
+					"AQAAACkAAAAAAAAAKgAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAKQAAAAAAAAApAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					14,
+					1,
+					"left_delete",
+					null,
+					"AQAAACkAAAAAAAAAKQAAAAAAAAABAAAANQ",
+					"AQAAAAAAAAABAAAAKgAAAAAAAAAqAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					15,
+					1,
+					"insert",
+					{
+						"characters": "6"
+					},
+					"AQAAACkAAAAAAAAAKgAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAKQAAAAAAAAApAAAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"file": "api/config/application.rb",
+			"settings":
+			{
+				"buffer_size": 1349,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -480,6 +595,10 @@
 		"selected_items":
 		[
 			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
 				"restart",
 				"LSP: Restart Server"
 			],
@@ -542,10 +661,6 @@
 			[
 				"tab",
 				"Indentation: Convert to Tabs"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
 			],
 			[
 				"re",
@@ -821,8 +936,44 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/Users/sicksid/projects/suum",
+		"/Users/sicksid/projects/suum/api",
+		"/Users/sicksid/projects/suum/api/app",
+		"/Users/sicksid/projects/suum/api/app/graphql",
+		"/Users/sicksid/projects/suum/api/app/graphql/types",
+		"/Users/sicksid/projects/suum/api/config",
+		"/Users/sicksid/projects/suum/api/config/initializers",
+		"/Users/sicksid/projects/suum/api/public",
+		"/Users/sicksid/projects/suum/api/scripts",
+		"/Users/sicksid/projects/suum/api/test",
+		"/Users/sicksid/projects/suum/api/test/fixtures",
+		"/Users/sicksid/projects/suum/api/test/fixtures/action_text"
+	],
 	"file_history":
 	[
+		"/Users/sicksid/projects/suum/api/Gemfile",
+		"/Users/sicksid/projects/suum/api/app/graphql/types/upload_type.rb",
+		"/Users/sicksid/projects/suum/api/test/test_helper.rb",
+		"/Users/sicksid/projects/suum/api/config/initializers/shrine.rb",
+		"/Users/sicksid/projects/suum/api/config/routes.rb",
+		"/Users/sicksid/projects/suum/api/config/application.rb",
+		"/Users/sicksid/projects/suum/server/config/nginx.conf",
+		"/Users/sicksid/projects/suum/api/test/controllers/uploads_controller_test.rb",
+		"/Users/sicksid/projects/suum/server/Gemfile",
+		"/Users/sicksid/projects/suum/api/app/assets/config/manifest.js",
+		"/Users/sicksid/projects/suum/server/scripts/thumbnail.sh",
+		"/Users/sicksid/projects/suum/server/Taskfile.yml",
+		"/Users/sicksid/projects/suum/server/app/javascript/controllers/application.js",
+		"/Users/sicksid/projects/suum/server/app/javascript/packs/application.js",
+		"/Users/sicksid/projects/suum/server/app/javascript/controllers/index.js",
+		"/Users/sicksid/projects/suum/server/app/javascript/controllers/main_controller.js",
+		"/Users/sicksid/projects/suum/server/config/initializers/shrine.rb",
+		"/Users/sicksid/projects/suum/server/docker-compose.yml",
+		"/Users/sicksid/projects/suum/Taskfile.yml",
+		"/Users/sicksid/projects/suum/server/scripts/mc-entrypoint.sh",
+		"/Users/sicksid/projects/suum/server/rtmp.Dockerfile",
 		"/Users/sicksid/savi/mono/.github/workflows/ci_web.yml",
 		"/Users/sicksid/savi/mono/services/apps/hardware/lib/hardware/user_clips/user_clips.ex",
 		"/Users/sicksid/savi/mono/services/apps/backbone/lib/query.ex",
@@ -929,28 +1080,7 @@
 		"/Users/sicksid/savi/mono/web/savi-app/src/components/Form/Form.Clip/__tests__/Form.Clip.test.tsx",
 		"/Users/sicksid/savi/mono/web/savi-app/src/components/Form/Form.Clip/Form.Clip.DateTimePicker.tsx",
 		"/Users/sicksid/savi/mono/web/savi-app/src/components/Filters/Filter.DateRange.tsx",
-		"/Users/sicksid/savi/mono/web/savi-app/src/components/Event/Event.Condensed.tsx",
-		"/Users/sicksid/savi/mono/web/savi-app/src/components/Authentication/Authentication.SetPassword.tsx",
-		"/Users/sicksid/savi/mono/web/savi-app/src/components/Authentication/Authentication.Login.tsx",
-		"/Users/sicksid/savi/mono/web/savi-app/src/components/Authentication/Authentication.ForgotPassword.tsx",
-		"/Users/sicksid/savi/mono/web/savi-app/src/components/AuditCase/AuditCase.Expanded/__tests__/__snapshots__/AuditCase.Expanded.test.tsx.snap",
-		"/Users/sicksid/savi/mono/web/savi-app/src/components/AuditCase/AuditCase.Expanded/AuditCase.Expanded.Comments.tsx",
-		"/Users/sicksid/savi/mono/web/modules/ui/src/Timeline/Timeline.Track/Timeline.Track.Playhead.tsx",
-		"/Users/sicksid/savi/mono/web/modules/player/src/Player/Clip.tsx",
-		"/Users/sicksid/savi/mono/web/modules/ui/jest.config.js",
-		"/Users/sicksid/savi/mono/web/savi-app/src/components/Form/Form.Clip/Form.Clip.Cameras/__tests__/Form.Clip.Cameras.test.tsx",
-		"/Users/sicksid/savi/mono/web/savi-app/src/components/Form/Form.Clip/Form.Clip.Cameras/__tests__/Form.Clip.Camera.test.tsx",
-		"/Users/sicksid/savi/mono/proxy_http_sibling/lib/proxy_http_sibling.ex",
-		"/Users/sicksid/savi/mono/web/savi-app/src/containers/Player/Player.VXG/Player.VXG.test.tsx",
-		"/Users/sicksid/savi/mono/web/savi-app/src/components/AuditCase/AuditCase.Expanded/__tests__/AuditCase.Expanded.test.tsx",
-		"/Users/sicksid/savi/mono/web/savi-app/src/components/AuditCase/AuditCase.Expanded/AuditCase.Expanded.tsx",
-		"/Users/sicksid/savi/mono/web/savi-app/test/setupPlayer.ts",
-		"/Users/sicksid/savi/mono/web/savi-app/src/pages/Video/__tests__/Video.state.test.ts",
-		"/Users/sicksid/savi/mono/web/savi-app/src/containers/Player/Player.VXG/Player.VXG.tsx",
-		"/Users/sicksid/savi/mono/web/savi-app/src/__mocks__/@savi/ffmpeg.js",
-		"/Users/sicksid/savi/mono/web/savi-app/src/__mocks__/@savi/sdk.js",
-		"/Users/sicksid/savi/mono/web/savi-app/src/components/Video/Video.Controls/__tests__/Video.Controls.SaveClip.test.tsx",
-		"/Users/sicksid/savi/mono/web/savi-app/src/components/Video/Video.Controls/__tests__/Video.Controls.Pagination.test.tsx"
+		"/Users/sicksid/savi/mono/web/savi-app/src/components/Event/Event.Condensed.tsx"
 	],
 	"find":
 	{
@@ -1028,6 +1158,13 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			".call",
+			"'User'",
+			"GraphqlDevise::ResourceLoader.new",
+			"GraphqlDevise::ResourceLoader.new('User')",
+			"rails",
+			"mix",
+			"rake",
 			"deleted_at",
 			"list_db_user_clips",
 			"setCameras",
@@ -1148,14 +1285,7 @@
 			"try",
 			"<=",
 			"console.log",
-			"retryCount",
-			"play",
-			"shouldPlay",
-			"play",
-			"retry",
-			"retryCount ** retry",
-			"play",
-			"setTimeout"
+			"retryCount"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1163,6 +1293,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"bin/rails",
+			"rake",
 			"attemptPlay",
 			"timeout",
 			"count",
@@ -1204,6 +1336,91 @@
 		{
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": ".tool-versions",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 53,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								42,
+								42
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								}
+							],
+							"lsp_uri": "file:///Users/sicksid/projects/suum/.tool-versions",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "api/config/application.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1349,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								796,
+								797
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								}
+							],
+							"lsp_uri": "file:///Users/sicksid/projects/suum/api/config/application.rb",
+							"syntax": "Packages/Ruby/Ruby.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1306,7 +1523,7 @@
 	"project": "suum.sublime-project",
 	"replace":
 	{
-		"height": 52.0
+		"height": 92.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1315,6 +1532,18 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"test/controllers/uploads_controller_test.rb",
+				"api/test/controllers/uploads_controller_test.rb"
+			],
+			[
+				"applica",
+				"api/config/application.rb"
+			],
+			[
+				"routes",
+				"api/config/routes.rb"
+			],
 			[
 				"query",
 				"services/apps/backbone/lib/query.ex"
@@ -1814,18 +2043,6 @@
 			[
 				"circleci",
 				"mono/.circleci/config.yml"
-			],
-			[
-				"src/Timeline/Timeline.test.tsx",
-				"web/modules/ui/src/Timeline/Timeline.test.tsx"
-			],
-			[
-				"src/react-router.ts",
-				"web/modules/types/src/react-router.ts"
-			],
-			[
-				"src/Player.ts",
-				"web/modules/types/src/Player.ts"
 			]
 		],
 		"width": 0.0

@@ -24,6 +24,7 @@ tasks:
     cmds:
       - rails db:drop
       - rails tmp:clear
+      - task: compose.down
 
   seed:
     desc: adds data for development

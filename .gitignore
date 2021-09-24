@@ -1,2 +1,4 @@
 .DS_Store
-api/.elixir_ls
+.env
+*.sublime-workspace
+node_modules

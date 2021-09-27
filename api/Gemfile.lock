@@ -192,6 +192,7 @@ GEM
     mini_mime (1.1.1)
     minitest (5.14.4)
     msgpack (1.4.2)
+    multi_json (1.15.0)
     nenv (0.3.0)
     nio4r (2.5.8)
     nokogiri (1.12.4-x86_64-darwin)
@@ -252,6 +253,7 @@ GEM
       parser (~> 3.0.0)
       rainbow (>= 2.0, < 4.0)
     regexp_parser (2.1.1)
+    require_all (3.0.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -351,6 +353,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    streamio-ffmpeg (3.0.2)
+      multi_json (~> 1.8)
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -389,12 +393,14 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 6.1.4, >= 6.1.4.1)
+  require_all
   rspec-rails (~> 5.0.0)
   rubycritic
   shrine (~> 3.0)
   sneakers
   solargraph
   spring
+  streamio-ffmpeg
   tzinfo-data
 
 RUBY VERSION

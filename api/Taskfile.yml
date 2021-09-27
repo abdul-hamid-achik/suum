@@ -31,7 +31,21 @@ tasks:
     cmds:
       - rails db:seed
 
+  migrate:
+    desc: runs migrations
+    cmds:
+      - rails db:migrate
+
   server:
-    deps: [compose.unpause]
+    deps: [up]
     cmds:
       - rails server
+
+  test:
+    deps: [up]
+    cmds:
+      - rails spec
+  test.watch:
+    deps: [up]
+    cmds:
+      - bundle exec guard

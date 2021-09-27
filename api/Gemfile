@@ -12,8 +12,10 @@ gem 'aws-sdk-s3', '~> 1.14'
 gem 'graphql'
 gem 'graphql_devise'
 gem 'puma', '~> 5.0'
+gem 'require_all'
 gem 'shrine', '~> 3.0'
 gem 'sneakers'
+gem 'streamio-ffmpeg'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production

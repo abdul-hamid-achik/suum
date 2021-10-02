@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+I18n.reload!
+include FactoryBot::Syntax::Methods
+
+create(:user,
+       name: 'abdul hamid',
+       nickname: 'abs',
+       email: 'abdulachik@icloud.com',
+       password: '12345678')

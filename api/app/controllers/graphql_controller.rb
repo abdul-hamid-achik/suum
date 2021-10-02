@@ -12,10 +12,12 @@ class GraphqlController < ApplicationController
       # Query context goes here, for example:
       # current_user: current_user,
     }
-    result = ApiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
-    render json: result
+    result = ApiSchema.execute(query, variables: variables, context: context.reverse_merge!(gql_devise_context(User)),
+                                      operation_name: operation_name)
+    render json: result unless performed?
   rescue StandardError => e
     raise e unless Rails.env.development?
+
     handle_error_in_development(e)
   end
 

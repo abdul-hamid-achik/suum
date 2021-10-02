@@ -11,7 +11,6 @@ tasks:
     deps: [compose.up]
     cmds:
       - rails db:setup
-      - task: seed
 
   reset:
     desc: resets project config and services
@@ -31,10 +30,17 @@ tasks:
     cmds:
       - rails db:seed
 
+  bundle.install: bundle install
+
   migrate:
     desc: runs migrations
     cmds:
       - rails db:migrate
+
+  routes:
+    desc: shows routes for project
+    cmds:
+      - rails routes
 
   server:
     deps: [up]
@@ -42,10 +48,9 @@ tasks:
       - rails server
 
   test:
-    deps: [up]
     cmds:
       - rails spec
+
   test.watch:
-    deps: [up]
     cmds:
       - bundle exec guard
